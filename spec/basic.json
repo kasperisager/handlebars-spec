@@ -1,0 +1,511 @@
+[
+	{
+		"description": "basic context",
+		"it": "most basic",
+		"template": "{{foo}}",
+		"data": {
+			"foo": "foo"
+		},
+		"expected": "foo"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping",
+		"template": "\\{{foo}}",
+		"data": {
+			"foo": "food"
+		},
+		"expected": "{{foo}}"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping",
+		"template": "content \\{{foo}}",
+		"data": {
+			"foo": "food"
+		},
+		"expected": "content {{foo}}"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping",
+		"template": "\\\\{{foo}}",
+		"data": {
+			"foo": "food"
+		},
+		"expected": "\\food"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping",
+		"template": "content \\\\{{foo}}",
+		"data": {
+			"foo": "food"
+		},
+		"expected": "content \\food"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping",
+		"template": "\\\\ {{foo}}",
+		"data": {
+			"foo": "food"
+		},
+		"expected": "\\\\ food"
+	},
+	{
+		"description": "basic context",
+		"it": "compiling with a basic context",
+		"template": "Goodbye\n{{cruel}}\n{{world}}!",
+		"data": {
+			"cruel": "cruel",
+			"world": "world"
+		},
+		"expected": "Goodbye\ncruel\nworld!"
+	},
+	{
+		"description": "basic context",
+		"it": "compiling with an undefined context",
+		"template": "Goodbye\n{{cruel}}\n{{world.bar}}!",
+		"expected": "Goodbye\n\n!"
+	},
+	{
+		"description": "basic context",
+		"it": "compiling with an undefined context",
+		"template": "{{#unless foo}}Goodbye{{../test}}{{test2}}{{/unless}}",
+		"expected": "Goodbye"
+	},
+	{
+		"description": "basic context",
+		"it": "comments",
+		"template": "{{! Goodbye}}Goodbye\n{{cruel}}\n{{world}}!",
+		"data": {
+			"cruel": "cruel",
+			"world": "world"
+		},
+		"expected": "Goodbye\ncruel\nworld!"
+	},
+	{
+		"description": "basic context",
+		"it": "boolean",
+		"template": "{{#goodbye}}GOODBYE {{/goodbye}}cruel {{world}}!",
+		"data": {
+			"goodbye": true,
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!"
+	},
+	{
+		"description": "basic context",
+		"it": "boolean",
+		"template": "{{#goodbye}}GOODBYE {{/goodbye}}cruel {{world}}!",
+		"data": {
+			"goodbye": false,
+			"world": "world"
+		},
+		"expected": "cruel world!"
+	},
+	{
+		"description": "basic context",
+		"it": "zeros",
+		"template": "num1: {{num1}}, num2: {{num2}}",
+		"data": {
+			"num1": 42,
+			"num2": 0
+		},
+		"expected": "num1: 42, num2: 0"
+	},
+	{
+		"description": "basic context",
+		"it": "zeros",
+		"template": "num: {{.}}",
+		"data": 0,
+		"expected": "num: 0"
+	},
+	{
+		"description": "basic context",
+		"it": "zeros",
+		"template": "num: {{num1/num2}}",
+		"data": {
+			"num1": {
+				"num2": 0
+			}
+		},
+		"expected": "num: 0"
+	},
+	{
+		"description": "basic context",
+		"it": "newlines",
+		"template": "Alan's\nTest",
+		"data": {},
+		"expected": "Alan's\nTest"
+	},
+	{
+		"description": "basic context",
+		"it": "newlines",
+		"template": "Alan's\rTest",
+		"data": {},
+		"expected": "Alan's\rTest"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping text",
+		"template": "Awesome's",
+		"data": {},
+		"expected": "Awesome's"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping text",
+		"template": "Awesome\\",
+		"data": {},
+		"expected": "Awesome\\"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping text",
+		"template": "Awesome\\\\ foo",
+		"data": {},
+		"expected": "Awesome\\\\ foo"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping text",
+		"template": "Awesome {{foo}}",
+		"data": {
+			"foo": "\\"
+		},
+		"expected": "Awesome \\"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping text",
+		"template": " \" \" ",
+		"data": {},
+		"expected": " \" \" "
+	},
+	{
+		"description": "basic context",
+		"it": "escaping expressions",
+		"template": "{{{awesome}}}",
+		"data": {
+			"awesome": "&\"\\<>"
+		},
+		"expected": "&\"\\<>"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping expressions",
+		"template": "{{&awesome}}",
+		"data": {
+			"awesome": "&\"\\<>"
+		},
+		"expected": "&\"\\<>"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping expressions",
+		"template": "{{awesome}}",
+		"data": {
+			"awesome": "&\"'`\\<>"
+		},
+		"expected": "&amp;&quot;&#x27;&#x60;\\&lt;&gt;"
+	},
+	{
+		"description": "basic context",
+		"it": "escaping expressions",
+		"template": "{{awesome}}",
+		"data": {
+			"awesome": "Escaped, <b> looks like: &lt;b&gt;"
+		},
+		"expected": "Escaped, &lt;b&gt; looks like: &amp;lt;b&amp;gt;"
+	},
+	{
+		"description": "basic context",
+		"it": "functions returning safestrings shouldn't be escaped",
+		"template": "{{awesome}}",
+		"data": {},
+		"expected": "&\"\\<>"
+	},
+	{
+		"description": "basic context",
+		"it": "functions",
+		"template": "{{awesome}}",
+		"data": {},
+		"expected": "Awesome"
+	},
+	{
+		"description": "basic context",
+		"it": "functions",
+		"template": "{{awesome}}",
+		"data": {
+			"more": "More awesome"
+		},
+		"expected": "More awesome"
+	},
+	{
+		"description": "basic context",
+		"it": "functions with context argument",
+		"template": "{{awesome frank}}",
+		"data": {
+			"frank": "Frank"
+		},
+		"expected": "Frank"
+	},
+	{
+		"description": "basic context",
+		"it": "pathed functions with context argument",
+		"template": "{{bar.awesome frank}}",
+		"data": {
+			"bar": {},
+			"frank": "Frank"
+		},
+		"expected": "Frank"
+	},
+	{
+		"description": "basic context",
+		"it": "depthed functions with context argument",
+		"template": "{{#with frank}}{{../awesome .}}{{/with}}",
+		"data": {
+			"frank": "Frank"
+		},
+		"expected": "Frank"
+	},
+	{
+		"description": "basic context",
+		"it": "block functions with context argument",
+		"template": "{{#awesome 1}}inner {{.}}{{/awesome}}",
+		"data": {},
+		"expected": "inner 1"
+	},
+	{
+		"description": "basic context",
+		"it": "depthed block functions with context argument",
+		"template": "{{#with value}}{{#../awesome 1}}inner {{.}}{{/../awesome}}{{/with}}",
+		"data": {
+			"value": true
+		},
+		"expected": "inner 1"
+	},
+	{
+		"description": "basic context",
+		"it": "block functions without context argument",
+		"template": "{{#awesome}}inner{{/awesome}}",
+		"data": {},
+		"expected": "inner"
+	},
+	{
+		"description": "basic context",
+		"it": "pathed block functions without context argument",
+		"template": "{{#foo.awesome}}inner{{/foo.awesome}}",
+		"data": {
+			"foo": {}
+		},
+		"expected": "inner"
+	},
+	{
+		"description": "basic context",
+		"it": "depthed block functions without context argument",
+		"template": "{{#with value}}{{#../awesome}}inner{{/../awesome}}{{/with}}",
+		"data": {
+			"value": true
+		},
+		"expected": "inner"
+	},
+	{
+		"description": "basic context",
+		"it": "paths with hyphens",
+		"template": "{{foo-bar}}",
+		"data": {
+			"foo-bar": "baz"
+		},
+		"expected": "baz"
+	},
+	{
+		"description": "basic context",
+		"it": "paths with hyphens",
+		"template": "{{foo.foo-bar}}",
+		"data": {
+			"foo": {
+				"foo-bar": "baz"
+			}
+		},
+		"expected": "baz"
+	},
+	{
+		"description": "basic context",
+		"it": "paths with hyphens",
+		"template": "{{foo/foo-bar}}",
+		"data": {
+			"foo": {
+				"foo-bar": "baz"
+			}
+		},
+		"expected": "baz"
+	},
+	{
+		"description": "basic context",
+		"it": "nested paths",
+		"template": "Goodbye {{alan/expression}} world!",
+		"data": {
+			"alan": {
+				"expression": "beautiful"
+			}
+		},
+		"expected": "Goodbye beautiful world!"
+	},
+	{
+		"description": "basic context",
+		"it": "nested paths with empty string value",
+		"template": "Goodbye {{alan/expression}} world!",
+		"data": {
+			"alan": {
+				"expression": ""
+			}
+		},
+		"expected": "Goodbye  world!"
+	},
+	{
+		"description": "basic context",
+		"it": "literal paths",
+		"template": "Goodbye {{[@alan]/expression}} world!",
+		"data": {
+			"@alan": {
+				"expression": "beautiful"
+			}
+		},
+		"expected": "Goodbye beautiful world!"
+	},
+	{
+		"description": "basic context",
+		"it": "literal paths",
+		"template": "Goodbye {{[foo bar]/expression}} world!",
+		"data": {
+			"foo bar": {
+				"expression": "beautiful"
+			}
+		},
+		"expected": "Goodbye beautiful world!"
+	},
+	{
+		"description": "basic context",
+		"it": "literal references",
+		"template": "Goodbye {{[foo bar]}} world!",
+		"data": {
+			"foo bar": "beautiful"
+		},
+		"expected": "Goodbye beautiful world!"
+	},
+	{
+		"description": "basic context",
+		"it": "that current context path ({{.}}) doesn't hit helpers",
+		"template": "test: {{.}}",
+		"data": [
+			null,
+			{
+				"helper": "awesome"
+			}
+		],
+		"expected": "test: "
+	},
+	{
+		"description": "basic context",
+		"it": "complex but empty paths",
+		"template": "{{person/name}}",
+		"data": {
+			"person": {
+				"name": null
+			}
+		},
+		"expected": ""
+	},
+	{
+		"description": "basic context",
+		"it": "complex but empty paths",
+		"template": "{{person/name}}",
+		"data": {
+			"person": {}
+		},
+		"expected": ""
+	},
+	{
+		"description": "basic context",
+		"it": "this keyword in paths",
+		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}",
+		"data": {
+			"goodbyes": [
+				"goodbye",
+				"Goodbye",
+				"GOODBYE"
+			]
+		},
+		"expected": "goodbyeGoodbyeGOODBYE"
+	},
+	{
+		"description": "basic context",
+		"it": "this keyword in paths",
+		"template": "{{#hellos}}{{this/text}}{{/hellos}}",
+		"data": {
+			"hellos": [
+				{
+					"text": "hello"
+				},
+				{
+					"text": "Hello"
+				},
+				{
+					"text": "HELLO"
+				}
+			]
+		},
+		"expected": "helloHelloHELLO"
+	},
+	{
+		"description": "basic context",
+		"it": "this keyword nested inside path",
+		"exception": true
+	},
+	{
+		"description": "basic context",
+		"it": "this keyword in helpers",
+		"template": "{{#goodbyes}}{{foo this}}{{/goodbyes}}",
+		"data": [
+			{
+				"goodbyes": [
+					"goodbye",
+					"Goodbye",
+					"GOODBYE"
+				]
+			},
+			{}
+		],
+		"expected": "bar goodbyebar Goodbyebar GOODBYE"
+	},
+	{
+		"description": "basic context",
+		"it": "this keyword in helpers",
+		"template": "{{#hellos}}{{foo this/text}}{{/hellos}}",
+		"data": [
+			{
+				"hellos": [
+					{
+						"text": "hello"
+					},
+					{
+						"text": "Hello"
+					},
+					{
+						"text": "HELLO"
+					}
+				]
+			},
+			{}
+		],
+		"expected": "bar hellobar Hellobar HELLO"
+	},
+	{
+		"description": "basic context",
+		"it": "this keyword nested inside helpers param",
+		"exception": true
+	}
+]
