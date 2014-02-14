@@ -232,6 +232,11 @@
 		"it": "functions",
 		"template": "{{awesome}}",
 		"data": {},
+        "helpers": {
+            "awesome": {
+                "php": "function() { return \"Awesome\"; }"
+            }
+        },
 		"expected": "Awesome"
 	},
 	{
@@ -240,6 +245,11 @@
 		"template": "{{awesome}}",
 		"data": {
 			"more": "More awesome"
+		},
+		"helpers": {
+			"awesome": {
+				"php": "function($prev) { return $prev['more']; }"
+			}
 		},
 		"expected": "More awesome"
 	},
