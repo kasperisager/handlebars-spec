@@ -1,0 +1,160 @@
+[
+	{
+		"description": "subexpressions",
+		"it": "arg-less helper",
+		"template": "{{foo (bar)}}!",
+		"data": {},
+		"helpers": {
+			"foo": {
+				"javascript": "function (val) {\n        return val+val;\n      }"
+			},
+			"bar": {
+				"javascript": "function () {\n        return \"LOL\";\n      }"
+			}
+		},
+		"expected": "LOLLOL!"
+	},
+	{
+		"description": "subexpressions",
+		"it": "helper w args",
+		"template": "{{blog (equal a b)}}",
+		"data": {
+			"bar": "LOL"
+		},
+		"helpers": {
+			"blog": {
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
+			},
+			"equal": {
+				"javascript": "function (x, y) {\n        return x === y;\n      }"
+			}
+		},
+		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "supports much nesting",
+		"template": "{{blog (equal (equal true true) true)}}",
+		"data": {
+			"bar": "LOL"
+		},
+		"helpers": {
+			"blog": {
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
+			},
+			"equal": {
+				"javascript": "function (x, y) {\n        return x === y;\n      }"
+			}
+		},
+		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "provides each nested helper invocation its own options hash",
+		"template": "{{equal (equal true true) true}}",
+		"data": {},
+		"helpers": {
+			"equal": {
+				"javascript": "function (x, y, options) {\n        if (!options || options === lastOptions) {\n          throw new Error(\"options hash was reused\");\n        }\n        lastOptions = options;\n        return x === y;\n      }"
+			}
+		},
+		"expected": "true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "with hashes",
+		"template": "{{blog (equal (equal true true) true fun=\"yes\")}}",
+		"data": {
+			"bar": "LOL"
+		},
+		"helpers": {
+			"blog": {
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
+			},
+			"equal": {
+				"javascript": "function (x, y) {\n        return x === y;\n      }"
+			}
+		},
+		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "as hashes",
+		"template": "{{blog fun=(equal (blog fun=1) \"val is 1\")}}",
+		"data": {},
+		"helpers": {
+			"blog": {
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }"
+			},
+			"equal": {
+				"javascript": "function (x, y) {\n        return x === y;\n      }"
+			}
+		},
+		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "in string params mode,",
+		"template": "{{snog (blorg foo x=y) yeah a=b}}",
+		"data": {
+			"foo": {},
+			"yeah": {}
+		},
+		"expected": "fooyeah",
+		"helpers": {
+			"snog": {
+				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, \"string params for outer helper processed correctly\");\n        equals(options.types[0], 'sexpr', \"string params for outer helper processed correctly\");\n        equals(options.types[1], 'ID', \"string params for outer helper processed correctly\");\n        return a + b;\n      }"
+			},
+			"blorg": {
+				"javascript": "function (a, options) {\n        equals(options.types.length, 1, \"string params for inner helper processed correctly\");\n        equals(options.types[0], 'ID', \"string params for inner helper processed correctly\");\n        return a;\n      }"
+			}
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "as hashes in string params mode",
+		"template": "{{blog fun=(bork)}}",
+		"data": {},
+		"expected": "val is BORK",
+		"helpers": {
+			"blog": {
+				"javascript": "function (options) {\n        equals(options.hashTypes.fun, 'sexpr');\n        return \"val is \" + options.hash.fun;\n      }"
+			},
+			"bork": {
+				"javascript": "function () {\n        return \"BORK\";\n      }"
+			}
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "subexpression functions on the context",
+		"template": "{{foo (bar)}}!",
+		"data": {},
+		"helpers": {
+			"foo": {
+				"javascript": "function (val) {\n        return val+val;\n      }"
+			}
+		},
+		"expected": "LOLLOL!"
+	},
+	{
+		"description": "subexpressions",
+		"it": "subexpressions can't just be property lookups",
+		"template": "{{foo (bar)}}!",
+		"data": {
+			"bar": "LOL"
+		},
+		"helpers": {
+			"foo": {
+				"javascript": "function (val) {\n        return val+val;\n      }"
+			}
+		},
+		"expected": "LOLLOL!"
+	},
+	{
+		"description": "subexpressions",
+		"it": "subexpressions can't just be property lookups",
+		"template": "{{blog fun=(bork)}}",
+		"exception": true
+	}
+]
