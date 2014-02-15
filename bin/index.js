@@ -100,33 +100,35 @@ global.equal = global.equals = function (actual, expected, message) {
   tests.push(test);
 };
 
-global.shouldCompileTo = function (template, data, expected) {
-  shouldCompileToWithPartials(template, data, false, expected);
+global.shouldCompileTo = function (string, hashOrArray, expected) {
+  shouldCompileToWithPartials(string, hashOrArray, false, expected);
 };
 
-global.shouldCompileToWithPartials = function (template, data, partials, expected, message) {
-  compileWithPartials(template, data, partials, expected);
+global.shouldCompileToWithPartials = function (string, hashOrArray, partials, expected, message) {
+  compileWithPartials(string, hashOrArray, partials, expected);
 };
 
-global.compileWithPartials = function(template, data, partials, expected) {
-  var helpers = false;
+global.compileWithPartials = function(string, hashOrArray, partials, expected) {
+  var helpers = {};
 
-  if (util.isArray(data)) {
-    data     = data[0] || {};
-    helpers  = data[1] || false;
-    partials = data[2] || false;
+  if (util.isArray(hashOrArray)) {
+    data     = hashOrArray[0];
+    helpers  = hashOrArray[1];
+    partials = hashOrArray[2];
+  } else {
+    data = hashOrArray;
   }
 
   var test = {
       description : context.description
     , it          : context.it
-    , template    : template
+    , template    : string
     , data        : data
     };
 
   if (partials) test.partials = partials;
+  if (!isEmptyObject(helpers)) test.helpers = extractHelpers(helpers);
   if (expected) test.expected = expected;
-  if (helpers)  test.helpers  = extractHelpers(helpers);
 
   tests.push(test);
 };
