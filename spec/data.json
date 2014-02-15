@@ -1,0 +1,326 @@
+[
+	{
+		"description": "data",
+		"it": "passing in data to a compiled function that expects data - works with helpers",
+		"template": "{{hello}}",
+		"data": {
+			"noun": "cat",
+			"adjective": "happy"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.data.adjective + \" \"  + this.noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "data can be looked up via @foo",
+		"template": "{{@hello}}",
+		"data": {
+			"hello": "hello"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.data.adjective + \" \"  + this.noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "deep @foo triggers automatic top-level data",
+		"template": "{{#let world=\"world\"}}{{#if foo}}{{#if foo}}Hello {{@world}}{{/if}}{{/if}}{{/let}}",
+		"data": {
+			"foo": true
+		},
+		"helpers": {
+			"helperMissing": {
+				"javascript": "function (/* [args, ]options */) {\n    if(arguments.length === 1) {\n      // A missing field in a {{foo}} constuct.\n      return undefined;\n    } else {\n      // Someone is actually trying to call something, blow up.\n      throw new Exception(\"Missing helper: '\" + arguments[arguments.length-1].name + \"'\");\n    }\n  }"
+			},
+			"blockHelperMissing": {
+				"javascript": "function (context, options) {\n    var inverse = options.inverse || function() {}, fn = options.fn;\n\n    if (isFunction(context)) { context = context.call(this); }\n\n    if(context === true) {\n      return fn(this);\n    } else if(context === false || context == null) {\n      return inverse(this);\n    } else if (isArray(context)) {\n      if(context.length > 0) {\n        if (options.ids) {\n          options.ids = [options.name];\n        }\n\n        return instance.helpers.each(context, options);\n      } else {\n        return inverse(this);\n      }\n    } else {\n      if (options.data && options.ids) {\n        var data = createFrame(options.data);\n        data.contextPath = Utils.appendContextPath(options.data.contextPath, options.name);\n        options = {data: data};\n      }\n\n      return fn(context, options);\n    }\n  }"
+			},
+			"each": {
+				"javascript": "function (context, options) {\n    // Allow for {{#each}}\n    if (!options) {\n      options = context;\n      context = this;\n    }\n\n    var fn = options.fn, inverse = options.inverse;\n    var i = 0, ret = \"\", data;\n\n    var contextPath;\n    if (options.data && options.ids) {\n      contextPath = Utils.appendContextPath(options.data.contextPath, options.ids[0]) + '.';\n    }\n\n    if (isFunction(context)) { context = context.call(this); }\n\n    if (options.data) {\n      data = createFrame(options.data);\n    }\n\n    if(context && typeof context === 'object') {\n      if (isArray(context)) {\n        for(var j = context.length; i<j; i++) {\n          if (data) {\n            data.index = i;\n            data.first = (i === 0);\n            data.last  = (i === (context.length-1));\n\n            if (contextPath) {\n              data.contextPath = contextPath + i;\n            }\n          }\n          ret = ret + fn(context[i], { data: data });\n        }\n      } else {\n        for(var key in context) {\n          if(context.hasOwnProperty(key)) {\n            if(data) {\n              data.key = key;\n              data.index = i;\n              data.first = (i === 0);\n\n              if (contextPath) {\n                data.contextPath = contextPath + key;\n              }\n            }\n            ret = ret + fn(context[key], {data: data});\n            i++;\n          }\n        }\n      }\n    }\n\n    if(i === 0){\n      ret = inverse(this);\n    }\n\n    return ret;\n  }"
+			},
+			"if": {
+				"javascript": "function (conditional, options) {\n    if (isFunction(conditional)) { conditional = conditional.call(this); }\n\n    // Default behavior is to render the positive path if the value is truthy and not empty.\n    // The `includeZero` option may be set to treat the condtional as purely not empty based on the\n    // behavior of isEmpty. Effectively this determines if 0 is handled by the positive path or negative.\n    if ((!options.hash.includeZero && !conditional) || Utils.isEmpty(conditional)) {\n      return options.inverse(this);\n    } else {\n      return options.fn(this);\n    }\n  }"
+			},
+			"unless": {
+				"javascript": "function (conditional, options) {\n    return instance.helpers['if'].call(this, conditional, {fn: options.inverse, inverse: options.fn, hash: options.hash});\n  }"
+			},
+			"with": {
+				"javascript": "function (context, options) {\n    if (isFunction(context)) { context = context.call(this); }\n\n    var fn = options.fn;\n\n    if (!Utils.isEmpty(context)) {\n      if (options.data && options.ids) {\n        var data = createFrame(options.data);\n        data.contextPath = Utils.appendContextPath(options.data.contextPath, options.ids[0]);\n        options = {data:data};\n      }\n\n      return fn(context, options);\n    }\n  }"
+			},
+			"log": {
+				"javascript": "function (context, options) {\n    var level = options.data && options.data.level != null ? parseInt(options.data.level, 10) : 1;\n    instance.log(level, context);\n  }"
+			},
+			"lookup": {
+				"javascript": "function (obj, field, options) {\n    return obj && obj[field];\n  }"
+			},
+			"let": {
+				"javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "parameter data can be looked up via @foo",
+		"template": "{{hello @world}}",
+		"data": {
+			"world": "world"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "hash values can be looked up via @foo",
+		"template": "{{hello noun=@world}}",
+		"data": {
+			"world": "world"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return \"Hello \" + options.hash.noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "nested parameter data can be looked up via @foo.bar",
+		"template": "{{hello @world.bar}}",
+		"data": {
+			"world": {
+				"bar": "world"
+			}
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "nested parameter data does not fail with @world.bar",
+		"template": "{{hello @world.bar}}",
+		"data": {
+			"foo": {
+				"bar": "world"
+			}
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "parameter data throws when using complex scope references",
+		"template": "{{#goodbyes}}{{text}} cruel {{@foo/../name}}! {{/goodbyes}}",
+		"exception": true
+	},
+	{
+		"description": "data",
+		"it": "data is inherited downstream",
+		"template": "{{#let foo=1 bar=2}}{{#let foo=bar.baz}}{{@bar}}{{@foo}}{{/let}}{{@foo}}{{/let}}",
+		"data": {
+			"bar": {
+				"baz": "hello world"
+			}
+		},
+		"helpers": {
+			"let": {
+				"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          frame[prop] = options.hash[prop];\n        }\n        return options.fn(this, {data: frame});\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "passing in data to a compiled function that expects data - works with helpers in partials",
+		"template": "{{hello}}",
+		"data": {
+			"noun": "cat",
+			"adjective": "happy"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.data.adjective + \" \"  + this.noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "passing in data to a compiled function that expects data - works with helpers and parameters",
+		"template": "{{hello world}}",
+		"data": {
+			"exclaim": true,
+			"world": "world",
+			"adjective": "happy"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (noun, options) {\n        return options.data.adjective + \" \"  + noun + (this.exclaim ? \"!\" : \"\");\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "passing in data to a compiled function that expects data - works with block helpers",
+		"template": "{{#hello}}{{world}}{{/hello}}",
+		"data": {
+			"exclaim": true,
+			"adjective": "happy"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.fn(this);\n      }"
+			},
+			"world": {
+				"javascript": "function (options) {\n        return options.data.adjective + \" world\" + (this.exclaim ? \"!\" : \"\");\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "passing in data to a compiled function that expects data - works with block helpers that use ..",
+		"template": "{{#hello}}{{world ../zomg}}{{/hello}}",
+		"data": {
+			"exclaim": true,
+			"zomg": "world",
+			"adjective": "happy"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"});\n      }"
+			},
+			"world": {
+				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "passing in data to a compiled function that expects data - data is passed to with block helpers where children use ..",
+		"template": "{{#hello}}{{world ../zomg}}{{/hello}}",
+		"data": {
+			"exclaim": true,
+			"zomg": "world",
+			"adjective": "happy",
+			"accessData": "#win"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.data.accessData + \" \" + options.fn({exclaim: \"?\"});\n      }"
+			},
+			"world": {
+				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "you can override inherited data when invoking a helper",
+		"template": "{{#hello}}{{world zomg}}{{/hello}}",
+		"data": {
+			"exclaim": true,
+			"zomg": "planet",
+			"adjective": "happy"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\", zomg: \"world\"}, { data: {adjective: \"sad\"} });\n      }"
+			},
+			"world": {
+				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
+			}
+		}
+	},
+	{
+		"description": "data",
+		"it": "you can override inherited data when invoking a helper with depth",
+		"template": "{{#hello}}{{world ../zomg}}{{/hello}}",
+		"data": {
+			"exclaim": true,
+			"zomg": "world",
+			"adjective": "happy"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }"
+			},
+			"world": {
+				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
+			}
+		}
+	},
+	{
+		"description": "@root",
+		"it": "the root context can be looked up via @root",
+		"template": "{{@root.foo}}",
+		"data": {
+			"foo": "hello"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }"
+			},
+			"world": {
+				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
+			}
+		}
+	},
+	{
+		"description": "@root",
+		"it": "the root context can be looked up via @root",
+		"template": "{{@root.foo}}",
+		"data": {
+			"foo": "hello"
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }"
+			},
+			"world": {
+				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
+			}
+		}
+	},
+	{
+		"description": "@root",
+		"it": "passed root values take priority",
+		"template": "{{@root.foo}}",
+		"data": {
+			"root": {
+				"foo": "hello"
+			}
+		},
+		"helpers": {
+			"hello": {
+				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }"
+			},
+			"world": {
+				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
+			}
+		}
+	},
+	{
+		"description": "nesting",
+		"it": "the root context can be looked up via @root",
+		"template": "{{#helper}}{{#helper}}{{@./depth}} {{@../depth}} {{@../../depth}}{{/helper}}{{/helper}}",
+		"data": {
+			"foo": "hello",
+			"depth": 0
+		},
+		"helpers": {
+			"helper": {
+				"javascript": "function (options) {\n            var frame = Handlebars.createFrame(options.data);\n            frame.depth = options.data.depth + 1;\n            return options.fn(this, {data: frame});\n          }"
+			}
+		}
+	}
+]
