@@ -13,8 +13,33 @@ program
   .option('-o, --output [file]', 'write JSON output to a file')
   .parse(process.argv);
 
-var tests = []
+var tests = {}
   , context = {};
+
+tests.add = function (spec) {
+  var key = (spec.description + '-' + spec.it).toLowerCase();
+
+  for (var i = 0; i < 20; i++) {
+    var name = key + '-' + ('0' + i).slice(-2);
+
+    if (!tests.hasOwnProperty(name)) {
+      if (program.output) {
+        var patchFile = __dirname + '/../patch/' + path.basename(program.output);
+
+        if (fs.existsSync(path.resolve(patchFile))) {
+          var patch = require(patchFile);
+
+          if (patch.hasOwnProperty(name)) {
+            spec = extend(true, spec, patch[name]);
+          }
+        }
+      }
+
+      tests[name] = spec;
+      break;
+    }
+  }
+};
 
 var isFunction = function (object) {
   return !!(object && object.constructor && object.call && object.apply);
@@ -85,7 +110,7 @@ global.it = function (description, next) {
 };
 
 global.equal = global.equals = function (actual, expected, message) {
-  var test = {
+  var spec = {
       description : context.description
     , it          : context.it
     , template    : context.template
@@ -94,10 +119,10 @@ global.equal = global.equals = function (actual, expected, message) {
     };
 
   if (context.hasOwnProperty('helpers')) {
-    test.helpers = extractHelpers(context.helpers);
+    spec.helpers = extractHelpers(context.helpers);
   }
 
-  tests.push(test);
+  tests.add(spec);
 };
 
 global.shouldCompileTo = function (string, hashOrArray, expected) {
@@ -119,30 +144,32 @@ global.compileWithPartials = function(string, hashOrArray, partials, expected, m
     data = hashOrArray;
   }
 
-  var test = {
+  var spec = {
       description : context.description
     , it          : context.it
     , template    : string
     , data        : data
     };
 
-  if (partials) test.partials = partials;
-  if (helpers)  test.helpers  = helpers;
-  if (expected) test.expected = expected;
-  if (message)  test.message  = message;
+  if (partials) spec.partials = partials;
+  if (helpers)  spec.helpers  = helpers;
+  if (expected) spec.expected = expected;
+  if (message)  spec.message  = message;
 
-  tests.push(test);
+  tests.add(spec);
 };
 
 global.shouldThrow = function (callback, error) {
   callback();
 
-  tests.push({
-    description : context.description
-  , it          : context.it
-  , template    : context.template
-  , exception   : true
-  });
+  var spec = {
+      description : context.description
+    , it          : context.it
+    , template    : context.template
+    , exception   : true
+    };
+
+  tests.add(spec);
 };
 
 var input = path.resolve(program.args[0]);
