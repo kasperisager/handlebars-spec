@@ -1,0 +1,2642 @@
+[
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with &",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with &",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with &",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with &",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with &",
+		"expected": "{{&"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with &",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with &",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with {{{",
+		"expected": "OPEN_UNESCAPED"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with {{{",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with {{{",
+		"expected": "CLOSE_UNESCAPED"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with {{{",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports unescaping with {{{",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": " "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping delimiters",
+		"expected": "{{bar}} "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": " "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "{{bar}} "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple delimiters",
+		"expected": "{{baz}}"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping a triple stash",
+		"expected": "{{{bar}}} "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": " \\"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping escape character",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": " \\"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": " \\"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaping multiple escape characters",
+		"expected": "baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": " \\"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "{{"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": " "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped mustaches after escaped escape characters",
+		"expected": "{{baz}}"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "{{bar}} "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "\\"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "{{"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape characters after escaped mustaches",
+		"expected": "baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "OPEN_UNESCAPED"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "CLOSE_UNESCAPED"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": " \\"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "supports escaped escape character on a triple stash",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple path",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple path",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple path",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple path",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple path",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows dot notation",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows path literals with []",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows path literals with []",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows path literals with []",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows path literals with []",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows path literals with []",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "allows multiple path literals on a line with []",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes {{.}} as OPEN ID CLOSE",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes {{.}} as OPEN ID CLOSE",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes {{.}} as OPEN ID CLOSE",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"expected": ".."
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with .. as a parent path",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with .. as a parent path",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with .. as a parent path",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with .. as a parent path",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with .. as a parent path",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with .. as a parent path",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with .. as a parent path",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with .. as a parent path",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with .. as a parent path",
+		"expected": ".."
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"expected": "this"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw content as \"CONTENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw content as \"CONTENT\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw content as \"CONTENT\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw content as \"CONTENT\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw content as \"CONTENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw content as \"CONTENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw content as \"CONTENT\"",
+		"expected": "foo "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw content as \"CONTENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw content as \"CONTENT\"",
+		"expected": " baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "OPEN_PARTIAL"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial with context as \"OPEN_PARTIAL ID ID CLOSE\"",
+		"expected": "OPEN_PARTIAL"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial with context as \"OPEN_PARTIAL ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial with context as \"OPEN_PARTIAL ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial with context as \"OPEN_PARTIAL ID ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial without spaces as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "OPEN_PARTIAL"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial without spaces as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial without spaces as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "OPEN_PARTIAL"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "OPEN_PARTIAL"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "SEP"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a comment as \"COMMENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a comment as \"COMMENT\"",
+		"expected": "COMMENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a comment as \"COMMENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a comment as \"COMMENT\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a comment as \"COMMENT\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a comment as \"COMMENT\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a comment as \"COMMENT\"",
+		"expected": "COMMENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a comment as \"COMMENT\"",
+		"expected": " this is a comment "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment as \"COMMENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment as \"COMMENT\"",
+		"expected": "COMMENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment as \"COMMENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment as \"COMMENT\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment as \"COMMENT\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment as \"COMMENT\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment as \"COMMENT\"",
+		"expected": "COMMENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment as \"COMMENT\"",
+		"expected": " this is a {{comment}} "
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"expected": "COMMENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"expected": "COMMENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"expected": " this is a\n{{comment}}\n"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"expected": "OPEN_BLOCK"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"expected": "CONTENT"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"expected": "OPEN_ENDBLOCK"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"expected": "OPEN_INVERSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"expected": "OPEN_INVERSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"expected": "OPEN_INVERSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "OPEN_INVERSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "OPEN_INVERSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"expected": "baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"expected": "baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"expected": "baz bat"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with escapes quotes as STRING",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with escapes quotes as STRING",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with escapes quotes as STRING",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with escapes quotes as STRING",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with escapes quotes as STRING",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params with escapes quotes as STRING",
+		"expected": "bar\"baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"expected": "bar'baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "1"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "1.1"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "-1"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes numbers",
+		"expected": "-1.1"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "BOOLEAN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "BOOLEAN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "true"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "BOOLEAN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "BOOLEAN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes booleans",
+		"expected": "false"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "BOOLEAN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "BOOLEAN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes hash arguments",
+		"expected": "omg"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "DATA"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "DATA"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "EQUALS"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "DATA"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes special @ identifiers",
+		"expected": "baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "does not time out in a mustache with a single } followed by EOF",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "does not time out in a mustache with a single } followed by EOF",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "does not time out in a mustache when invalid ID characters are used",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "does not time out in a mustache when invalid ID characters are used",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "foo"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "a-x"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes subexpressions",
+		"expected": "b-y"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "CLOSE"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "bar"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "lol"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "rofl"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions",
+		"expected": "baz"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "OPEN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "BOOLEAN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "BOOLEAN"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "NUMBER"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "OPEN_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "ID"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "STRING"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "CLOSE_SEXPR"
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes nested subexpressions: literals",
+		"expected": "CLOSE"
+	}
+]
