@@ -260,6 +260,11 @@
 		"data": {
 			"frank": "Frank"
 		},
+        "helpers": {
+            "awesome": {
+                "php": "function($context) { return $context; }"
+            }
+        },
 		"expected": "Frank"
 	},
 	{
