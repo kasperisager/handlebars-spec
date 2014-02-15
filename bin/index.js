@@ -105,10 +105,10 @@ global.shouldCompileTo = function (string, hashOrArray, expected) {
 };
 
 global.shouldCompileToWithPartials = function (string, hashOrArray, partials, expected, message) {
-  compileWithPartials(string, hashOrArray, partials, expected);
+  compileWithPartials(string, hashOrArray, partials, expected, message);
 };
 
-global.compileWithPartials = function(string, hashOrArray, partials, expected) {
+global.compileWithPartials = function(string, hashOrArray, partials, expected, message) {
   var helpers = false;
 
   if (util.isArray(hashOrArray)) {
@@ -129,6 +129,7 @@ global.compileWithPartials = function(string, hashOrArray, partials, expected) {
   if (partials) test.partials = partials;
   if (helpers)  test.helpers  = helpers;
   if (expected) test.expected = expected;
+  if (message)  test.message  = message;
 
   tests.push(test);
 };
