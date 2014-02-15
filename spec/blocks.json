@@ -103,9 +103,7 @@
 		"description": "blocks",
 		"it": "block with complex lookup using nested context",
 		"template": "{{#goodbyes}}{{text}} cruel {{foo/../name}}! {{/goodbyes}}",
-		"exception": {
-			"javascript": "function Error() { [native code] }"
-		}
+		"exception": true
 	},
 	{
 		"description": "blocks",
