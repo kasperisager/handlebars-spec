@@ -1,0 +1,887 @@
+[
+	{
+		"description": "helpers",
+		"it": "helper with complex lookup$",
+		"template": "{{#goodbyes}}{{{link ../prefix}}}{{/goodbyes}}",
+		"data": {
+			"prefix": "/root",
+			"goodbyes": [
+				{
+					"text": "Goodbye",
+					"url": "goodbye"
+				}
+			]
+		},
+		"helpers": {
+			"link": {
+				"javascript": "function (prefix) {\n      return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + this.text + \"</a>\";\n    }"
+			}
+		},
+		"expected": "<a href='/root/goodbye'>Goodbye</a>"
+	},
+	{
+		"description": "helpers",
+		"it": "helper for raw block gets raw content",
+		"template": "{{{{raw}}}} {{test}} {{{{/raw}}}}",
+		"data": {
+			"test": "hello"
+		},
+		"helpers": {
+			"raw": {
+				"javascript": "function (options) {\n        return options.fn();\n    }"
+			}
+		},
+		"expected": " {{test}} "
+	},
+	{
+		"description": "helpers",
+		"it": "helper for raw block gets parameters",
+		"template": "{{{{raw 1 2 3}}}} {{test}} {{{{/raw}}}}",
+		"data": {
+			"test": "hello"
+		},
+		"helpers": {
+			"raw": {
+				"javascript": "function (a, b, c, options) {\n        return options.fn() + a + b + c;\n    }"
+			}
+		},
+		"expected": " {{test}} 123"
+	},
+	{
+		"description": "helpers",
+		"it": "helper block with complex lookup expression",
+		"template": "{{#goodbyes}}{{../name}}{{/goodbyes}}",
+		"data": {
+			"name": "Alan"
+		},
+		"helpers": {
+			"goodbyes": {
+				"javascript": "function (options) {\n      var out = \"\";\n      var byes = [\"Goodbye\", \"goodbye\", \"GOODBYE\"];\n      for (var i = 0,j = byes.length; i < j; i++) {\n        out += byes[i] + \" \" + options.fn(this) + \"! \";\n      }\n      return out;\n    }"
+			}
+		},
+		"expected": "Goodbye Alan! goodbye Alan! GOODBYE Alan! "
+	},
+	{
+		"description": "helpers",
+		"it": "helper with complex lookup and nested template",
+		"template": "{{#goodbyes}}{{#link ../prefix}}{{text}}{{/link}}{{/goodbyes}}",
+		"data": {
+			"prefix": "/root",
+			"goodbyes": [
+				{
+					"text": "Goodbye",
+					"url": "goodbye"
+				}
+			]
+		},
+		"helpers": {
+			"link": {
+				"javascript": "function (prefix, options) {\n        return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + options.fn(this) + \"</a>\";\n    }"
+			}
+		},
+		"expected": "<a href='/root/goodbye'>Goodbye</a>"
+	},
+	{
+		"description": "helpers",
+		"it": "helper with complex lookup and nested template in VM+Compiler",
+		"template": "{{#goodbyes}}{{#link ../prefix}}{{text}}{{/link}}{{/goodbyes}}",
+		"data": {
+			"prefix": "/root",
+			"goodbyes": [
+				{
+					"text": "Goodbye",
+					"url": "goodbye"
+				}
+			]
+		},
+		"helpers": {
+			"link": {
+				"javascript": "function (prefix, options) {\n        return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + options.fn(this) + \"</a>\";\n    }"
+			}
+		},
+		"expected": "<a href='/root/goodbye'>Goodbye</a>"
+	},
+	{
+		"description": "helpers",
+		"it": "block helper",
+		"template": "{{#goodbyes}}{{text}}! {{/goodbyes}}cruel {{world}}!",
+		"data": {
+			"world": "world"
+		},
+		"expected": "GOODBYE! cruel world!",
+		"helpers": {
+			"goodbyes": {
+				"javascript": "function (options) { return options.fn({text: \"GOODBYE\"}); }"
+			}
+		}
+	},
+	{
+		"description": "helpers",
+		"it": "block helper staying in the same context",
+		"template": "{{#form}}<p>{{name}}</p>{{/form}}",
+		"data": {
+			"name": "Yehuda"
+		},
+		"expected": "<form><p>Yehuda</p></form>",
+		"helpers": {
+			"form": {
+				"javascript": "function (options) { return \"<form>\" + options.fn(this) + \"</form>\"; }"
+			}
+		}
+	},
+	{
+		"description": "helpers",
+		"it": "block helper should have context in this",
+		"template": "<ul>{{#people}}<li>{{#link}}{{name}}{{/link}}</li>{{/people}}</ul>",
+		"data": {
+			"people": [
+				{
+					"name": "Alan",
+					"id": 1
+				},
+				{
+					"name": "Yehuda",
+					"id": 2
+				}
+			]
+		},
+		"helpers": {
+			"link": {
+				"javascript": "function (options) {\n      return '<a href=\"/people/' + this.id + '\">' + options.fn(this) + '</a>';\n    }"
+			}
+		},
+		"expected": "<ul><li><a href=\"/people/1\">Alan</a></li><li><a href=\"/people/2\">Yehuda</a></li></ul>"
+	},
+	{
+		"description": "helpers",
+		"it": "block helper for undefined value",
+		"template": "{{#empty}}shouldn't render{{/empty}}",
+		"data": {}
+	},
+	{
+		"description": "helpers",
+		"it": "block helper passing a new context",
+		"template": "{{#form yehuda}}<p>{{name}}</p>{{/form}}",
+		"data": {
+			"yehuda": {
+				"name": "Yehuda"
+			}
+		},
+		"expected": "<form><p>Yehuda</p></form>",
+		"helpers": {
+			"form": {
+				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }"
+			}
+		}
+	},
+	{
+		"description": "helpers",
+		"it": "block helper passing a complex path context",
+		"template": "{{#form yehuda/cat}}<p>{{name}}</p>{{/form}}",
+		"data": {
+			"yehuda": {
+				"name": "Yehuda",
+				"cat": {
+					"name": "Harold"
+				}
+			}
+		},
+		"expected": "<form><p>Harold</p></form>",
+		"helpers": {
+			"form": {
+				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }"
+			}
+		}
+	},
+	{
+		"description": "helpers",
+		"it": "nested block helpers",
+		"template": "{{#form yehuda}}<p>{{name}}</p>{{#link}}Hello{{/link}}{{/form}}",
+		"data": {
+			"yehuda": {
+				"name": "Yehuda"
+			}
+		},
+		"expected": "<form><p>Yehuda</p><a href='Yehuda'>Hello</a></form>",
+		"helpers": {
+			"link": {
+				"javascript": "function (options) { return \"<a href='\" + this.name + \"'>\" + options.fn(this) + \"</a>\"; }"
+			},
+			"form": {
+				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }"
+			}
+		}
+	},
+	{
+		"description": "helpers",
+		"it": "block helper inverted sections",
+		"template": "{{#list people}}{{name}}{{^}}<em>Nobody's here</em>{{/list}}",
+		"data": {
+			"people": [
+				{
+					"name": "Alan"
+				},
+				{
+					"name": "Yehuda"
+				}
+			]
+		},
+		"helpers": {
+			"list": {
+				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }"
+			}
+		},
+		"expected": "<ul><li>Alan</li><li>Yehuda</li></ul>"
+	},
+	{
+		"description": "helpers",
+		"it": "block helper inverted sections",
+		"template": "{{#list people}}{{name}}{{^}}<em>Nobody's here</em>{{/list}}",
+		"data": {
+			"people": []
+		},
+		"helpers": {
+			"list": {
+				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }"
+			}
+		},
+		"expected": "<p><em>Nobody's here</em></p>"
+	},
+	{
+		"description": "helpers",
+		"it": "block helper inverted sections",
+		"template": "{{#list people}}Hello{{^}}{{message}}{{/list}}",
+		"data": {
+			"people": [],
+			"message": "Nobody's here"
+		},
+		"helpers": {
+			"list": {
+				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }"
+			}
+		},
+		"expected": "<p>Nobody&#x27;s here</p>"
+	},
+	{
+		"description": "helpers hash",
+		"it": "providing a helpers hash",
+		"template": "Goodbye {{cruel}} {{world}}!",
+		"data": {
+			"cruel": "cruel"
+		},
+		"helpers": {
+			"world": {
+				"javascript": "function () { return \"world\"; }"
+			}
+		},
+		"expected": "Goodbye cruel world!"
+	},
+	{
+		"description": "helpers hash",
+		"it": "providing a helpers hash",
+		"template": "Goodbye {{#iter}}{{cruel}} {{world}}{{/iter}}!",
+		"data": {
+			"iter": [
+				{
+					"cruel": "cruel"
+				}
+			]
+		},
+		"helpers": {
+			"world": {
+				"javascript": "function () { return \"world\"; }"
+			}
+		},
+		"expected": "Goodbye cruel world!"
+	},
+	{
+		"description": "helpers hash",
+		"it": "in cases of conflict, helpers win",
+		"template": "{{{lookup}}}",
+		"data": {
+			"lookup": "Explicit"
+		},
+		"helpers": {
+			"lookup": {
+				"javascript": "function () { return 'helpers'; }"
+			}
+		},
+		"expected": "helpers"
+	},
+	{
+		"description": "helpers hash",
+		"it": "in cases of conflict, helpers win",
+		"template": "{{lookup}}",
+		"data": {
+			"lookup": "Explicit"
+		},
+		"helpers": {
+			"lookup": {
+				"javascript": "function () { return 'helpers'; }"
+			}
+		},
+		"expected": "helpers"
+	},
+	{
+		"description": "helpers hash",
+		"it": "the helpers hash is available is nested contexts",
+		"template": "{{#outer}}{{#inner}}{{helper}}{{/inner}}{{/outer}}",
+		"data": {
+			"outer": {
+				"inner": {
+					"unused": []
+				}
+			}
+		},
+		"helpers": {
+			"helper": {
+				"javascript": "function () { return 'helper'; }"
+			}
+		},
+		"expected": "helper"
+	},
+	{
+		"description": "helpers hash",
+		"it": "the helper hash should augment the global hash",
+		"template": "{{test_helper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
+		"data": {
+			"cruel": "cruel"
+		},
+		"helpers": {
+			"world": {
+				"javascript": "function () { return \"world!\"; }"
+			}
+		},
+		"expected": "found it! Goodbye cruel world!!"
+	},
+	{
+		"description": "helpers hash",
+		"it": "Multiple global helper registration",
+		"template": "{{test_helper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
+		"data": {
+			"cruel": "cruel"
+		},
+		"expected": "found it! Goodbye cruel world!!"
+	},
+	{
+		"description": "helpers hash",
+		"it": "decimal number literals work",
+		"template": "Message: {{hello -1.2 1.2}}",
+		"data": {},
+		"helpers": {
+			"hello": {
+				"javascript": "function (times, times2) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      if(typeof times2 !== 'number') { times2 = \"NaN\"; }\n      return \"Hello \" + times + \" \" + times2 + \" times\";\n    }"
+			}
+		},
+		"expected": "Message: Hello -1.2 1.2 times"
+	},
+	{
+		"description": "helpers hash",
+		"it": "negative number literals work",
+		"template": "Message: {{hello -12}}",
+		"data": {},
+		"helpers": {
+			"hello": {
+				"javascript": "function (times) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      return \"Hello \" + times + \" times\";\n    }"
+			}
+		},
+		"expected": "Message: Hello -12 times"
+	},
+	{
+		"description": "String literal parameters",
+		"it": "simple literals work",
+		"template": "Message: {{hello \"world\" 12 true false}}",
+		"data": {},
+		"helpers": {
+			"hello": {
+				"javascript": "function (param, times, bool1, bool2) {\n        if(typeof times !== 'number') { times = \"NaN\"; }\n        if(typeof bool1 !== 'boolean') { bool1 = \"NaB\"; }\n        if(typeof bool2 !== 'boolean') { bool2 = \"NaB\"; }\n        return \"Hello \" + param + \" \" + times + \" times: \" + bool1 + \" \" + bool2;\n      }"
+			}
+		},
+		"expected": "Message: Hello world 12 times: true false"
+	},
+	{
+		"description": "String literal parameters",
+		"it": "using a quote in the middle of a parameter raises an error",
+		"template": "Message: {{hello wo\"rld\"}}",
+		"exception": true
+	},
+	{
+		"description": "String literal parameters",
+		"it": "escaping a String is possible",
+		"template": "Message: {{{hello \"\\\"world\\\"\"}}}",
+		"data": {},
+		"helpers": {
+			"hello": {
+				"javascript": "function (param) { return \"Hello \" + param; }"
+			}
+		},
+		"expected": "Message: Hello \"world\""
+	},
+	{
+		"description": "String literal parameters",
+		"it": "it works with ' marks",
+		"template": "Message: {{{hello \"Alan's world\"}}}",
+		"data": {},
+		"helpers": {
+			"hello": {
+				"javascript": "function (param) { return \"Hello \" + param; }"
+			}
+		},
+		"expected": "Message: Hello Alan's world"
+	},
+	{
+		"description": "String literal parameters",
+		"it": "negative number literals work",
+		"template": "Message: {{hello -12}}",
+		"data": {},
+		"helpers": {
+			"hello": {
+				"javascript": "function (times) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      return \"Hello \" + times + \" times\";\n    }"
+			}
+		},
+		"expected": "Message: Hello -12 times"
+	},
+	{
+		"description": "multiple parameters",
+		"it": "simple multi-params work",
+		"template": "Message: {{goodbye cruel world}}",
+		"data": {
+			"cruel": "cruel",
+			"world": "world"
+		},
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (cruel, world) { return \"Goodbye \" + cruel + \" \" + world; }"
+			}
+		},
+		"expected": "Message: Goodbye cruel world"
+	},
+	{
+		"description": "multiple parameters",
+		"it": "block multi-params work",
+		"template": "Message: {{#goodbye cruel world}}{{greeting}} {{adj}} {{noun}}{{/goodbye}}",
+		"data": {
+			"cruel": "cruel",
+			"world": "world"
+		},
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: \"Goodbye\", adj: cruel, noun: world});\n      }"
+			}
+		},
+		"expected": "Message: Goodbye cruel world"
+	},
+	{
+		"description": "hash",
+		"it": "helpers can take an optional hash",
+		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" times=12}}",
+		"data": {},
+		"expected": "GOODBYE CRUEL WORLD 12 TIMES",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.hash.world + \" \" + options.hash.times + \" TIMES\";\n        }"
+			}
+		}
+	},
+	{
+		"description": "hash",
+		"it": "helpers can take an optional hash with booleans",
+		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=true}}",
+		"data": {},
+		"expected": "GOODBYE CRUEL WORLD",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.hash.world;\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }"
+			}
+		}
+	},
+	{
+		"description": "hash",
+		"it": "helpers can take an optional hash with booleans",
+		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=false}}",
+		"data": {},
+		"expected": "NOT PRINTING",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.hash.world;\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }"
+			}
+		}
+	},
+	{
+		"description": "hash",
+		"it": "block helpers can take an optional hash",
+		"template": "{{#goodbye cruel=\"CRUEL\" times=12}}world{{/goodbye}}",
+		"data": {},
+		"expected": "GOODBYE CRUEL world 12 TIMES",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this) + \" \" + options.hash.times + \" TIMES\";\n        }"
+			}
+		}
+	},
+	{
+		"description": "hash",
+		"it": "block helpers can take an optional hash with single quoted stings",
+		"template": "{{#goodbye cruel='CRUEL' times=12}}world{{/goodbye}}",
+		"data": {},
+		"expected": "GOODBYE CRUEL world 12 TIMES",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this) + \" \" + options.hash.times + \" TIMES\";\n        }"
+			}
+		}
+	},
+	{
+		"description": "hash",
+		"it": "block helpers can take an optional hash with booleans",
+		"template": "{{#goodbye cruel=\"CRUEL\" print=true}}world{{/goodbye}}",
+		"data": {},
+		"expected": "GOODBYE CRUEL world",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this);\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }"
+			}
+		}
+	},
+	{
+		"description": "hash",
+		"it": "block helpers can take an optional hash with booleans",
+		"template": "{{#goodbye cruel=\"CRUEL\" print=false}}world{{/goodbye}}",
+		"data": {},
+		"expected": "NOT PRINTING",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this);\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }"
+			}
+		}
+	},
+	{
+		"description": "helperMissing",
+		"it": "if a context is not found, helperMissing is used",
+		"template": "{{hello}} {{link_to world}}",
+		"exception": true
+	},
+	{
+		"description": "helperMissing",
+		"it": "if a context is not found, custom helperMissing is used",
+		"template": "{{hello}} {{link_to world}}",
+		"data": {
+			"hello": "Hello",
+			"world": "world"
+		},
+		"helpers": {
+			"helperMissing": {
+				"javascript": "function (mesg, options) {\n          if(options.name === \"link_to\") {\n            return new Handlebars.SafeString(\"<a>\" + mesg + \"</a>\");\n          }\n        }"
+			}
+		},
+		"expected": "Hello <a>world</a>"
+	},
+	{
+		"description": "knownHelpers",
+		"it": "Known helper should render helper",
+		"template": "{{hello}}",
+		"data": {},
+		"expected": "foo",
+		"helpers": {
+			"hello": {
+				"javascript": "function () { return \"foo\"; }"
+			}
+		}
+	},
+	{
+		"description": "knownHelpers",
+		"it": "Unknown helper in knownHelpers only mode should be passed as undefined",
+		"template": "{{typeof hello}}",
+		"data": {},
+		"expected": "undefined",
+		"helpers": {
+			"typeof": {
+				"javascript": "function (arg) { return typeof arg; }"
+			},
+			"hello": {
+				"javascript": "function () { return \"foo\"; }"
+			}
+		}
+	},
+	{
+		"description": "knownHelpers",
+		"it": "Builtin helpers available in knownHelpers only mode",
+		"template": "{{#unless foo}}bar{{/unless}}",
+		"data": {},
+		"expected": "bar",
+		"helpers": {
+			"typeof": {
+				"javascript": "function (arg) { return typeof arg; }"
+			},
+			"hello": {
+				"javascript": "function () { return \"foo\"; }"
+			}
+		}
+	},
+	{
+		"description": "knownHelpers",
+		"it": "Field lookup works in knownHelpers only mode",
+		"template": "{{foo}}",
+		"data": {
+			"foo": "bar"
+		},
+		"expected": "bar",
+		"helpers": {
+			"typeof": {
+				"javascript": "function (arg) { return typeof arg; }"
+			},
+			"hello": {
+				"javascript": "function () { return \"foo\"; }"
+			}
+		}
+	},
+	{
+		"description": "knownHelpers",
+		"it": "Conditional blocks work in knownHelpers only mode",
+		"template": "{{#foo}}bar{{/foo}}",
+		"data": {
+			"foo": "baz"
+		},
+		"expected": "bar",
+		"helpers": {
+			"typeof": {
+				"javascript": "function (arg) { return typeof arg; }"
+			},
+			"hello": {
+				"javascript": "function () { return \"foo\"; }"
+			}
+		}
+	},
+	{
+		"description": "knownHelpers",
+		"it": "Invert blocks work in knownHelpers only mode",
+		"template": "{{^foo}}bar{{/foo}}",
+		"data": {
+			"foo": false
+		},
+		"expected": "bar",
+		"helpers": {
+			"typeof": {
+				"javascript": "function (arg) { return typeof arg; }"
+			},
+			"hello": {
+				"javascript": "function () { return \"foo\"; }"
+			}
+		}
+	},
+	{
+		"description": "knownHelpers",
+		"it": "Functions are bound to the context in knownHelpers only mode",
+		"template": "{{foo}}",
+		"data": {
+			"bar": "bar"
+		},
+		"expected": "bar",
+		"helpers": {
+			"typeof": {
+				"javascript": "function (arg) { return typeof arg; }"
+			},
+			"hello": {
+				"javascript": "function () { return \"foo\"; }"
+			}
+		}
+	},
+	{
+		"description": "knownHelpers",
+		"it": "Unknown helper call in knownHelpers only mode should throw",
+		"template": "{{typeof hello}}",
+		"exception": true
+	},
+	{
+		"description": "blockHelperMissing",
+		"it": "lambdas are resolved by blockHelperMissing, not handlebars proper",
+		"template": "{{#truthy}}yep{{/truthy}}",
+		"data": {},
+		"expected": "yep"
+	},
+	{
+		"description": "blockHelperMissing",
+		"it": "lambdas resolved by blockHelperMissing are bound to the context",
+		"template": "{{#truthy}}yep{{/truthy}}",
+		"data": {}
+	},
+	{
+		"description": "name field",
+		"it": "should include in ambiguous mustache calls",
+		"template": "{{helper}}",
+		"data": {},
+		"helpers": {
+			"blockHelperMissing": {
+				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
+			"helper": {
+				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
+			}
+		},
+		"expected": "ran: helper"
+	},
+	{
+		"description": "name field",
+		"it": "should include in helper mustache calls",
+		"template": "{{helper 1}}",
+		"data": {},
+		"helpers": {
+			"blockHelperMissing": {
+				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
+			"helper": {
+				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
+			}
+		},
+		"expected": "ran: helper"
+	},
+	{
+		"description": "name field",
+		"it": "should include in ambiguous block calls",
+		"template": "{{#helper}}{{/helper}}",
+		"data": {},
+		"helpers": {
+			"blockHelperMissing": {
+				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
+			"helper": {
+				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
+			}
+		},
+		"expected": "ran: helper"
+	},
+	{
+		"description": "name field",
+		"it": "should include in simple block calls",
+		"template": "{{#./helper}}{{/./helper}}",
+		"data": {},
+		"helpers": {
+			"blockHelperMissing": {
+				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
+			"helper": {
+				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
+			}
+		},
+		"expected": "missing: ./helper"
+	},
+	{
+		"description": "name field",
+		"it": "should include in helper block calls",
+		"template": "{{#helper 1}}{{/helper}}",
+		"data": {},
+		"helpers": {
+			"blockHelperMissing": {
+				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
+			"helper": {
+				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
+			}
+		},
+		"expected": "ran: helper"
+	},
+	{
+		"description": "name field",
+		"it": "should include in known helper calls",
+		"template": "{{helper}}",
+		"data": {},
+		"expected": "ran: helper",
+		"helpers": {
+			"blockHelperMissing": {
+				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
+			"helper": {
+				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
+			}
+		}
+	},
+	{
+		"description": "name field",
+		"it": "should include full id",
+		"template": "{{#foo.helper}}{{/foo.helper}}",
+		"data": {
+			"foo": {}
+		},
+		"helpers": {
+			"blockHelperMissing": {
+				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
+			"helper": {
+				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
+			}
+		},
+		"expected": "missing: foo.helper"
+	},
+	{
+		"description": "name conflicts",
+		"it": "helpers take precedence over same-named context properties",
+		"template": "{{goodbye}} {{cruel world}}",
+		"data": {
+			"goodbye": "goodbye",
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel WORLD",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }"
+			},
+			"cruel": {
+				"javascript": "function (world) {\n          return \"cruel \" + world.toUpperCase();\n        }"
+			}
+		}
+	},
+	{
+		"description": "name conflicts",
+		"it": "helpers take precedence over same-named context properties$",
+		"template": "{{#goodbye}} {{cruel world}}{{/goodbye}}",
+		"data": {
+			"goodbye": "goodbye",
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel WORLD",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }"
+			},
+			"cruel": {
+				"javascript": "function (world) {\n          return \"cruel \" + world.toUpperCase();\n        }"
+			}
+		}
+	},
+	{
+		"description": "name conflicts",
+		"it": "Scoped names take precedence over helpers",
+		"template": "{{this.goodbye}} {{cruel world}} {{cruel this.goodbye}}",
+		"data": {
+			"goodbye": "goodbye",
+			"world": "world"
+		},
+		"expected": "goodbye cruel WORLD cruel GOODBYE",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }"
+			},
+			"cruel": {
+				"javascript": "function (world) {\n          return \"cruel \" + world.toUpperCase();\n        }"
+			}
+		}
+	},
+	{
+		"description": "name conflicts",
+		"it": "Scoped names take precedence over block helpers",
+		"template": "{{#goodbye}} {{cruel world}}{{/goodbye}} {{this.goodbye}}",
+		"data": {
+			"goodbye": "goodbye",
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel WORLD goodbye",
+		"helpers": {
+			"goodbye": {
+				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }"
+			},
+			"cruel": {
+				"javascript": "function (world) {\n          return \"cruel \" + world.toUpperCase();\n        }"
+			}
+		}
+	}
+]
