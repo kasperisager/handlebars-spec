@@ -2,7 +2,9 @@
 
 var program = require('commander')
   , fs = require('fs')
-  , path = require('path');
+  , path = require('path')
+  , extend = require('util-extend')
+  , Handlebars = require('handlebars');
 
 program
   .version('0.0.0')
@@ -42,17 +44,39 @@ var extractHelpers = function (data) {
   return helpers;
 };
 
-global.beforeEach = function () {};
+global.Handlebars    = Handlebars;
+global.handlebarsEnv = Handlebars.create();
+
+global.beforeEach = function (next) {
+  next();
+};
 
 global.CompilerContext = {
-  compile: function (template) {
+  compile: function (template, options) {
     // Push template unto context
     context.template = template;
 
-    return function (data) {
+    return function (data, options) {
+      if (options && !isEmptyObject(options)) {
+        if (options.hasOwnProperty('data')) {
+          data = extend(data, options.data);
+        }
+      }
+
       // Push template data unto context
       context.data = data;
+
+      if (options && !isEmptyObject(options)) {
+        if (options.hasOwnProperty('helpers')) {
+          // Push helpers unto context
+          context.helpers = options.helpers;
+        }
+      }
     };
+  },
+  compileWithPartial: function(template, options) {
+    // Push template unto context
+    context.template = template;
   }
 };
 
@@ -68,14 +92,20 @@ global.it = function (description, next) {
   next();
 };
 
-global.equal = function (actual, expected, message) {
-  tests.push({
-    description : context.description
-  , it          : context.it
-  , template    : context.template
-  , data        : context.data
-  , expected    : expected
-  });
+global.equal = global.equals = function (actual, expected, message) {
+  var test = {
+      description : context.description
+    , it          : context.it
+    , template    : context.template
+    , data        : context.data
+    , expected    : expected
+    };
+
+  if (context.hasOwnProperty('helpers')) {
+    test.helpers = extractHelpers(context.helpers);
+  }
+
+  tests.push(test);
 };
 
 global.shouldCompileTo = function (template, data, expected) {
@@ -95,6 +125,31 @@ global.shouldCompileTo = function (template, data, expected) {
   tests.push(test);
 };
 
+global.shouldCompileToWithPartials = function (template, data, partials, expected, message) {
+  compileWithPartials(template, data, partials, expected);
+};
+
+global.compileWithPartials = function(template, data, partials, expected) {
+  var helpers = extractHelpers(data[1])
+    , test = {
+      description : context.description
+    , it          : context.it
+    , template    : template
+    , data        : data[0]
+    , partials    : data[2]
+    };
+
+  if (expected) {
+    test.expected = expected;
+  }
+
+  if (!isEmptyObject(helpers)) {
+    test.helpers = helpers;
+  }
+
+  tests.push(test);
+};
+
 global.shouldThrow = function (callback, error) {
   callback();
 
@@ -102,9 +157,7 @@ global.shouldThrow = function (callback, error) {
     description : context.description
   , it          : context.it
   , template    : context.template
-  , exception   : {
-    javascript: '' + error
-  }
+  , exception   : true
   });
 };
 
