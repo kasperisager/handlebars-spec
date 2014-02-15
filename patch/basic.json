@@ -1,0 +1,16 @@
+{
+	"basic context-this keyword in helpers-00": {
+		"helpers": {
+			"foo": {
+				"php": "function($value) { return 'bar '.$value; }"
+			}
+		}
+	},
+	"basic context-this keyword in helpers-01": {
+		"helpers": {
+			"foo": {
+				"php": "function($value) { return 'bar '.$value; }"
+			}
+		}
+	}
+}
