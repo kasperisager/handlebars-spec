@@ -3,6 +3,7 @@
 var program = require('commander')
   , fs = require('fs')
   , path = require('path')
+  , util = require('util')
   , extend = require('util-extend')
   , Handlebars = require('handlebars');
 
@@ -24,22 +25,17 @@ var isEmptyObject = function (object) {
 };
 
 var extractHelpers = function (data) {
-  var helpers = {}
-    , extract = function (object) {
-      if (!object || typeof object !== 'object') {
-        return false;
-      }
+  var helpers = {};
 
-      Object.keys(object).forEach(function (el) {
-        if (isFunction(object[el])) {
-          helpers[el] = { javascript: '' + object[el] };
-        }
+  if (!data || typeof data !== 'object') {
+    return false;
+  }
 
-        extract(object[el]);
-      });
-    };
-
-  extract(data);
+  Object.keys(data).forEach(function (el) {
+    if (isFunction(data[el])) {
+      helpers[el] = { javascript: '' + data[el] };
+    }
+  });
 
   return helpers;
 };
@@ -57,20 +53,16 @@ global.CompilerContext = {
     context.template = template;
 
     return function (data, options) {
-      if (options && !isEmptyObject(options)) {
-        if (options.hasOwnProperty('data')) {
-          data = extend(data, options.data);
-        }
+      if (!isEmptyObject(options) && options.hasOwnProperty('data')) {
+        data = extend(data, options.data);
       }
 
       // Push template data unto context
       context.data = data;
 
-      if (options && !isEmptyObject(options)) {
-        if (options.hasOwnProperty('helpers')) {
-          // Push helpers unto context
-          context.helpers = options.helpers;
-        }
+      if (!isEmptyObject(options) && options.hasOwnProperty('helpers')) {
+        // Push helpers unto context
+        context.helpers = options.helpers;
       }
     };
   },
@@ -109,20 +101,7 @@ global.equal = global.equals = function (actual, expected, message) {
 };
 
 global.shouldCompileTo = function (template, data, expected) {
-  var helpers = extractHelpers(data)
-    , test = {
-      description : context.description
-    , it          : context.it
-    , template    : template
-    , data        : data
-    , expected    : expected
-    };
-
-  if (!isEmptyObject(helpers)) {
-    test.helpers = helpers;
-  }
-
-  tests.push(test);
+  shouldCompileToWithPartials(template, data, false, expected);
 };
 
 global.shouldCompileToWithPartials = function (template, data, partials, expected, message) {
@@ -130,22 +109,24 @@ global.shouldCompileToWithPartials = function (template, data, partials, expecte
 };
 
 global.compileWithPartials = function(template, data, partials, expected) {
-  var helpers = extractHelpers(data[1])
-    , test = {
+  var helpers = false;
+
+  if (util.isArray(data)) {
+    data     = data[0] || {};
+    helpers  = data[1] || false;
+    partials = data[2] || false;
+  }
+
+  var test = {
       description : context.description
     , it          : context.it
     , template    : template
-    , data        : data[0]
-    , partials    : data[2]
+    , data        : data
     };
 
-  if (expected) {
-    test.expected = expected;
-  }
-
-  if (!isEmptyObject(helpers)) {
-    test.helpers = helpers;
-  }
+  if (partials) test.partials = partials;
+  if (expected) test.expected = expected;
+  if (helpers)  test.helpers  = extractHelpers(helpers);
 
   tests.push(test);
 };
