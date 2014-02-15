@@ -484,43 +484,48 @@
 		"description": "basic context",
 		"it": "this keyword in helpers",
 		"template": "{{#goodbyes}}{{foo this}}{{/goodbyes}}",
-		"data": [
-			{
-				"goodbyes": [
-					"goodbye",
-					"Goodbye",
-					"GOODBYE"
-				]
-			},
-			{}
-		],
+        "helpers": {
+            "foo": {
+                "php": "function($value) { return 'bar '.$value; }"
+            }
+        },
+		"data": {
+			"goodbyes": [
+				"goodbye",
+				"Goodbye",
+				"GOODBYE"
+			]
+		},
 		"expected": "bar goodbyebar Goodbyebar GOODBYE"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword in helpers",
 		"template": "{{#hellos}}{{foo this/text}}{{/hellos}}",
-		"data": [
-			{
-				"hellos": [
-					{
-						"text": "hello"
-					},
-					{
-						"text": "Hello"
-					},
-					{
-						"text": "HELLO"
-					}
-				]
-			},
-			{}
-		],
+		"helpers": {
+			"foo": {
+				"php": "function($value) { return 'bar '.$value; }"
+			}
+		},
+		"data": {
+			"hellos": [
+				{
+					"text": "hello"
+				},
+				{
+					"text": "Hello"
+				},
+				{
+					"text": "HELLO"
+				}
+			]
+		},
 		"expected": "bar hellobar Hellobar HELLO"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside helpers param",
+		"template": "{{#hellos}}{{foo text/this/foo}}{{/hellos}}",
 		"exception": true
 	}
 ]
