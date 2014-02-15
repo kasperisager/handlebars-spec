@@ -1,5 +1,5 @@
-[
-	{
+{
+	"data-passing in data to a compiled function that expects data - works with helpers-00": {
 		"description": "data",
 		"it": "passing in data to a compiled function that expects data - works with helpers",
 		"template": "{{hello}}",
@@ -13,7 +13,7 @@
 			}
 		}
 	},
-	{
+	"data-data can be looked up via @foo-00": {
 		"description": "data",
 		"it": "data can be looked up via @foo",
 		"template": "{{@hello}}",
@@ -26,7 +26,7 @@
 			}
 		}
 	},
-	{
+	"data-deep @foo triggers automatic top-level data-00": {
 		"description": "data",
 		"it": "deep @foo triggers automatic top-level data",
 		"template": "{{#let world=\"world\"}}{{#if foo}}{{#if foo}}Hello {{@world}}{{/if}}{{/if}}{{/let}}",
@@ -63,7 +63,7 @@
 			}
 		}
 	},
-	{
+	"data-parameter data can be looked up via @foo-00": {
 		"description": "data",
 		"it": "parameter data can be looked up via @foo",
 		"template": "{{hello @world}}",
@@ -76,7 +76,7 @@
 			}
 		}
 	},
-	{
+	"data-hash values can be looked up via @foo-00": {
 		"description": "data",
 		"it": "hash values can be looked up via @foo",
 		"template": "{{hello noun=@world}}",
@@ -89,7 +89,7 @@
 			}
 		}
 	},
-	{
+	"data-nested parameter data can be looked up via @foo.bar-00": {
 		"description": "data",
 		"it": "nested parameter data can be looked up via @foo.bar",
 		"template": "{{hello @world.bar}}",
@@ -104,7 +104,7 @@
 			}
 		}
 	},
-	{
+	"data-nested parameter data does not fail with @world.bar-00": {
 		"description": "data",
 		"it": "nested parameter data does not fail with @world.bar",
 		"template": "{{hello @world.bar}}",
@@ -119,13 +119,13 @@
 			}
 		}
 	},
-	{
+	"data-parameter data throws when using complex scope references-00": {
 		"description": "data",
 		"it": "parameter data throws when using complex scope references",
 		"template": "{{#goodbyes}}{{text}} cruel {{@foo/../name}}! {{/goodbyes}}",
 		"exception": true
 	},
-	{
+	"data-data is inherited downstream-00": {
 		"description": "data",
 		"it": "data is inherited downstream",
 		"template": "{{#let foo=1 bar=2}}{{#let foo=bar.baz}}{{@bar}}{{@foo}}{{/let}}{{@foo}}{{/let}}",
@@ -140,7 +140,7 @@
 			}
 		}
 	},
-	{
+	"data-passing in data to a compiled function that expects data - works with helpers in partials-00": {
 		"description": "data",
 		"it": "passing in data to a compiled function that expects data - works with helpers in partials",
 		"template": "{{hello}}",
@@ -154,7 +154,7 @@
 			}
 		}
 	},
-	{
+	"data-passing in data to a compiled function that expects data - works with helpers and parameters-00": {
 		"description": "data",
 		"it": "passing in data to a compiled function that expects data - works with helpers and parameters",
 		"template": "{{hello world}}",
@@ -169,7 +169,7 @@
 			}
 		}
 	},
-	{
+	"data-passing in data to a compiled function that expects data - works with block helpers-00": {
 		"description": "data",
 		"it": "passing in data to a compiled function that expects data - works with block helpers",
 		"template": "{{#hello}}{{world}}{{/hello}}",
@@ -186,7 +186,7 @@
 			}
 		}
 	},
-	{
+	"data-passing in data to a compiled function that expects data - works with block helpers that use ..-00": {
 		"description": "data",
 		"it": "passing in data to a compiled function that expects data - works with block helpers that use ..",
 		"template": "{{#hello}}{{world ../zomg}}{{/hello}}",
@@ -204,7 +204,7 @@
 			}
 		}
 	},
-	{
+	"data-passing in data to a compiled function that expects data - data is passed to with block helpers where children use ..-00": {
 		"description": "data",
 		"it": "passing in data to a compiled function that expects data - data is passed to with block helpers where children use ..",
 		"template": "{{#hello}}{{world ../zomg}}{{/hello}}",
@@ -223,7 +223,7 @@
 			}
 		}
 	},
-	{
+	"data-you can override inherited data when invoking a helper-00": {
 		"description": "data",
 		"it": "you can override inherited data when invoking a helper",
 		"template": "{{#hello}}{{world zomg}}{{/hello}}",
@@ -241,7 +241,7 @@
 			}
 		}
 	},
-	{
+	"data-you can override inherited data when invoking a helper with depth-00": {
 		"description": "data",
 		"it": "you can override inherited data when invoking a helper with depth",
 		"template": "{{#hello}}{{world ../zomg}}{{/hello}}",
@@ -259,7 +259,7 @@
 			}
 		}
 	},
-	{
+	"@root-the root context can be looked up via @root-00": {
 		"description": "@root",
 		"it": "the root context can be looked up via @root",
 		"template": "{{@root.foo}}",
@@ -275,7 +275,7 @@
 			}
 		}
 	},
-	{
+	"@root-the root context can be looked up via @root-01": {
 		"description": "@root",
 		"it": "the root context can be looked up via @root",
 		"template": "{{@root.foo}}",
@@ -291,7 +291,7 @@
 			}
 		}
 	},
-	{
+	"@root-passed root values take priority-00": {
 		"description": "@root",
 		"it": "passed root values take priority",
 		"template": "{{@root.foo}}",
@@ -309,7 +309,7 @@
 			}
 		}
 	},
-	{
+	"nesting-the root context can be looked up via @root-00": {
 		"description": "nesting",
 		"it": "the root context can be looked up via @root",
 		"template": "{{#helper}}{{#helper}}{{@./depth}} {{@../depth}} {{@../../depth}}{{/helper}}{{/helper}}",
@@ -323,4 +323,4 @@
 			}
 		}
 	}
-]
+}

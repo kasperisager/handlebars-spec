@@ -1,5 +1,5 @@
-[
-	{
+{
+	"regressions-gh-94: cannot read property of undefined-00": {
 		"description": "Regressions",
 		"it": "GH-94: Cannot read property of undefined",
 		"template": "{{#books}}{{title}}{{author.name}}{{/books}}",
@@ -18,21 +18,21 @@
 		},
 		"expected": "The origin of speciesCharles DarwinLazarillo de Tormes"
 	},
-	{
+	"regressions-gh-150: inverted sections print when they shouldn't-00": {
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {},
 		"expected": "not set :: "
 	},
-	{
+	"regressions-gh-150: inverted sections print when they shouldn't-01": {
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {},
 		"expected": "not set :: "
 	},
-	{
+	"regressions-gh-150: inverted sections print when they shouldn't-02": {
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
@@ -41,7 +41,7 @@
 		},
 		"expected": "not set :: "
 	},
-	{
+	"regressions-gh-150: inverted sections print when they shouldn't-03": {
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
@@ -50,7 +50,7 @@
 		},
 		"expected": " :: set"
 	},
-	{
+	"regressions-gh-158: using array index twice, breaks the template-00": {
 		"description": "Regressions",
 		"it": "GH-158: Using array index twice, breaks the template",
 		"template": "{{arr.[0]}}, {{arr.[1]}}",
@@ -62,7 +62,7 @@
 		},
 		"expected": "1, 2"
 	},
-	{
+	"regressions-bug reported by @fat where lambdas weren't being properly resolved-00": {
 		"description": "Regressions",
 		"it": "bug reported by @fat where lambdas weren't being properly resolved",
 		"template": "<strong>This is a slightly more complicated {{thing}}.</strong>.\n{{! Just ignore this business. }}\nCheck this out:\n{{#hasThings}}\n<ul>\n{{#things}}\n<li class={{className}}>{{word}}</li>\n{{/things}}</ul>.\n{{/hasThings}}\n{{^hasThings}}\n\n<small>Nothing to check out...</small>\n{{/hasThings}}",
@@ -84,7 +84,7 @@
 		},
 		"expected": "<strong>This is a slightly more complicated blah.</strong>.\n\nCheck this out:\n\n<ul>\n\n<li class=one>@fat</li>\n\n<li class=two>@dhg</li>\n\n<li class=three>@sayrer</li>\n</ul>.\n\n"
 	},
-	{
+	"regressions-gh-408: multiple loops fail-00": {
 		"description": "Regressions",
 		"it": "GH-408: Multiple loops fail",
 		"template": "{{#.}}{{name}}{{/.}}{{#.}}{{name}}{{/.}}{{#.}}{{name}}{{/.}}",
@@ -104,7 +104,7 @@
 		],
 		"expected": "John DoeJane DoeJohn DoeJane DoeJohn DoeJane Doe"
 	},
-	{
+	"regressions-gs-428: nested if else rendering-00": {
 		"description": "Regressions",
 		"it": "GS-428: Nested if else rendering",
 		"template": "{{#inverse}} {{#blk}} Unexpected {{/blk}} {{else}}  {{#blk}} Expected {{/blk}} {{/inverse}}",
@@ -119,7 +119,7 @@
 		},
 		"expected": "   Expected  "
 	},
-	{
+	"regressions-gs-428: nested if else rendering-01": {
 		"description": "Regressions",
 		"it": "GS-428: Nested if else rendering",
 		"template": "{{#inverse}} {{#blk}} Unexpected {{/blk}} {{else}} {{#blk}} Expected {{/blk}} {{/inverse}}",
@@ -134,7 +134,7 @@
 		},
 		"expected": "  Expected  "
 	},
-	{
+	"regressions-gh-458: scoped this identifier-00": {
 		"description": "Regressions",
 		"it": "GH-458: Scoped this identifier",
 		"template": "{{./foo}}",
@@ -143,14 +143,14 @@
 		},
 		"expected": "bar"
 	},
-	{
+	"regressions-gh-375: unicode line terminators-00": {
 		"description": "Regressions",
 		"it": "GH-375: Unicode line terminators",
 		"template": " ",
 		"data": {},
 		"expected": " "
 	},
-	{
+	"regressions-gh-534: object prototype aliases-00": {
 		"description": "Regressions",
 		"it": "GH-534: Object prototype aliases",
 		"template": "{{foo}}",
@@ -159,19 +159,19 @@
 		},
 		"expected": "bar"
 	},
-	{
+	"regressions-gh-437: matching escaping-00": {
 		"description": "Regressions",
 		"it": "GH-437: Matching escaping",
 		"template": "{{{a}}",
 		"exception": true
 	},
-	{
+	"regressions-gh-437: matching escaping-01": {
 		"description": "Regressions",
 		"it": "GH-437: Matching escaping",
 		"template": "{{a}}}",
 		"exception": true
 	},
-	{
+	"regressions-gh-676: using array in escaping mustache fails-00": {
 		"description": "Regressions",
 		"it": "GH-676: Using array in escaping mustache fails",
 		"template": "{{arr}}",
@@ -183,7 +183,7 @@
 		},
 		"expected": "1,2"
 	},
-	{
+	"regressions-mustache man page-00": {
 		"description": "Regressions",
 		"it": "Mustache man page",
 		"template": "Hello {{name}}. You have just won ${{value}}!{{#in_ca}} Well, ${{taxed_value}}, after taxes.{{/in_ca}}",
@@ -195,13 +195,13 @@
 		},
 		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes."
 	},
-	{
+	"regressions-passing falsy values to handlebars.compile throws an error-00": {
 		"description": "Regressions",
 		"it": "Passing falsy values to Handlebars.compile throws an error",
 		"template": null,
 		"exception": true
 	},
-	{
+	"regressions-can pass through an already-compiled ast via compile/precompile-00": {
 		"description": "Regressions",
 		"it": "can pass through an already-compiled AST via compile/precompile",
 		"template": null,
@@ -221,7 +221,7 @@
 		],
 		"expected": "Hello"
 	},
-	{
+	"regressions-can pass through an empty string-00": {
 		"description": "Regressions",
 		"it": "can pass through an empty string",
 		"template": null,
@@ -241,4 +241,4 @@
 		],
 		"expected": ""
 	}
-]
+}

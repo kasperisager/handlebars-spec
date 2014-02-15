@@ -1,5 +1,5 @@
-[
-	{
+{
+	"#if-if-00": {
 		"description": "#if",
 		"it": "if",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -9,7 +9,7 @@
 		},
 		"expected": "GOODBYE cruel world!"
 	},
-	{
+	"#if-if-01": {
 		"description": "#if",
 		"it": "if",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -19,7 +19,7 @@
 		},
 		"expected": "GOODBYE cruel world!"
 	},
-	{
+	"#if-if-02": {
 		"description": "#if",
 		"it": "if",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -29,7 +29,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	{
+	"#if-if-03": {
 		"description": "#if",
 		"it": "if",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -38,7 +38,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	{
+	"#if-if-04": {
 		"description": "#if",
 		"it": "if",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -50,7 +50,7 @@
 		},
 		"expected": "GOODBYE cruel world!"
 	},
-	{
+	"#if-if-05": {
 		"description": "#if",
 		"it": "if",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -60,7 +60,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	{
+	"#if-if-06": {
 		"description": "#if",
 		"it": "if",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -70,7 +70,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	{
+	"#if-if-07": {
 		"description": "#if",
 		"it": "if",
 		"template": "{{#if goodbye includeZero=true}}GOODBYE {{/if}}cruel {{world}}!",
@@ -80,7 +80,7 @@
 		},
 		"expected": "GOODBYE cruel world!"
 	},
-	{
+	"#if-if with function argument-00": {
 		"description": "#if",
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -89,7 +89,7 @@
 		},
 		"expected": "GOODBYE cruel world!"
 	},
-	{
+	"#if-if with function argument-01": {
 		"description": "#if",
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -98,7 +98,7 @@
 		},
 		"expected": "GOODBYE cruel world!"
 	},
-	{
+	"#if-if with function argument-02": {
 		"description": "#if",
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -107,7 +107,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	{
+	"#if-if with function argument-03": {
 		"description": "#if",
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
@@ -116,7 +116,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	{
+	"#with-with-00": {
 		"description": "#with",
 		"it": "with",
 		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
@@ -128,14 +128,14 @@
 		},
 		"expected": "Alan Johnson"
 	},
-	{
+	"#with-with with function argument-00": {
 		"description": "#with",
 		"it": "with with function argument",
 		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
 		"data": {},
 		"expected": "Alan Johnson"
 	},
-	{
+	"#each-each-00": {
 		"description": "#each",
 		"it": "each",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
@@ -155,7 +155,7 @@
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
 	},
-	{
+	"#each-each-01": {
 		"description": "#each",
 		"it": "each",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
@@ -165,7 +165,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	{
+	"#each-each with an object and @key-00": {
 		"description": "#each",
 		"it": "each with an object and @key",
 		"template": "{{#each goodbyes}}{{@key}}. {{text}}! {{/each}}cruel {{world}}!",
@@ -181,12 +181,12 @@
 			"world": "world"
 		}
 	},
-	{
+	"#each-each with an object and @key-01": {
 		"description": "#each",
 		"it": "each with an object and @key",
 		"expected": true
 	},
-	{
+	"#each-each with an object and @key-02": {
 		"description": "#each",
 		"it": "each with an object and @key",
 		"template": "{{#each goodbyes}}{{@key}}. {{text}}! {{/each}}cruel {{world}}!",
@@ -196,7 +196,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	{
+	"#each-each with @index-00": {
 		"description": "#each",
 		"it": "each with @index",
 		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
@@ -216,7 +216,7 @@
 		},
 		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!"
 	},
-	{
+	"#each-each with nested @index-00": {
 		"description": "#each",
 		"it": "each with nested @index",
 		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{#each ../goodbyes}}{{@index}} {{/each}}After {{@index}} {{/each}}{{@index}}cruel {{world}}!",
@@ -236,7 +236,7 @@
 		},
 		"expected": "0. goodbye! 0 1 2 After 0 1. Goodbye! 0 1 2 After 1 2. GOODBYE! 0 1 2 After 2 cruel world!"
 	},
-	{
+	"#each-each object with @index-00": {
 		"description": "#each",
 		"it": "each object with @index",
 		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
@@ -256,7 +256,7 @@
 		},
 		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!"
 	},
-	{
+	"#each-each with @first-00": {
 		"description": "#each",
 		"it": "each with @first",
 		"template": "{{#each goodbyes}}{{#if @first}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
@@ -276,7 +276,7 @@
 		},
 		"expected": "goodbye! cruel world!"
 	},
-	{
+	"#each-each with nested @first-00": {
 		"description": "#each",
 		"it": "each with nested @first",
 		"template": "{{#each goodbyes}}({{#if @first}}{{text}}! {{/if}}{{#each ../goodbyes}}{{#if @first}}{{text}}!{{/if}}{{/each}}{{#if @first}} {{text}}!{{/if}}) {{/each}}cruel {{world}}!",
@@ -296,7 +296,7 @@
 		},
 		"expected": "(goodbye! goodbye! goodbye!) (goodbye!) (goodbye!) cruel world!"
 	},
-	{
+	"#each-each object with @first-00": {
 		"description": "#each",
 		"it": "each object with @first",
 		"template": "{{#each goodbyes}}{{#if @first}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
@@ -313,7 +313,7 @@
 		},
 		"expected": "goodbye! cruel world!"
 	},
-	{
+	"#each-each with @last-00": {
 		"description": "#each",
 		"it": "each with @last",
 		"template": "{{#each goodbyes}}{{#if @last}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
@@ -333,7 +333,7 @@
 		},
 		"expected": "GOODBYE! cruel world!"
 	},
-	{
+	"#each-each with nested @last-00": {
 		"description": "#each",
 		"it": "each with nested @last",
 		"template": "{{#each goodbyes}}({{#if @last}}{{text}}! {{/if}}{{#each ../goodbyes}}{{#if @last}}{{text}}!{{/if}}{{/each}}{{#if @last}} {{text}}!{{/if}}) {{/each}}cruel {{world}}!",
@@ -353,7 +353,7 @@
 		},
 		"expected": "(GOODBYE!) (GOODBYE!) (GOODBYE! GOODBYE! GOODBYE!) cruel world!"
 	},
-	{
+	"#each-each with function argument-00": {
 		"description": "#each",
 		"it": "each with function argument",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
@@ -362,7 +362,7 @@
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
 	},
-	{
+	"#each-each with function argument-01": {
 		"description": "#each",
 		"it": "each with function argument",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
@@ -372,7 +372,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	{
+	"#each-data passed to helpers-00": {
 		"description": "#each",
 		"it": "data passed to helpers",
 		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
@@ -386,7 +386,7 @@
 		},
 		"expected": "a!b!c!"
 	},
-	{
+	"#each-each on implicit context-00": {
 		"description": "#each",
 		"it": "each on implicit context",
 		"template": "{{#each}}{{text}}! {{/each}}cruel world!",
@@ -403,7 +403,7 @@
 		],
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
 	},
-	{
+	"#each-#log-00": {
 		"description": "#each",
 		"it": "#log",
 		"template": "{{log blah}}",
@@ -411,7 +411,7 @@
 			"blah": "whee"
 		}
 	},
-	{
+	"#each-#log-01": {
 		"description": "#each",
 		"it": "#log",
 		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
@@ -424,7 +424,7 @@
 			"exclaim": "!"
 		}
 	},
-	{
+	"#each-#log-02": {
 		"description": "#each",
 		"it": "#log",
 		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
@@ -437,7 +437,7 @@
 			"exclaim": "!"
 		}
 	},
-	{
+	"#lookup-should lookup arbitrary content-00": {
 		"description": "#lookup",
 		"it": "should lookup arbitrary content",
 		"template": "{{#each goodbyes}}{{lookup ../data .}}{{/each}}",
@@ -453,7 +453,7 @@
 		},
 		"expected": "foobar"
 	},
-	{
+	"#lookup-should not fail on undefined value-00": {
 		"description": "#lookup",
 		"it": "should not fail on undefined value",
 		"template": "{{#each goodbyes}}{{lookup ../bar .}}{{/each}}",
@@ -469,4 +469,4 @@
 		},
 		"expected": ""
 	}
-]
+}
