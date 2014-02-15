@@ -1,5 +1,5 @@
-{
-	"basic context-most basic-00": {
+[
+	{
 		"description": "basic context",
 		"it": "most basic",
 		"template": "{{foo}}",
@@ -8,7 +8,7 @@
 		},
 		"expected": "foo"
 	},
-	"basic context-escaping-00": {
+	{
 		"description": "basic context",
 		"it": "escaping",
 		"template": "\\{{foo}}",
@@ -17,7 +17,7 @@
 		},
 		"expected": "{{foo}}"
 	},
-	"basic context-escaping-01": {
+	{
 		"description": "basic context",
 		"it": "escaping",
 		"template": "content \\{{foo}}",
@@ -26,7 +26,7 @@
 		},
 		"expected": "content {{foo}}"
 	},
-	"basic context-escaping-02": {
+	{
 		"description": "basic context",
 		"it": "escaping",
 		"template": "\\\\{{foo}}",
@@ -35,7 +35,7 @@
 		},
 		"expected": "\\food"
 	},
-	"basic context-escaping-03": {
+	{
 		"description": "basic context",
 		"it": "escaping",
 		"template": "content \\\\{{foo}}",
@@ -44,7 +44,7 @@
 		},
 		"expected": "content \\food"
 	},
-	"basic context-escaping-04": {
+	{
 		"description": "basic context",
 		"it": "escaping",
 		"template": "\\\\ {{foo}}",
@@ -53,7 +53,7 @@
 		},
 		"expected": "\\\\ food"
 	},
-	"basic context-compiling with a basic context-00": {
+	{
 		"description": "basic context",
 		"it": "compiling with a basic context",
 		"template": "Goodbye\n{{cruel}}\n{{world}}!",
@@ -63,19 +63,19 @@
 		},
 		"expected": "Goodbye\ncruel\nworld!"
 	},
-	"basic context-compiling with an undefined context-00": {
+	{
 		"description": "basic context",
 		"it": "compiling with an undefined context",
 		"template": "Goodbye\n{{cruel}}\n{{world.bar}}!",
 		"expected": "Goodbye\n\n!"
 	},
-	"basic context-compiling with an undefined context-01": {
+	{
 		"description": "basic context",
 		"it": "compiling with an undefined context",
 		"template": "{{#unless foo}}Goodbye{{../test}}{{test2}}{{/unless}}",
 		"expected": "Goodbye"
 	},
-	"basic context-comments-00": {
+	{
 		"description": "basic context",
 		"it": "comments",
 		"template": "{{! Goodbye}}Goodbye\n{{cruel}}\n{{world}}!",
@@ -85,7 +85,7 @@
 		},
 		"expected": "Goodbye\ncruel\nworld!"
 	},
-	"basic context-boolean-00": {
+	{
 		"description": "basic context",
 		"it": "boolean",
 		"template": "{{#goodbye}}GOODBYE {{/goodbye}}cruel {{world}}!",
@@ -95,7 +95,7 @@
 		},
 		"expected": "GOODBYE cruel world!"
 	},
-	"basic context-boolean-01": {
+	{
 		"description": "basic context",
 		"it": "boolean",
 		"template": "{{#goodbye}}GOODBYE {{/goodbye}}cruel {{world}}!",
@@ -105,7 +105,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	"basic context-zeros-00": {
+	{
 		"description": "basic context",
 		"it": "zeros",
 		"template": "num1: {{num1}}, num2: {{num2}}",
@@ -115,14 +115,14 @@
 		},
 		"expected": "num1: 42, num2: 0"
 	},
-	"basic context-zeros-01": {
+	{
 		"description": "basic context",
 		"it": "zeros",
 		"template": "num: {{.}}",
 		"data": 0,
 		"expected": "num: 0"
 	},
-	"basic context-zeros-02": {
+	{
 		"description": "basic context",
 		"it": "zeros",
 		"template": "num: {{num1/num2}}",
@@ -133,42 +133,42 @@
 		},
 		"expected": "num: 0"
 	},
-	"basic context-newlines-00": {
+	{
 		"description": "basic context",
 		"it": "newlines",
 		"template": "Alan's\nTest",
 		"data": {},
 		"expected": "Alan's\nTest"
 	},
-	"basic context-newlines-01": {
+	{
 		"description": "basic context",
 		"it": "newlines",
 		"template": "Alan's\rTest",
 		"data": {},
 		"expected": "Alan's\rTest"
 	},
-	"basic context-escaping text-00": {
+	{
 		"description": "basic context",
 		"it": "escaping text",
 		"template": "Awesome's",
 		"data": {},
 		"expected": "Awesome's"
 	},
-	"basic context-escaping text-01": {
+	{
 		"description": "basic context",
 		"it": "escaping text",
 		"template": "Awesome\\",
 		"data": {},
 		"expected": "Awesome\\"
 	},
-	"basic context-escaping text-02": {
+	{
 		"description": "basic context",
 		"it": "escaping text",
 		"template": "Awesome\\\\ foo",
 		"data": {},
 		"expected": "Awesome\\\\ foo"
 	},
-	"basic context-escaping text-03": {
+	{
 		"description": "basic context",
 		"it": "escaping text",
 		"template": "Awesome {{foo}}",
@@ -177,14 +177,14 @@
 		},
 		"expected": "Awesome \\"
 	},
-	"basic context-escaping text-04": {
+	{
 		"description": "basic context",
 		"it": "escaping text",
 		"template": " \" \" ",
 		"data": {},
 		"expected": " \" \" "
 	},
-	"basic context-escaping expressions-00": {
+	{
 		"description": "basic context",
 		"it": "escaping expressions",
 		"template": "{{{awesome}}}",
@@ -193,7 +193,7 @@
 		},
 		"expected": "&\"\\<>"
 	},
-	"basic context-escaping expressions-01": {
+	{
 		"description": "basic context",
 		"it": "escaping expressions",
 		"template": "{{&awesome}}",
@@ -202,7 +202,7 @@
 		},
 		"expected": "&\"\\<>"
 	},
-	"basic context-escaping expressions-02": {
+	{
 		"description": "basic context",
 		"it": "escaping expressions",
 		"template": "{{awesome}}",
@@ -211,7 +211,7 @@
 		},
 		"expected": "&amp;&quot;&#x27;&#x60;\\&lt;&gt;"
 	},
-	"basic context-escaping expressions-03": {
+	{
 		"description": "basic context",
 		"it": "escaping expressions",
 		"template": "{{awesome}}",
@@ -220,21 +220,21 @@
 		},
 		"expected": "Escaped, &lt;b&gt; looks like: &amp;lt;b&amp;gt;"
 	},
-	"basic context-functions returning safestrings shouldn't be escaped-00": {
+	{
 		"description": "basic context",
 		"it": "functions returning safestrings shouldn't be escaped",
 		"template": "{{awesome}}",
 		"data": {},
 		"expected": "&\"\\<>"
 	},
-	"basic context-functions-00": {
+	{
 		"description": "basic context",
 		"it": "functions",
 		"template": "{{awesome}}",
 		"data": {},
 		"expected": "Awesome"
 	},
-	"basic context-functions-01": {
+	{
 		"description": "basic context",
 		"it": "functions",
 		"template": "{{awesome}}",
@@ -243,7 +243,7 @@
 		},
 		"expected": "More awesome"
 	},
-	"basic context-functions with context argument-00": {
+	{
 		"description": "basic context",
 		"it": "functions with context argument",
 		"template": "{{awesome frank}}",
@@ -252,7 +252,7 @@
 		},
 		"expected": "Frank"
 	},
-	"basic context-pathed functions with context argument-00": {
+	{
 		"description": "basic context",
 		"it": "pathed functions with context argument",
 		"template": "{{bar.awesome frank}}",
@@ -262,7 +262,7 @@
 		},
 		"expected": "Frank"
 	},
-	"basic context-depthed functions with context argument-00": {
+	{
 		"description": "basic context",
 		"it": "depthed functions with context argument",
 		"template": "{{#with frank}}{{../awesome .}}{{/with}}",
@@ -271,14 +271,14 @@
 		},
 		"expected": "Frank"
 	},
-	"basic context-block functions with context argument-00": {
+	{
 		"description": "basic context",
 		"it": "block functions with context argument",
 		"template": "{{#awesome 1}}inner {{.}}{{/awesome}}",
 		"data": {},
 		"expected": "inner 1"
 	},
-	"basic context-depthed block functions with context argument-00": {
+	{
 		"description": "basic context",
 		"it": "depthed block functions with context argument",
 		"template": "{{#with value}}{{#../awesome 1}}inner {{.}}{{/../awesome}}{{/with}}",
@@ -287,14 +287,14 @@
 		},
 		"expected": "inner 1"
 	},
-	"basic context-block functions without context argument-00": {
+	{
 		"description": "basic context",
 		"it": "block functions without context argument",
 		"template": "{{#awesome}}inner{{/awesome}}",
 		"data": {},
 		"expected": "inner"
 	},
-	"basic context-pathed block functions without context argument-00": {
+	{
 		"description": "basic context",
 		"it": "pathed block functions without context argument",
 		"template": "{{#foo.awesome}}inner{{/foo.awesome}}",
@@ -303,7 +303,7 @@
 		},
 		"expected": "inner"
 	},
-	"basic context-depthed block functions without context argument-00": {
+	{
 		"description": "basic context",
 		"it": "depthed block functions without context argument",
 		"template": "{{#with value}}{{#../awesome}}inner{{/../awesome}}{{/with}}",
@@ -312,7 +312,7 @@
 		},
 		"expected": "inner"
 	},
-	"basic context-paths with hyphens-00": {
+	{
 		"description": "basic context",
 		"it": "paths with hyphens",
 		"template": "{{foo-bar}}",
@@ -321,7 +321,7 @@
 		},
 		"expected": "baz"
 	},
-	"basic context-paths with hyphens-01": {
+	{
 		"description": "basic context",
 		"it": "paths with hyphens",
 		"template": "{{foo.foo-bar}}",
@@ -332,7 +332,7 @@
 		},
 		"expected": "baz"
 	},
-	"basic context-paths with hyphens-02": {
+	{
 		"description": "basic context",
 		"it": "paths with hyphens",
 		"template": "{{foo/foo-bar}}",
@@ -343,7 +343,7 @@
 		},
 		"expected": "baz"
 	},
-	"basic context-nested paths-00": {
+	{
 		"description": "basic context",
 		"it": "nested paths",
 		"template": "Goodbye {{alan/expression}} world!",
@@ -354,7 +354,7 @@
 		},
 		"expected": "Goodbye beautiful world!"
 	},
-	"basic context-nested paths with empty string value-00": {
+	{
 		"description": "basic context",
 		"it": "nested paths with empty string value",
 		"template": "Goodbye {{alan/expression}} world!",
@@ -365,7 +365,7 @@
 		},
 		"expected": "Goodbye  world!"
 	},
-	"basic context-literal paths-00": {
+	{
 		"description": "basic context",
 		"it": "literal paths",
 		"template": "Goodbye {{[@alan]/expression}} world!",
@@ -376,7 +376,7 @@
 		},
 		"expected": "Goodbye beautiful world!"
 	},
-	"basic context-literal paths-01": {
+	{
 		"description": "basic context",
 		"it": "literal paths",
 		"template": "Goodbye {{[foo bar]/expression}} world!",
@@ -387,7 +387,7 @@
 		},
 		"expected": "Goodbye beautiful world!"
 	},
-	"basic context-literal references-00": {
+	{
 		"description": "basic context",
 		"it": "literal references",
 		"template": "Goodbye {{[foo bar]}} world!",
@@ -396,14 +396,14 @@
 		},
 		"expected": "Goodbye beautiful world!"
 	},
-	"basic context-that current context path ({{.}}) doesn't hit helpers-00": {
+	{
 		"description": "basic context",
 		"it": "that current context path ({{.}}) doesn't hit helpers",
 		"template": "test: {{.}}",
 		"data": null,
 		"expected": "test: "
 	},
-	"basic context-complex but empty paths-00": {
+	{
 		"description": "basic context",
 		"it": "complex but empty paths",
 		"template": "{{person/name}}",
@@ -413,7 +413,7 @@
 			}
 		}
 	},
-	"basic context-complex but empty paths-01": {
+	{
 		"description": "basic context",
 		"it": "complex but empty paths",
 		"template": "{{person/name}}",
@@ -421,7 +421,7 @@
 			"person": {}
 		}
 	},
-	"basic context-this keyword in paths-00": {
+	{
 		"description": "basic context",
 		"it": "this keyword in paths",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}",
@@ -434,7 +434,7 @@
 		},
 		"expected": "goodbyeGoodbyeGOODBYE"
 	},
-	"basic context-this keyword in paths-01": {
+	{
 		"description": "basic context",
 		"it": "this keyword in paths",
 		"template": "{{#hellos}}{{this/text}}{{/hellos}}",
@@ -453,13 +453,13 @@
 		},
 		"expected": "helloHelloHELLO"
 	},
-	"basic context-this keyword nested inside path-00": {
+	{
 		"description": "basic context",
 		"it": "this keyword nested inside path",
 		"template": "{{#hellos}}{{text/this/foo}}{{/hellos}}",
 		"exception": true
 	},
-	"basic context-this keyword in helpers-00": {
+	{
 		"description": "basic context",
 		"it": "this keyword in helpers",
 		"template": "{{#goodbyes}}{{foo this}}{{/goodbyes}}",
@@ -478,7 +478,7 @@
 		},
 		"expected": "bar goodbyebar Goodbyebar GOODBYE"
 	},
-	"basic context-this keyword in helpers-01": {
+	{
 		"description": "basic context",
 		"it": "this keyword in helpers",
 		"template": "{{#hellos}}{{foo this/text}}{{/hellos}}",
@@ -503,10 +503,10 @@
 		},
 		"expected": "bar hellobar Hellobar HELLO"
 	},
-	"basic context-this keyword nested inside helpers param-00": {
+	{
 		"description": "basic context",
 		"it": "this keyword nested inside helpers param",
 		"template": "{{#hellos}}{{foo text/this/foo}}{{/hellos}}",
 		"exception": true
 	}
-}
+]

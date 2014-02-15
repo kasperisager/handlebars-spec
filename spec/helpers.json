@@ -1,5 +1,5 @@
-{
-	"helpers-helper with complex lookup$-00": {
+[
+	{
 		"description": "helpers",
 		"it": "helper with complex lookup$",
 		"template": "{{#goodbyes}}{{{link ../prefix}}}{{/goodbyes}}",
@@ -19,7 +19,7 @@
 		},
 		"expected": "<a href='/root/goodbye'>Goodbye</a>"
 	},
-	"helpers-helper for raw block gets raw content-00": {
+	{
 		"description": "helpers",
 		"it": "helper for raw block gets raw content",
 		"template": "{{{{raw}}}} {{test}} {{{{/raw}}}}",
@@ -33,7 +33,7 @@
 		},
 		"expected": " {{test}} "
 	},
-	"helpers-helper for raw block gets parameters-00": {
+	{
 		"description": "helpers",
 		"it": "helper for raw block gets parameters",
 		"template": "{{{{raw 1 2 3}}}} {{test}} {{{{/raw}}}}",
@@ -47,7 +47,7 @@
 		},
 		"expected": " {{test}} 123"
 	},
-	"helpers-helper block with complex lookup expression-00": {
+	{
 		"description": "helpers",
 		"it": "helper block with complex lookup expression",
 		"template": "{{#goodbyes}}{{../name}}{{/goodbyes}}",
@@ -61,7 +61,7 @@
 		},
 		"expected": "Goodbye Alan! goodbye Alan! GOODBYE Alan! "
 	},
-	"helpers-helper with complex lookup and nested template-00": {
+	{
 		"description": "helpers",
 		"it": "helper with complex lookup and nested template",
 		"template": "{{#goodbyes}}{{#link ../prefix}}{{text}}{{/link}}{{/goodbyes}}",
@@ -81,7 +81,7 @@
 		},
 		"expected": "<a href='/root/goodbye'>Goodbye</a>"
 	},
-	"helpers-helper with complex lookup and nested template in vm+compiler-00": {
+	{
 		"description": "helpers",
 		"it": "helper with complex lookup and nested template in VM+Compiler",
 		"template": "{{#goodbyes}}{{#link ../prefix}}{{text}}{{/link}}{{/goodbyes}}",
@@ -101,7 +101,7 @@
 		},
 		"expected": "<a href='/root/goodbye'>Goodbye</a>"
 	},
-	"helpers-block helper-00": {
+	{
 		"description": "helpers",
 		"it": "block helper",
 		"template": "{{#goodbyes}}{{text}}! {{/goodbyes}}cruel {{world}}!",
@@ -115,7 +115,7 @@
 			}
 		}
 	},
-	"helpers-block helper staying in the same context-00": {
+	{
 		"description": "helpers",
 		"it": "block helper staying in the same context",
 		"template": "{{#form}}<p>{{name}}</p>{{/form}}",
@@ -129,7 +129,7 @@
 			}
 		}
 	},
-	"helpers-block helper should have context in this-00": {
+	{
 		"description": "helpers",
 		"it": "block helper should have context in this",
 		"template": "<ul>{{#people}}<li>{{#link}}{{name}}{{/link}}</li>{{/people}}</ul>",
@@ -152,13 +152,13 @@
 		},
 		"expected": "<ul><li><a href=\"/people/1\">Alan</a></li><li><a href=\"/people/2\">Yehuda</a></li></ul>"
 	},
-	"helpers-block helper for undefined value-00": {
+	{
 		"description": "helpers",
 		"it": "block helper for undefined value",
 		"template": "{{#empty}}shouldn't render{{/empty}}",
 		"data": {}
 	},
-	"helpers-block helper passing a new context-00": {
+	{
 		"description": "helpers",
 		"it": "block helper passing a new context",
 		"template": "{{#form yehuda}}<p>{{name}}</p>{{/form}}",
@@ -174,7 +174,7 @@
 			}
 		}
 	},
-	"helpers-block helper passing a complex path context-00": {
+	{
 		"description": "helpers",
 		"it": "block helper passing a complex path context",
 		"template": "{{#form yehuda/cat}}<p>{{name}}</p>{{/form}}",
@@ -193,7 +193,7 @@
 			}
 		}
 	},
-	"helpers-nested block helpers-00": {
+	{
 		"description": "helpers",
 		"it": "nested block helpers",
 		"template": "{{#form yehuda}}<p>{{name}}</p>{{#link}}Hello{{/link}}{{/form}}",
@@ -212,7 +212,7 @@
 			}
 		}
 	},
-	"helpers-block helper inverted sections-00": {
+	{
 		"description": "helpers",
 		"it": "block helper inverted sections",
 		"template": "{{#list people}}{{name}}{{^}}<em>Nobody's here</em>{{/list}}",
@@ -233,7 +233,7 @@
 		},
 		"expected": "<ul><li>Alan</li><li>Yehuda</li></ul>"
 	},
-	"helpers-block helper inverted sections-01": {
+	{
 		"description": "helpers",
 		"it": "block helper inverted sections",
 		"template": "{{#list people}}{{name}}{{^}}<em>Nobody's here</em>{{/list}}",
@@ -247,7 +247,7 @@
 		},
 		"expected": "<p><em>Nobody's here</em></p>"
 	},
-	"helpers-block helper inverted sections-02": {
+	{
 		"description": "helpers",
 		"it": "block helper inverted sections",
 		"template": "{{#list people}}Hello{{^}}{{message}}{{/list}}",
@@ -262,7 +262,7 @@
 		},
 		"expected": "<p>Nobody&#x27;s here</p>"
 	},
-	"helpers hash-providing a helpers hash-00": {
+	{
 		"description": "helpers hash",
 		"it": "providing a helpers hash",
 		"template": "Goodbye {{cruel}} {{world}}!",
@@ -276,7 +276,7 @@
 		},
 		"expected": "Goodbye cruel world!"
 	},
-	"helpers hash-providing a helpers hash-01": {
+	{
 		"description": "helpers hash",
 		"it": "providing a helpers hash",
 		"template": "Goodbye {{#iter}}{{cruel}} {{world}}{{/iter}}!",
@@ -294,7 +294,7 @@
 		},
 		"expected": "Goodbye cruel world!"
 	},
-	"helpers hash-in cases of conflict, helpers win-00": {
+	{
 		"description": "helpers hash",
 		"it": "in cases of conflict, helpers win",
 		"template": "{{{lookup}}}",
@@ -308,7 +308,7 @@
 		},
 		"expected": "helpers"
 	},
-	"helpers hash-in cases of conflict, helpers win-01": {
+	{
 		"description": "helpers hash",
 		"it": "in cases of conflict, helpers win",
 		"template": "{{lookup}}",
@@ -322,7 +322,7 @@
 		},
 		"expected": "helpers"
 	},
-	"helpers hash-the helpers hash is available is nested contexts-00": {
+	{
 		"description": "helpers hash",
 		"it": "the helpers hash is available is nested contexts",
 		"template": "{{#outer}}{{#inner}}{{helper}}{{/inner}}{{/outer}}",
@@ -340,7 +340,7 @@
 		},
 		"expected": "helper"
 	},
-	"helpers hash-the helper hash should augment the global hash-00": {
+	{
 		"description": "helpers hash",
 		"it": "the helper hash should augment the global hash",
 		"template": "{{test_helper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
@@ -354,7 +354,7 @@
 		},
 		"expected": "found it! Goodbye cruel world!!"
 	},
-	"helpers hash-multiple global helper registration-00": {
+	{
 		"description": "helpers hash",
 		"it": "Multiple global helper registration",
 		"template": "{{test_helper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
@@ -363,7 +363,7 @@
 		},
 		"expected": "found it! Goodbye cruel world!!"
 	},
-	"helpers hash-decimal number literals work-00": {
+	{
 		"description": "helpers hash",
 		"it": "decimal number literals work",
 		"template": "Message: {{hello -1.2 1.2}}",
@@ -375,7 +375,7 @@
 		},
 		"expected": "Message: Hello -1.2 1.2 times"
 	},
-	"helpers hash-negative number literals work-00": {
+	{
 		"description": "helpers hash",
 		"it": "negative number literals work",
 		"template": "Message: {{hello -12}}",
@@ -387,7 +387,7 @@
 		},
 		"expected": "Message: Hello -12 times"
 	},
-	"string literal parameters-simple literals work-00": {
+	{
 		"description": "String literal parameters",
 		"it": "simple literals work",
 		"template": "Message: {{hello \"world\" 12 true false}}",
@@ -399,13 +399,13 @@
 		},
 		"expected": "Message: Hello world 12 times: true false"
 	},
-	"string literal parameters-using a quote in the middle of a parameter raises an error-00": {
+	{
 		"description": "String literal parameters",
 		"it": "using a quote in the middle of a parameter raises an error",
 		"template": "Message: {{hello wo\"rld\"}}",
 		"exception": true
 	},
-	"string literal parameters-escaping a string is possible-00": {
+	{
 		"description": "String literal parameters",
 		"it": "escaping a String is possible",
 		"template": "Message: {{{hello \"\\\"world\\\"\"}}}",
@@ -417,7 +417,7 @@
 		},
 		"expected": "Message: Hello \"world\""
 	},
-	"string literal parameters-it works with ' marks-00": {
+	{
 		"description": "String literal parameters",
 		"it": "it works with ' marks",
 		"template": "Message: {{{hello \"Alan's world\"}}}",
@@ -429,7 +429,7 @@
 		},
 		"expected": "Message: Hello Alan's world"
 	},
-	"string literal parameters-negative number literals work-00": {
+	{
 		"description": "String literal parameters",
 		"it": "negative number literals work",
 		"template": "Message: {{hello -12}}",
@@ -441,7 +441,7 @@
 		},
 		"expected": "Message: Hello -12 times"
 	},
-	"multiple parameters-simple multi-params work-00": {
+	{
 		"description": "multiple parameters",
 		"it": "simple multi-params work",
 		"template": "Message: {{goodbye cruel world}}",
@@ -456,7 +456,7 @@
 		},
 		"expected": "Message: Goodbye cruel world"
 	},
-	"multiple parameters-block multi-params work-00": {
+	{
 		"description": "multiple parameters",
 		"it": "block multi-params work",
 		"template": "Message: {{#goodbye cruel world}}{{greeting}} {{adj}} {{noun}}{{/goodbye}}",
@@ -471,7 +471,7 @@
 		},
 		"expected": "Message: Goodbye cruel world"
 	},
-	"hash-helpers can take an optional hash-00": {
+	{
 		"description": "hash",
 		"it": "helpers can take an optional hash",
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" times=12}}",
@@ -483,7 +483,7 @@
 			}
 		}
 	},
-	"hash-helpers can take an optional hash with booleans-00": {
+	{
 		"description": "hash",
 		"it": "helpers can take an optional hash with booleans",
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=true}}",
@@ -495,7 +495,7 @@
 			}
 		}
 	},
-	"hash-helpers can take an optional hash with booleans-01": {
+	{
 		"description": "hash",
 		"it": "helpers can take an optional hash with booleans",
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=false}}",
@@ -507,7 +507,7 @@
 			}
 		}
 	},
-	"hash-block helpers can take an optional hash-00": {
+	{
 		"description": "hash",
 		"it": "block helpers can take an optional hash",
 		"template": "{{#goodbye cruel=\"CRUEL\" times=12}}world{{/goodbye}}",
@@ -519,7 +519,7 @@
 			}
 		}
 	},
-	"hash-block helpers can take an optional hash with single quoted stings-00": {
+	{
 		"description": "hash",
 		"it": "block helpers can take an optional hash with single quoted stings",
 		"template": "{{#goodbye cruel='CRUEL' times=12}}world{{/goodbye}}",
@@ -531,7 +531,7 @@
 			}
 		}
 	},
-	"hash-block helpers can take an optional hash with booleans-00": {
+	{
 		"description": "hash",
 		"it": "block helpers can take an optional hash with booleans",
 		"template": "{{#goodbye cruel=\"CRUEL\" print=true}}world{{/goodbye}}",
@@ -543,7 +543,7 @@
 			}
 		}
 	},
-	"hash-block helpers can take an optional hash with booleans-01": {
+	{
 		"description": "hash",
 		"it": "block helpers can take an optional hash with booleans",
 		"template": "{{#goodbye cruel=\"CRUEL\" print=false}}world{{/goodbye}}",
@@ -555,13 +555,13 @@
 			}
 		}
 	},
-	"helpermissing-if a context is not found, helpermissing is used-00": {
+	{
 		"description": "helperMissing",
 		"it": "if a context is not found, helperMissing is used",
 		"template": "{{hello}} {{link_to world}}",
 		"exception": true
 	},
-	"helpermissing-if a context is not found, custom helpermissing is used-00": {
+	{
 		"description": "helperMissing",
 		"it": "if a context is not found, custom helperMissing is used",
 		"template": "{{hello}} {{link_to world}}",
@@ -576,7 +576,7 @@
 		},
 		"expected": "Hello <a>world</a>"
 	},
-	"knownhelpers-known helper should render helper-00": {
+	{
 		"description": "knownHelpers",
 		"it": "Known helper should render helper",
 		"template": "{{hello}}",
@@ -588,7 +588,7 @@
 			}
 		}
 	},
-	"knownhelpers-unknown helper in knownhelpers only mode should be passed as undefined-00": {
+	{
 		"description": "knownHelpers",
 		"it": "Unknown helper in knownHelpers only mode should be passed as undefined",
 		"template": "{{typeof hello}}",
@@ -603,7 +603,7 @@
 			}
 		}
 	},
-	"knownhelpers-builtin helpers available in knownhelpers only mode-00": {
+	{
 		"description": "knownHelpers",
 		"it": "Builtin helpers available in knownHelpers only mode",
 		"template": "{{#unless foo}}bar{{/unless}}",
@@ -618,7 +618,7 @@
 			}
 		}
 	},
-	"knownhelpers-field lookup works in knownhelpers only mode-00": {
+	{
 		"description": "knownHelpers",
 		"it": "Field lookup works in knownHelpers only mode",
 		"template": "{{foo}}",
@@ -635,7 +635,7 @@
 			}
 		}
 	},
-	"knownhelpers-conditional blocks work in knownhelpers only mode-00": {
+	{
 		"description": "knownHelpers",
 		"it": "Conditional blocks work in knownHelpers only mode",
 		"template": "{{#foo}}bar{{/foo}}",
@@ -652,7 +652,7 @@
 			}
 		}
 	},
-	"knownhelpers-invert blocks work in knownhelpers only mode-00": {
+	{
 		"description": "knownHelpers",
 		"it": "Invert blocks work in knownHelpers only mode",
 		"template": "{{^foo}}bar{{/foo}}",
@@ -669,7 +669,7 @@
 			}
 		}
 	},
-	"knownhelpers-functions are bound to the context in knownhelpers only mode-00": {
+	{
 		"description": "knownHelpers",
 		"it": "Functions are bound to the context in knownHelpers only mode",
 		"template": "{{foo}}",
@@ -686,26 +686,26 @@
 			}
 		}
 	},
-	"knownhelpers-unknown helper call in knownhelpers only mode should throw-00": {
+	{
 		"description": "knownHelpers",
 		"it": "Unknown helper call in knownHelpers only mode should throw",
 		"template": "{{typeof hello}}",
 		"exception": true
 	},
-	"blockhelpermissing-lambdas are resolved by blockhelpermissing, not handlebars proper-00": {
+	{
 		"description": "blockHelperMissing",
 		"it": "lambdas are resolved by blockHelperMissing, not handlebars proper",
 		"template": "{{#truthy}}yep{{/truthy}}",
 		"data": {},
 		"expected": "yep"
 	},
-	"blockhelpermissing-lambdas resolved by blockhelpermissing are bound to the context-00": {
+	{
 		"description": "blockHelperMissing",
 		"it": "lambdas resolved by blockHelperMissing are bound to the context",
 		"template": "{{#truthy}}yep{{/truthy}}",
 		"data": {}
 	},
-	"name field-should include in ambiguous mustache calls-00": {
+	{
 		"description": "name field",
 		"it": "should include in ambiguous mustache calls",
 		"template": "{{helper}}",
@@ -720,7 +720,7 @@
 		},
 		"expected": "ran: helper"
 	},
-	"name field-should include in helper mustache calls-00": {
+	{
 		"description": "name field",
 		"it": "should include in helper mustache calls",
 		"template": "{{helper 1}}",
@@ -735,7 +735,7 @@
 		},
 		"expected": "ran: helper"
 	},
-	"name field-should include in ambiguous block calls-00": {
+	{
 		"description": "name field",
 		"it": "should include in ambiguous block calls",
 		"template": "{{#helper}}{{/helper}}",
@@ -750,7 +750,7 @@
 		},
 		"expected": "ran: helper"
 	},
-	"name field-should include in simple block calls-00": {
+	{
 		"description": "name field",
 		"it": "should include in simple block calls",
 		"template": "{{#./helper}}{{/./helper}}",
@@ -765,7 +765,7 @@
 		},
 		"expected": "missing: ./helper"
 	},
-	"name field-should include in helper block calls-00": {
+	{
 		"description": "name field",
 		"it": "should include in helper block calls",
 		"template": "{{#helper 1}}{{/helper}}",
@@ -780,7 +780,7 @@
 		},
 		"expected": "ran: helper"
 	},
-	"name field-should include in known helper calls-00": {
+	{
 		"description": "name field",
 		"it": "should include in known helper calls",
 		"template": "{{helper}}",
@@ -795,7 +795,7 @@
 			}
 		}
 	},
-	"name field-should include full id-00": {
+	{
 		"description": "name field",
 		"it": "should include full id",
 		"template": "{{#foo.helper}}{{/foo.helper}}",
@@ -812,7 +812,7 @@
 		},
 		"expected": "missing: foo.helper"
 	},
-	"name conflicts-helpers take precedence over same-named context properties-00": {
+	{
 		"description": "name conflicts",
 		"it": "helpers take precedence over same-named context properties",
 		"template": "{{goodbye}} {{cruel world}}",
@@ -830,7 +830,7 @@
 			}
 		}
 	},
-	"name conflicts-helpers take precedence over same-named context properties$-00": {
+	{
 		"description": "name conflicts",
 		"it": "helpers take precedence over same-named context properties$",
 		"template": "{{#goodbye}} {{cruel world}}{{/goodbye}}",
@@ -848,7 +848,7 @@
 			}
 		}
 	},
-	"name conflicts-scoped names take precedence over helpers-00": {
+	{
 		"description": "name conflicts",
 		"it": "Scoped names take precedence over helpers",
 		"template": "{{this.goodbye}} {{cruel world}} {{cruel this.goodbye}}",
@@ -866,7 +866,7 @@
 			}
 		}
 	},
-	"name conflicts-scoped names take precedence over block helpers-00": {
+	{
 		"description": "name conflicts",
 		"it": "Scoped names take precedence over block helpers",
 		"template": "{{#goodbye}} {{cruel world}}{{/goodbye}} {{this.goodbye}}",
@@ -884,4 +884,4 @@
 			}
 		}
 	}
-}
+]

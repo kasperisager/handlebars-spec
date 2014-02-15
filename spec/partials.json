@@ -1,5 +1,5 @@
-{
-	"partials-basic partials-00": {
+[
+	{
 		"description": "partials",
 		"it": "basic partials",
 		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
@@ -21,7 +21,7 @@
 		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
 		"message": "Basic partials output based on current context."
 	},
-	"partials-partials with context-00": {
+	{
 		"description": "partials",
 		"it": "partials with context",
 		"template": "Dudes: {{>dude dudes}}",
@@ -43,7 +43,7 @@
 		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
 		"message": "Partials can be passed a context"
 	},
-	"partials-partials with undefined context-00": {
+	{
 		"description": "partials",
 		"it": "partials with undefined context",
 		"template": "Dudes: {{>dude dudes}}",
@@ -53,7 +53,7 @@
 		},
 		"expected": "Dudes:  Empty"
 	},
-	"partials-partials with parameters-00": {
+	{
 		"description": "partials",
 		"it": "partials with parameters",
 		"template": "Dudes: {{#dudes}}{{> dude others=..}}{{/dudes}}",
@@ -76,7 +76,7 @@
 		"expected": "Dudes: barYehuda (http://yehuda) barAlan (http://alan) ",
 		"message": "Basic partials output based on current context."
 	},
-	"partials-partial in a partial-00": {
+	{
 		"description": "partials",
 		"it": "partial in a partial",
 		"template": "Dudes: {{#dudes}}{{>dude}}{{/dudes}}",
@@ -99,19 +99,19 @@
 		"expected": "Dudes: Yehuda <a href='http://yehuda'>http://yehuda</a> Alan <a href='http://alan'>http://alan</a> ",
 		"message": "Partials are rendered inside of other partials"
 	},
-	"partials-rendering undefined partial throws an exception-00": {
+	{
 		"description": "partials",
 		"it": "rendering undefined partial throws an exception",
 		"template": "{{> whatever}}",
 		"exception": true
 	},
-	"partials-rendering template partial in vm mode throws an exception-00": {
+	{
 		"description": "partials",
 		"it": "rendering template partial in vm mode throws an exception",
 		"template": "{{> whatever}}",
 		"exception": true
 	},
-	"partials-rendering function partial in vm mode-00": {
+	{
 		"description": "partials",
 		"it": "rendering function partial in vm mode",
 		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
@@ -130,7 +130,7 @@
 		"partials": {},
 		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) "
 	},
-	"partials-gh-14: a partial preceding a selector-00": {
+	{
 		"description": "partials",
 		"it": "GH-14: a partial preceding a selector",
 		"template": "Dudes: {{>dude}} {{another_dude}}",
@@ -144,7 +144,7 @@
 		"expected": "Dudes: Jeepers Creepers",
 		"message": "Regular selectors can follow a partial"
 	},
-	"partials-partials with slash paths-00": {
+	{
 		"description": "partials",
 		"it": "Partials with slash paths",
 		"template": "Dudes: {{> shared/dude}}",
@@ -158,7 +158,7 @@
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal paths"
 	},
-	"partials-partials with slash and point paths-00": {
+	{
 		"description": "partials",
 		"it": "Partials with slash and point paths",
 		"template": "Dudes: {{> shared/dude.thing}}",
@@ -172,7 +172,7 @@
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal with points in paths"
 	},
-	"partials-global partials-00": {
+	{
 		"description": "partials",
 		"it": "Global Partials",
 		"template": "Dudes: {{> shared/dude}} {{> global_test}}",
@@ -186,7 +186,7 @@
 		"expected": "Dudes: Jeepers Creepers",
 		"message": "Partials can use globals or passed"
 	},
-	"partials-multiple partial registration-00": {
+	{
 		"description": "partials",
 		"it": "Multiple partial registration",
 		"template": "Dudes: {{> shared/dude}} {{> global_test}}",
@@ -197,7 +197,7 @@
 		"expected": "Dudes: Jeepers Creepers",
 		"message": "Partials can use globals or passed"
 	},
-	"partials-partials with integer path-00": {
+	{
 		"description": "partials",
 		"it": "Partials with integer path",
 		"template": "Dudes: {{> 404}}",
@@ -211,7 +211,7 @@
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal paths"
 	},
-	"partials-partials with complex path-00": {
+	{
 		"description": "partials",
 		"it": "Partials with complex path",
 		"template": "Dudes: {{> 404/asdf?.bar}}",
@@ -225,7 +225,7 @@
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal paths"
 	},
-	"partials-partials with escaped-00": {
+	{
 		"description": "partials",
 		"it": "Partials with escaped",
 		"template": "Dudes: {{> [+404/asdf?.bar]}}",
@@ -239,7 +239,7 @@
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal paths"
 	},
-	"partials-partials with string-00": {
+	{
 		"description": "partials",
 		"it": "Partials with string",
 		"template": "Dudes: {{> \"+404/asdf?.bar\"}}",
@@ -253,7 +253,7 @@
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal paths"
 	},
-	"partials-should handle empty partial-00": {
+	{
 		"description": "partials",
 		"it": "should handle empty partial",
 		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
@@ -274,4 +274,4 @@
 		},
 		"expected": "Dudes: "
 	}
-}
+]

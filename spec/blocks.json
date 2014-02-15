@@ -1,5 +1,5 @@
-{
-	"blocks-array-00": {
+[
+	{
 		"description": "blocks",
 		"it": "array",
 		"template": "{{#goodbyes}}{{text}}! {{/goodbyes}}cruel {{world}}!",
@@ -19,7 +19,7 @@
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
 	},
-	"blocks-array-01": {
+	{
 		"description": "blocks",
 		"it": "array",
 		"template": "{{#goodbyes}}{{text}}! {{/goodbyes}}cruel {{world}}!",
@@ -29,7 +29,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	"blocks-array with @index-00": {
+	{
 		"description": "blocks",
 		"it": "array with @index",
 		"template": "{{#goodbyes}}{{@index}}. {{text}}! {{/goodbyes}}cruel {{world}}!",
@@ -49,7 +49,7 @@
 		},
 		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!"
 	},
-	"blocks-empty block-00": {
+	{
 		"description": "blocks",
 		"it": "empty block",
 		"template": "{{#goodbyes}}{{/goodbyes}}cruel {{world}}!",
@@ -69,7 +69,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	"blocks-empty block-01": {
+	{
 		"description": "blocks",
 		"it": "empty block",
 		"template": "{{#goodbyes}}{{/goodbyes}}cruel {{world}}!",
@@ -79,7 +79,7 @@
 		},
 		"expected": "cruel world!"
 	},
-	"blocks-block with complex lookup-00": {
+	{
 		"description": "blocks",
 		"it": "block with complex lookup",
 		"template": "{{#goodbyes}}{{text}} cruel {{../name}}! {{/goodbyes}}",
@@ -99,13 +99,13 @@
 		},
 		"expected": "goodbye cruel Alan! Goodbye cruel Alan! GOODBYE cruel Alan! "
 	},
-	"blocks-block with complex lookup using nested context-00": {
+	{
 		"description": "blocks",
 		"it": "block with complex lookup using nested context",
 		"template": "{{#goodbyes}}{{text}} cruel {{foo/../name}}! {{/goodbyes}}",
 		"exception": true
 	},
-	"blocks-block with deep nested complex lookup-00": {
+	{
 		"description": "blocks",
 		"it": "block with deep nested complex lookup",
 		"template": "{{#outer}}Goodbye {{#inner}}cruel {{../../omg}}{{/inner}}{{/outer}}",
@@ -123,14 +123,14 @@
 		},
 		"expected": "Goodbye cruel OMG!"
 	},
-	"inverted sections-inverted sections with unset value-00": {
+	{
 		"description": "inverted sections",
 		"it": "inverted sections with unset value",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
 		"data": {},
 		"expected": "Right On!"
 	},
-	"inverted sections-inverted section with false value-00": {
+	{
 		"description": "inverted sections",
 		"it": "inverted section with false value",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
@@ -139,7 +139,7 @@
 		},
 		"expected": "Right On!"
 	},
-	"inverted sections-inverted section with empty set-00": {
+	{
 		"description": "inverted sections",
 		"it": "inverted section with empty set",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
@@ -148,7 +148,7 @@
 		},
 		"expected": "Right On!"
 	},
-	"inverted sections-block inverted sections-00": {
+	{
 		"description": "inverted sections",
 		"it": "block inverted sections",
 		"template": "{{#people}}{{name}}{{^}}{{none}}{{/people}}",
@@ -157,7 +157,7 @@
 		},
 		"expected": "No people"
 	},
-	"inverted sections-block inverted sections with empty arrays-00": {
+	{
 		"description": "inverted sections",
 		"it": "block inverted sections with empty arrays",
 		"template": "{{#people}}{{name}}{{^}}{{none}}{{/people}}",
@@ -167,4 +167,4 @@
 		},
 		"expected": "No people"
 	}
-}
+]
