@@ -552,7 +552,7 @@
 		"template": "{{#hellos}}{{foo this/text}}{{/hellos}}",
 		"helpers": {
 			"foo": {
-				"php": "function($value) { return 'bar '.$value; }"
+				"php": "function($value) { return 'bar '.$value; }",
 				"javascript": "function (value) {\n        return 'bar ' + value;\n    }"
 			}
 		},
