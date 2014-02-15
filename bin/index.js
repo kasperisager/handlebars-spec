@@ -17,33 +17,25 @@ var isFunction = function (object) {
   return !!(object && object.constructor && object.call && object.apply);
 };
 
-var extractHelpers = function (data, helpers) {
-  if (!data) return;
+var extractHelpers = function (data) {
+  var helpers = {}
+    , extract = function (object) {
+      if (!object || typeof object !== 'object') {
+        return false;
+      }
 
-  var keys = [];
+      Object.keys(object).forEach(function (el) {
+        if (isFunction(object[el])) {
+          helpers[el] = { javascript: '' + object[el] };
+        }
 
-  switch (typeof data) {
-    case 'object':
-      keys = Object.keys(data);
-      break;
+        extract(object[el]);
+      });
+    };
 
-    case 'array':
-      keys = data;
-      break;
+  extract(data);
 
-    default:
-      return false;
-  }
-
-  keys.forEach(function (el, index) {
-    if (isFunction(data[el])) {
-      helpers[el] = { javascript: '' + data[el] };
-    }
-
-    extractHelpers(data[el], helpers);
-  });
-
-  return data;
+  return helpers;
 };
 
 global.beforeEach = function () {};
@@ -59,8 +51,7 @@ global.it = function (description, next) {
 };
 
 global.shouldCompileTo = function (template, data, expected) {
-  var helpers = {};
-  data = extractHelpers(data, helpers);
+  var helpers = extractHelpers(data);
 
   tests.push({
     description : context.description
