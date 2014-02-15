@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "commander": "2.1.x",
-    "util-extend": "1.0.x",
+    "extend": "1.2.1",
     "handlebars": "2.0.0-alpha.1"
   }
 }

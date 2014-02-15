@@ -4,7 +4,7 @@ var program = require('commander')
   , fs = require('fs')
   , path = require('path')
   , util = require('util')
-  , extend = require('util-extend')
+  , extend = require('extend')
   , Handlebars = require('handlebars');
 
 program
@@ -37,7 +37,7 @@ var extractHelpers = function (data) {
     }
   });
 
-  return helpers;
+  return isEmptyObject(helpers) ? false : helpers;
 };
 
 global.Handlebars    = Handlebars;
@@ -53,14 +53,14 @@ global.CompilerContext = {
     context.template = template;
 
     return function (data, options) {
-      if (!isEmptyObject(options) && options.hasOwnProperty('data')) {
-        data = extend(data, options.data);
+      if (options && options.hasOwnProperty('data')) {
+        data = extend(true, data, options.data);
       }
 
       // Push template data unto context
       context.data = data;
 
-      if (!isEmptyObject(options) && options.hasOwnProperty('helpers')) {
+      if (options && options.hasOwnProperty('helpers')) {
         // Push helpers unto context
         context.helpers = options.helpers;
       }
@@ -109,11 +109,11 @@ global.shouldCompileToWithPartials = function (string, hashOrArray, partials, ex
 };
 
 global.compileWithPartials = function(string, hashOrArray, partials, expected) {
-  var helpers = {};
+  var helpers = false;
 
   if (util.isArray(hashOrArray)) {
     data     = hashOrArray[0];
-    helpers  = hashOrArray[1];
+    helpers  = extractHelpers(hashOrArray[1]);
     partials = hashOrArray[2];
   } else {
     data = hashOrArray;
@@ -127,7 +127,7 @@ global.compileWithPartials = function(string, hashOrArray, partials, expected) {
     };
 
   if (partials) test.partials = partials;
-  if (!isEmptyObject(helpers)) test.helpers = extractHelpers(helpers);
+  if (helpers)  test.helpers  = helpers;
   if (expected) test.expected = expected;
 
   tests.push(test);
