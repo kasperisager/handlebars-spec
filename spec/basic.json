@@ -6,6 +6,7 @@
 		"data": {
 			"foo": "foo"
 		},
+		"helpers": {},
 		"expected": "foo"
 	},
 	{
@@ -15,6 +16,7 @@
 		"data": {
 			"foo": "food"
 		},
+		"helpers": {},
 		"expected": "{{foo}}"
 	},
 	{
@@ -24,6 +26,7 @@
 		"data": {
 			"foo": "food"
 		},
+		"helpers": {},
 		"expected": "content {{foo}}"
 	},
 	{
@@ -33,6 +36,7 @@
 		"data": {
 			"foo": "food"
 		},
+		"helpers": {},
 		"expected": "\\food"
 	},
 	{
@@ -42,6 +46,7 @@
 		"data": {
 			"foo": "food"
 		},
+		"helpers": {},
 		"expected": "content \\food"
 	},
 	{
@@ -51,6 +56,7 @@
 		"data": {
 			"foo": "food"
 		},
+		"helpers": {},
 		"expected": "\\\\ food"
 	},
 	{
@@ -61,18 +67,21 @@
 			"cruel": "cruel",
 			"world": "world"
 		},
+		"helpers": {},
 		"expected": "Goodbye\ncruel\nworld!"
 	},
 	{
 		"description": "basic context",
 		"it": "compiling with an undefined context",
 		"template": "Goodbye\n{{cruel}}\n{{world.bar}}!",
+		"helpers": {},
 		"expected": "Goodbye\n\n!"
 	},
 	{
 		"description": "basic context",
 		"it": "compiling with an undefined context",
 		"template": "{{#unless foo}}Goodbye{{../test}}{{test2}}{{/unless}}",
+		"helpers": {},
 		"expected": "Goodbye"
 	},
 	{
@@ -83,6 +92,7 @@
 			"cruel": "cruel",
 			"world": "world"
 		},
+		"helpers": {},
 		"expected": "Goodbye\ncruel\nworld!"
 	},
 	{
@@ -93,6 +103,7 @@
 			"goodbye": true,
 			"world": "world"
 		},
+		"helpers": {},
 		"expected": "GOODBYE cruel world!"
 	},
 	{
@@ -103,6 +114,7 @@
 			"goodbye": false,
 			"world": "world"
 		},
+		"helpers": {},
 		"expected": "cruel world!"
 	},
 	{
@@ -113,6 +125,7 @@
 			"num1": 42,
 			"num2": 0
 		},
+		"helpers": {},
 		"expected": "num1: 42, num2: 0"
 	},
 	{
@@ -120,6 +133,7 @@
 		"it": "zeros",
 		"template": "num: {{.}}",
 		"data": 0,
+		"helpers": {},
 		"expected": "num: 0"
 	},
 	{
@@ -131,6 +145,7 @@
 				"num2": 0
 			}
 		},
+		"helpers": {},
 		"expected": "num: 0"
 	},
 	{
@@ -138,6 +153,7 @@
 		"it": "newlines",
 		"template": "Alan's\nTest",
 		"data": {},
+		"helpers": {},
 		"expected": "Alan's\nTest"
 	},
 	{
@@ -145,6 +161,7 @@
 		"it": "newlines",
 		"template": "Alan's\rTest",
 		"data": {},
+		"helpers": {},
 		"expected": "Alan's\rTest"
 	},
 	{
@@ -152,6 +169,7 @@
 		"it": "escaping text",
 		"template": "Awesome's",
 		"data": {},
+		"helpers": {},
 		"expected": "Awesome's"
 	},
 	{
@@ -159,6 +177,7 @@
 		"it": "escaping text",
 		"template": "Awesome\\",
 		"data": {},
+		"helpers": {},
 		"expected": "Awesome\\"
 	},
 	{
@@ -166,6 +185,7 @@
 		"it": "escaping text",
 		"template": "Awesome\\\\ foo",
 		"data": {},
+		"helpers": {},
 		"expected": "Awesome\\\\ foo"
 	},
 	{
@@ -175,6 +195,7 @@
 		"data": {
 			"foo": "\\"
 		},
+		"helpers": {},
 		"expected": "Awesome \\"
 	},
 	{
@@ -182,6 +203,7 @@
 		"it": "escaping text",
 		"template": " \" \" ",
 		"data": {},
+		"helpers": {},
 		"expected": " \" \" "
 	},
 	{
@@ -191,6 +213,7 @@
 		"data": {
 			"awesome": "&\"\\<>"
 		},
+		"helpers": {},
 		"expected": "&\"\\<>"
 	},
 	{
@@ -200,6 +223,7 @@
 		"data": {
 			"awesome": "&\"\\<>"
 		},
+		"helpers": {},
 		"expected": "&\"\\<>"
 	},
 	{
@@ -209,6 +233,7 @@
 		"data": {
 			"awesome": "&\"'`\\<>"
 		},
+		"helpers": {},
 		"expected": "&amp;&quot;&#x27;&#x60;\\&lt;&gt;"
 	},
 	{
@@ -218,6 +243,7 @@
 		"data": {
 			"awesome": "Escaped, <b> looks like: &lt;b&gt;"
 		},
+		"helpers": {},
 		"expected": "Escaped, &lt;b&gt; looks like: &amp;lt;b&amp;gt;"
 	},
 	{
@@ -225,6 +251,11 @@
 		"it": "functions returning safestrings shouldn't be escaped",
 		"template": "{{awesome}}",
 		"data": {},
+		"helpers": {
+			"awesome": {
+				"javascript": "function () { return new Handlebars.SafeString(\"&\\\"\\\\<>\"); }"
+			}
+		},
 		"expected": "&\"\\<>"
 	},
 	{
@@ -232,11 +263,12 @@
 		"it": "functions",
 		"template": "{{awesome}}",
 		"data": {},
-        "helpers": {
-            "awesome": {
-                "php": "function() { return \"Awesome\"; }"
-            }
-        },
+		"helpers": {
+			"awesome": {
+				"javascript": "function () { return \"Awesome\"; }",
+				"php": "function() { return \"Awesome\"; }"
+			}
+		},
 		"expected": "Awesome"
 	},
 	{
@@ -248,6 +280,7 @@
 		},
 		"helpers": {
 			"awesome": {
+				"javascript": "function () { return this.more; }",
 				"php": "function($prev) { return $prev['more']; }"
 			}
 		},
@@ -260,11 +293,12 @@
 		"data": {
 			"frank": "Frank"
 		},
-        "helpers": {
-            "awesome": {
-                "php": "function($context) { return $context; }"
-            }
-        },
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context) { return context; }",
+				"php": "function($context) { return $context; }"
+			}
+		},
 		"expected": "Frank"
 	},
 	{
@@ -275,6 +309,12 @@
 			"bar": {},
 			"frank": "Frank"
 		},
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context) { return context; }",
+				"php": "function($context) { return $context; }"
+			}
+		},
 		"expected": "Frank"
 	},
 	{
@@ -284,6 +324,12 @@
 		"data": {
 			"frank": "Frank"
 		},
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context) { return context; }",
+				"php": "function($context) { return $context; }"
+			}
+		},
 		"expected": "Frank"
 	},
 	{
@@ -291,6 +337,11 @@
 		"it": "block functions with context argument",
 		"template": "{{#awesome 1}}inner {{.}}{{/awesome}}",
 		"data": {},
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context, options) { return options.fn(context); }"
+			}
+		},
 		"expected": "inner 1"
 	},
 	{
@@ -300,6 +351,11 @@
 		"data": {
 			"value": true
 		},
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context, options) { return options.fn(context); }"
+			}
+		},
 		"expected": "inner 1"
 	},
 	{
@@ -307,6 +363,11 @@
 		"it": "block functions without context argument",
 		"template": "{{#awesome}}inner{{/awesome}}",
 		"data": {},
+		"helpers": {
+			"awesome": {
+				"javascript": "function (options) { return options.fn(this); }"
+			}
+		},
 		"expected": "inner"
 	},
 	{
@@ -315,6 +376,11 @@
 		"template": "{{#foo.awesome}}inner{{/foo.awesome}}",
 		"data": {
 			"foo": {}
+		},
+		"helpers": {
+			"awesome": {
+				"javascript": "function (options) { return this; }"
+			}
 		},
 		"expected": "inner"
 	},
@@ -325,6 +391,11 @@
 		"data": {
 			"value": true
 		},
+		"helpers": {
+			"awesome": {
+				"javascript": "function (options) { return this; }"
+			}
+		},
 		"expected": "inner"
 	},
 	{
@@ -334,6 +405,7 @@
 		"data": {
 			"foo-bar": "baz"
 		},
+		"helpers": {},
 		"expected": "baz"
 	},
 	{
@@ -345,6 +417,7 @@
 				"foo-bar": "baz"
 			}
 		},
+		"helpers": {},
 		"expected": "baz"
 	},
 	{
@@ -356,6 +429,7 @@
 				"foo-bar": "baz"
 			}
 		},
+		"helpers": {},
 		"expected": "baz"
 	},
 	{
@@ -367,6 +441,7 @@
 				"expression": "beautiful"
 			}
 		},
+		"helpers": {},
 		"expected": "Goodbye beautiful world!"
 	},
 	{
@@ -378,6 +453,7 @@
 				"expression": ""
 			}
 		},
+		"helpers": {},
 		"expected": "Goodbye  world!"
 	},
 	{
@@ -389,6 +465,7 @@
 				"expression": "beautiful"
 			}
 		},
+		"helpers": {},
 		"expected": "Goodbye beautiful world!"
 	},
 	{
@@ -400,6 +477,7 @@
 				"expression": "beautiful"
 			}
 		},
+		"helpers": {},
 		"expected": "Goodbye beautiful world!"
 	},
 	{
@@ -409,6 +487,7 @@
 		"data": {
 			"foo bar": "beautiful"
 		},
+		"helpers": {},
 		"expected": "Goodbye beautiful world!"
 	},
 	{
@@ -421,6 +500,7 @@
 				"helper": "awesome"
 			}
 		],
+		"helpers": {},
 		"expected": "test: "
 	},
 	{
@@ -432,6 +512,7 @@
 				"name": null
 			}
 		},
+		"helpers": {},
 		"expected": ""
 	},
 	{
@@ -441,6 +522,7 @@
 		"data": {
 			"person": {}
 		},
+		"helpers": {},
 		"expected": ""
 	},
 	{
@@ -454,6 +536,7 @@
 				"GOODBYE"
 			]
 		},
+		"helpers": {},
 		"expected": "goodbyeGoodbyeGOODBYE"
 	},
 	{
@@ -473,6 +556,7 @@
 				}
 			]
 		},
+		"helpers": {},
 		"expected": "helloHelloHELLO"
 	},
 	{
@@ -494,6 +578,11 @@
 			},
 			{}
 		],
+		"helpers": {
+			"foo": {
+				"javascript": "function (value) {\n        return 'bar ' + value;\n    }"
+			}
+		},
 		"expected": "bar goodbyebar Goodbyebar GOODBYE"
 	},
 	{
@@ -516,6 +605,11 @@
 			},
 			{}
 		],
+		"helpers": {
+			"foo": {
+				"javascript": "function (value) {\n        return 'bar ' + value;\n    }"
+			}
+		},
 		"expected": "bar hellobar Hellobar HELLO"
 	},
 	{

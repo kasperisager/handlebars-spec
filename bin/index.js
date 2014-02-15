@@ -13,6 +13,39 @@ program
 var tests = []
   , context = {};
 
+var isFunction = function (object) {
+  return !!(object && object.constructor && object.call && object.apply);
+};
+
+var extractHelpers = function (data, helpers) {
+  if (!data) return;
+
+  var keys = [];
+
+  switch (typeof data) {
+    case 'object':
+      keys = Object.keys(data);
+      break;
+
+    case 'array':
+      keys = data;
+      break;
+
+    default:
+      return false;
+  }
+
+  keys.forEach(function (el, index) {
+    if (isFunction(data[el])) {
+      helpers[el] = { javascript: '' + data[el] };
+    }
+
+    extractHelpers(data[el], helpers);
+  });
+
+  return data;
+};
+
 global.beforeEach = function () {};
 
 global.describe = function (description, next) {
@@ -26,11 +59,15 @@ global.it = function (description, next) {
 };
 
 global.shouldCompileTo = function (template, data, expected) {
+  var helpers = {};
+  data = extractHelpers(data, helpers);
+
   tests.push({
     description : context.description
   , it          : context.it
   , template    : template
   , data        : data
+  , helpers     : helpers
   , expected    : expected
   });
 };
