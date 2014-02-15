@@ -13,7 +13,7 @@ program
   .option('-o, --output [file]', 'write JSON output to a file')
   .parse(process.argv);
 
-var tests = {}
+var tests = []
   , context = {};
 
 tests.add = function (spec) {
@@ -35,7 +35,7 @@ tests.add = function (spec) {
         }
       }
 
-      tests[name] = spec;
+      tests.push(spec);
       break;
     }
   }
