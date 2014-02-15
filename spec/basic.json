@@ -225,19 +225,24 @@
 		"it": "functions returning safestrings shouldn't be escaped",
 		"template": "{{awesome}}",
 		"data": {},
-		"expected": "&\"\\<>"
+		"expected": "&\"\\<>",
+		"helpers": {
+			"awesome": {
+				"javascript": "function () { return new Handlebars.SafeString(\"&\\\"\\\\<>\"); }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
 		"it": "functions",
 		"template": "{{awesome}}",
 		"data": {},
-        "helpers": {
-            "awesome": {
-                "php": "function() { return \"Awesome\"; }"
-            }
-        },
-		"expected": "Awesome"
+		"expected": "Awesome",
+		"helpers": {
+			"awesome": {
+				"javascript": "function () { return \"Awesome\"; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -246,12 +251,12 @@
 		"data": {
 			"more": "More awesome"
 		},
+		"expected": "More awesome",
 		"helpers": {
 			"awesome": {
-				"php": "function($prev) { return $prev['more']; }"
+				"javascript": "function () { return this.more; }"
 			}
-		},
-		"expected": "More awesome"
+		}
 	},
 	{
 		"description": "basic context",
@@ -260,12 +265,12 @@
 		"data": {
 			"frank": "Frank"
 		},
-        "helpers": {
-            "awesome": {
-                "php": "function($context) { return $context; }"
-            }
-        },
-		"expected": "Frank"
+		"expected": "Frank",
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context) { return context; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -275,7 +280,12 @@
 			"bar": {},
 			"frank": "Frank"
 		},
-		"expected": "Frank"
+		"expected": "Frank",
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context) { return context; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -284,14 +294,24 @@
 		"data": {
 			"frank": "Frank"
 		},
-		"expected": "Frank"
+		"expected": "Frank",
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context) { return context; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
 		"it": "block functions with context argument",
 		"template": "{{#awesome 1}}inner {{.}}{{/awesome}}",
 		"data": {},
-		"expected": "inner 1"
+		"expected": "inner 1",
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context, options) { return options.fn(context); }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -300,14 +320,24 @@
 		"data": {
 			"value": true
 		},
-		"expected": "inner 1"
+		"expected": "inner 1",
+		"helpers": {
+			"awesome": {
+				"javascript": "function (context, options) { return options.fn(context); }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
 		"it": "block functions without context argument",
 		"template": "{{#awesome}}inner{{/awesome}}",
 		"data": {},
-		"expected": "inner"
+		"expected": "inner",
+		"helpers": {
+			"awesome": {
+				"javascript": "function (options) { return options.fn(this); }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -316,7 +346,12 @@
 		"data": {
 			"foo": {}
 		},
-		"expected": "inner"
+		"expected": "inner",
+		"helpers": {
+			"awesome": {
+				"javascript": "function (options) { return this; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -325,7 +360,12 @@
 		"data": {
 			"value": true
 		},
-		"expected": "inner"
+		"expected": "inner",
+		"helpers": {
+			"awesome": {
+				"javascript": "function (options) { return this; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -479,7 +519,9 @@
 		"description": "basic context",
 		"it": "this keyword nested inside path",
 		"template": "{{#hellos}}{{text/this/foo}}{{/hellos}}",
-		"exception": true
+		"exception": {
+			"javascript": "function Error() { [native code] }"
+		}
 	},
 	{
 		"description": "basic context",
@@ -497,7 +539,12 @@
 				"GOODBYE"
 			]
 		},
-		"expected": "bar goodbyebar Goodbyebar GOODBYE"
+		"expected": "bar goodbyebar Goodbyebar GOODBYE",
+		"helpers": {
+			"foo": {
+				"javascript": "function (value) {\n        return 'bar ' + value;\n    }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -506,6 +553,7 @@
 		"helpers": {
 			"foo": {
 				"php": "function($value) { return 'bar '.$value; }"
+				"javascript": "function (value) {\n        return 'bar ' + value;\n    }"
 			}
 		},
 		"data": {
@@ -527,6 +575,8 @@
 		"description": "basic context",
 		"it": "this keyword nested inside helpers param",
 		"template": "{{#hellos}}{{foo text/this/foo}}{{/hellos}}",
-		"exception": true
+		"exception": {
+			"javascript": "function Error() { [native code] }"
+		}
 	}
 ]

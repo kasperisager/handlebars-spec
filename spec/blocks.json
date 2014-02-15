@@ -1,0 +1,172 @@
+[
+	{
+		"description": "blocks",
+		"it": "array",
+		"template": "{{#goodbyes}}{{text}}! {{/goodbyes}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
+	},
+	{
+		"description": "blocks",
+		"it": "array",
+		"template": "{{#goodbyes}}{{text}}! {{/goodbyes}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [],
+			"world": "world"
+		},
+		"expected": "cruel world!"
+	},
+	{
+		"description": "blocks",
+		"it": "array with @index",
+		"template": "{{#goodbyes}}{{@index}}. {{text}}! {{/goodbyes}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!"
+	},
+	{
+		"description": "blocks",
+		"it": "empty block",
+		"template": "{{#goodbyes}}{{/goodbyes}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "cruel world!"
+	},
+	{
+		"description": "blocks",
+		"it": "empty block",
+		"template": "{{#goodbyes}}{{/goodbyes}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [],
+			"world": "world"
+		},
+		"expected": "cruel world!"
+	},
+	{
+		"description": "blocks",
+		"it": "block with complex lookup",
+		"template": "{{#goodbyes}}{{text}} cruel {{../name}}! {{/goodbyes}}",
+		"data": {
+			"name": "Alan",
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			]
+		},
+		"expected": "goodbye cruel Alan! Goodbye cruel Alan! GOODBYE cruel Alan! "
+	},
+	{
+		"description": "blocks",
+		"it": "block with complex lookup using nested context",
+		"template": "{{#goodbyes}}{{text}} cruel {{foo/../name}}! {{/goodbyes}}",
+		"exception": {
+			"javascript": "function Error() { [native code] }"
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "block with deep nested complex lookup",
+		"template": "{{#outer}}Goodbye {{#inner}}cruel {{../../omg}}{{/inner}}{{/outer}}",
+		"data": {
+			"omg": "OMG!",
+			"outer": [
+				{
+					"inner": [
+						{
+							"text": "goodbye"
+						}
+					]
+				}
+			]
+		},
+		"expected": "Goodbye cruel OMG!"
+	},
+	{
+		"description": "inverted sections",
+		"it": "inverted sections with unset value",
+		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
+		"data": {},
+		"expected": "Right On!"
+	},
+	{
+		"description": "inverted sections",
+		"it": "inverted section with false value",
+		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
+		"data": {
+			"goodbyes": false
+		},
+		"expected": "Right On!"
+	},
+	{
+		"description": "inverted sections",
+		"it": "inverted section with empty set",
+		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
+		"data": {
+			"goodbyes": []
+		},
+		"expected": "Right On!"
+	},
+	{
+		"description": "inverted sections",
+		"it": "block inverted sections",
+		"template": "{{#people}}{{name}}{{^}}{{none}}{{/people}}",
+		"data": {
+			"none": "No people"
+		},
+		"expected": "No people"
+	},
+	{
+		"description": "inverted sections",
+		"it": "block inverted sections with empty arrays",
+		"template": "{{#people}}{{name}}{{^}}{{none}}{{/people}}",
+		"data": {
+			"none": "No people",
+			"people": []
+		},
+		"expected": "No people"
+	}
+]
