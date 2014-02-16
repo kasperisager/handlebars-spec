@@ -150,11 +150,5 @@
 			}
 		},
 		"expected": "LOLLOL!"
-	},
-	{
-		"description": "subexpressions",
-		"it": "subexpressions can't just be property lookups",
-		"template": "{{blog fun=(bork)}}",
-		"exception": true
 	}
 ]
