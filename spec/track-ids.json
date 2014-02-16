@@ -1,0 +1,280 @@
+[
+	{
+		"description": "track ids",
+		"it": "should not include anything without the flag",
+		"template": "{{wycats is.a slave.driver}}",
+		"data": {},
+		"expected": "success",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids, undefined);\n        equal(options.hashIds, undefined);\n\n        return 'success';\n      }"
+			}
+		}
+	},
+	{
+		"description": "track ids",
+		"it": "should include argument ids",
+		"template": "{{wycats is.a slave.driver}}",
+		"data": {
+			"is": {
+				"a": "foo"
+			},
+			"slave": {
+				"driver": "bar"
+			}
+		},
+		"expected": "HELP ME MY BOSS is.a:foo slave.driver:bar",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "track ids",
+		"it": "should include hash ids",
+		"template": "{{wycats bat=is.a baz=slave.driver}}",
+		"data": {
+			"is": {
+				"a": "foo"
+			},
+			"slave": {
+				"driver": "bar"
+			}
+		},
+		"expected": "HELP ME MY BOSS is.a:foo slave.driver:bar",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (options) {\n        equal(options.hashIds.bat, 'is.a');\n        equal(options.hashIds.baz, 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;\n      }"
+			}
+		}
+	},
+	{
+		"description": "track ids",
+		"it": "should note ../ and ./ references",
+		"template": "{{wycats ./is.a ../slave.driver}}",
+		"data": {
+			"is": {
+				"a": "foo"
+			},
+			"slave": {
+				"driver": "bar"
+			}
+		},
+		"expected": "HELP ME MY BOSS is.a:foo ../slave.driver:undefined",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "track ids",
+		"it": "should note @data references",
+		"template": "{{wycats @is.a @slave.driver}}",
+		"data": {
+			"is": {
+				"a": "foo"
+			},
+			"slave": {
+				"driver": "bar"
+			}
+		},
+		"expected": "HELP ME MY BOSS @is.a:foo @slave.driver:bar",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], '@is.a');\n        equal(options.ids[1], '@slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }"
+			}
+		}
+	},
+	{
+		"description": "track ids",
+		"it": "should return null for constants",
+		"template": "{{wycats 1 \"foo\" key=false}}",
+		"data": {
+			"is": {
+				"a": "foo"
+			},
+			"slave": {
+				"driver": "bar"
+			}
+		},
+		"expected": "HELP ME MY BOSS 1 foo false",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }"
+			}
+		}
+	},
+	{
+		"description": "track ids",
+		"it": "should return true for subexpressions",
+		"template": "{{wycats (sub)}}",
+		"data": {
+			"is": {
+				"a": "foo"
+			},
+			"slave": {
+				"driver": "bar"
+			}
+		},
+		"expected": "HELP ME MY BOSS 1",
+		"helpers": {
+			"sub": {
+				"javascript": "function () { return 1; }"
+			},
+			"wycats": {
+				"javascript": "function (passiveVoice, options) {\n        equal(options.ids[0], true);\n\n        return \"HELP ME MY BOSS \" + passiveVoice;\n      }"
+			}
+		}
+	},
+	{
+		"description": "#each",
+		"it": "should track contextPath for arrays",
+		"template": "{{#each array}}{{wycats name}}{{/each}}",
+		"data": {
+			"array": [
+				{
+					"name": "foo"
+				},
+				{
+					"name": "bar"
+				}
+			]
+		},
+		"expected": "foo:array.0\nbar:array.1\n",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+			}
+		}
+	},
+	{
+		"description": "#each",
+		"it": "should track contextPath for keys",
+		"template": "{{#each object}}{{wycats name}}{{/each}}",
+		"data": {
+			"object": {
+				"foo": {
+					"name": "foo"
+				},
+				"bar": {
+					"name": "bar"
+				}
+			}
+		},
+		"expected": "foo:object.foo\nbar:object.bar\n",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+			}
+		}
+	},
+	{
+		"description": "#each",
+		"it": "should handle nesting",
+		"template": "{{#each .}}{{#each .}}{{wycats name}}{{/each}}{{/each}}",
+		"data": {
+			"array": [
+				{
+					"name": "foo"
+				},
+				{
+					"name": "bar"
+				}
+			]
+		},
+		"expected": "foo:.array..0\nbar:.array..1\n",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+			}
+		}
+	},
+	{
+		"description": "#with",
+		"it": "should track contextPath",
+		"template": "{{#with field}}{{wycats name}}{{/with}}",
+		"data": {
+			"field": {
+				"name": "foo"
+			}
+		},
+		"expected": "foo:field\n",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+			}
+		}
+	},
+	{
+		"description": "#with",
+		"it": "should handle nesting",
+		"template": "{{#with bat}}{{#with field}}{{wycats name}}{{/with}}{{/with}}",
+		"data": {
+			"bat": {
+				"field": {
+					"name": "foo"
+				}
+			}
+		},
+		"expected": "foo:bat.field\n",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+			}
+		}
+	},
+	{
+		"description": "#blockHelperMissing",
+		"it": "should track contextPath for arrays",
+		"template": "{{#field}}{{wycats name}}{{/field}}",
+		"data": {
+			"field": [
+				{
+					"name": "foo"
+				}
+			]
+		},
+		"expected": "foo:field.0\n",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+			}
+		}
+	},
+	{
+		"description": "#blockHelperMissing",
+		"it": "should track contextPath for keys",
+		"template": "{{#field}}{{wycats name}}{{/field}}",
+		"data": {
+			"field": {
+				"name": "foo"
+			}
+		},
+		"expected": "foo:field\n",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+			}
+		}
+	},
+	{
+		"description": "#blockHelperMissing",
+		"it": "should handle nesting",
+		"template": "{{#bat}}{{#field}}{{wycats name}}{{/field}}{{/bat}}",
+		"data": {
+			"bat": {
+				"field": {
+					"name": "foo"
+				}
+			}
+		},
+		"expected": "foo:bat.field\n",
+		"helpers": {
+			"wycats": {
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+			}
+		}
+	}
+]
