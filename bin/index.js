@@ -118,8 +118,13 @@ global.equal = global.equals = function (actual, expected, message) {
     , expected    : expected
     };
 
+  // Remove template and data from context
+  delete context.template;
+  delete context.data;
+
   if (context.hasOwnProperty('helpers')) {
     spec.helpers = extractHelpers(context.helpers);
+    delete context.helpers;
   }
 
   tests.add(spec);
@@ -168,6 +173,9 @@ global.shouldThrow = function (callback, error, message) {
     , template    : context.template
     , exception   : true
     };
+
+  // Remove template from context
+  delete context.template;
 
   if (message) spec.message = '' + message;
 
