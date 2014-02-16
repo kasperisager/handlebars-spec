@@ -184,11 +184,6 @@
 	{
 		"description": "#each",
 		"it": "each with an object and @key",
-		"expected": true
-	},
-	{
-		"description": "#each",
-		"it": "each with an object and @key",
 		"template": "{{#each goodbyes}}{{@key}}. {{text}}! {{/each}}cruel {{world}}!",
 		"data": {
 			"goodbyes": [],
@@ -409,32 +404,6 @@
 		"template": "{{log blah}}",
 		"data": {
 			"blah": "whee"
-		}
-	},
-	{
-		"description": "#each",
-		"it": "#log",
-		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
-		"data": {
-			"letters": [
-				"a",
-				"b",
-				"c"
-			],
-			"exclaim": "!"
-		}
-	},
-	{
-		"description": "#each",
-		"it": "#log",
-		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
-		"data": {
-			"letters": [
-				"a",
-				"b",
-				"c"
-			],
-			"exclaim": "!"
 		}
 	},
 	{

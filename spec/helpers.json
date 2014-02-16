@@ -559,7 +559,8 @@
 		"description": "helperMissing",
 		"it": "if a context is not found, helperMissing is used",
 		"template": "{{hello}} {{link_to world}}",
-		"exception": true
+		"exception": true,
+		"message": "/Missing helper: 'link_to'/"
 	},
 	{
 		"description": "helperMissing",
@@ -608,15 +609,7 @@
 		"it": "Builtin helpers available in knownHelpers only mode",
 		"template": "{{#unless foo}}bar{{/unless}}",
 		"data": {},
-		"expected": "bar",
-		"helpers": {
-			"typeof": {
-				"javascript": "function (arg) { return typeof arg; }"
-			},
-			"hello": {
-				"javascript": "function () { return \"foo\"; }"
-			}
-		}
+		"expected": "bar"
 	},
 	{
 		"description": "knownHelpers",
@@ -625,15 +618,7 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar",
-		"helpers": {
-			"typeof": {
-				"javascript": "function (arg) { return typeof arg; }"
-			},
-			"hello": {
-				"javascript": "function () { return \"foo\"; }"
-			}
-		}
+		"expected": "bar"
 	},
 	{
 		"description": "knownHelpers",
@@ -642,15 +627,7 @@
 		"data": {
 			"foo": "baz"
 		},
-		"expected": "bar",
-		"helpers": {
-			"typeof": {
-				"javascript": "function (arg) { return typeof arg; }"
-			},
-			"hello": {
-				"javascript": "function () { return \"foo\"; }"
-			}
-		}
+		"expected": "bar"
 	},
 	{
 		"description": "knownHelpers",
@@ -659,15 +636,7 @@
 		"data": {
 			"foo": false
 		},
-		"expected": "bar",
-		"helpers": {
-			"typeof": {
-				"javascript": "function (arg) { return typeof arg; }"
-			},
-			"hello": {
-				"javascript": "function () { return \"foo\"; }"
-			}
-		}
+		"expected": "bar"
 	},
 	{
 		"description": "knownHelpers",
@@ -676,15 +645,7 @@
 		"data": {
 			"bar": "bar"
 		},
-		"expected": "bar",
-		"helpers": {
-			"typeof": {
-				"javascript": "function (arg) { return typeof arg; }"
-			},
-			"hello": {
-				"javascript": "function () { return \"foo\"; }"
-			}
-		}
+		"expected": "bar"
 	},
 	{
 		"description": "knownHelpers",

@@ -19,11 +19,6 @@
 		"template": "{{@hello}}",
 		"data": {
 			"hello": "hello"
-		},
-		"helpers": {
-			"hello": {
-				"javascript": "function (options) {\n        return options.data.adjective + \" \"  + this.noun;\n      }"
-			}
 		}
 	},
 	{
@@ -265,30 +260,6 @@
 		"template": "{{@root.foo}}",
 		"data": {
 			"foo": "hello"
-		},
-		"helpers": {
-			"hello": {
-				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }"
-			},
-			"world": {
-				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
-			}
-		}
-	},
-	{
-		"description": "@root",
-		"it": "the root context can be looked up via @root",
-		"template": "{{@root.foo}}",
-		"data": {
-			"foo": "hello"
-		},
-		"helpers": {
-			"hello": {
-				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }"
-			},
-			"world": {
-				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
-			}
 		}
 	},
 	{
@@ -298,14 +269,6 @@
 		"data": {
 			"root": {
 				"foo": "hello"
-			}
-		},
-		"helpers": {
-			"hello": {
-				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }"
-			},
-			"world": {
-				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }"
 			}
 		}
 	},

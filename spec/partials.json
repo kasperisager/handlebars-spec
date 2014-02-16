@@ -103,13 +103,15 @@
 		"description": "partials",
 		"it": "rendering undefined partial throws an exception",
 		"template": "{{> whatever}}",
-		"exception": true
+		"exception": true,
+		"message": "The partial whatever could not be found"
 	},
 	{
 		"description": "partials",
 		"it": "rendering template partial in vm mode throws an exception",
 		"template": "{{> whatever}}",
-		"exception": true
+		"exception": true,
+		"message": "The partial whatever could not be found"
 	},
 	{
 		"description": "partials",
