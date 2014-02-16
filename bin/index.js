@@ -167,7 +167,9 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
 };
 
 global.shouldThrow = function (callback, error, message) {
-  callback();
+  try {
+    callback();
+  } catch (err) {}
 
   var spec = {
       description : context.description
