@@ -17,6 +17,8 @@ var tests = []
   , context = {};
 
 tests.add = function (spec) {
+  if (!spec || !spec.template) return;
+
   var key = (spec.description + '-' + spec.it).toLowerCase();
 
   for (var i = 0; i < 20; i++) {
@@ -138,7 +140,7 @@ global.shouldCompileToWithPartials = function (string, hashOrArray, partials, ex
   compileWithPartials(string, hashOrArray, partials, expected, message);
 };
 
-global.compileWithPartials = function(string, hashOrArray, partials, expected, message) {
+global.compileWithPartials = function (string, hashOrArray, partials, expected, message) {
   var helpers = false;
 
   if (util.isArray(hashOrArray)) {
