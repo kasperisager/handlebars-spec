@@ -159,7 +159,7 @@ global.compileWithPartials = function(string, hashOrArray, partials, expected, m
   tests.add(spec);
 };
 
-global.shouldThrow = function (callback, error) {
+global.shouldThrow = function (callback, error, message) {
   callback();
 
   var spec = {
@@ -168,6 +168,8 @@ global.shouldThrow = function (callback, error) {
     , template    : context.template
     , exception   : true
     };
+
+  if (message) spec.message = message;
 
   tests.add(spec);
 };
