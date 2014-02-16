@@ -2,2641 +2,3169 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"template": "{{foo}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"template": "{{foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"template": "{{foo}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"template": "{{foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache as \"OPEN ID CLOSE\"",
+		"template": "{{foo}}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with &",
+		"template": "{{&bar}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with &",
+		"template": "{{&bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with &",
+		"template": "{{&bar}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with &",
+		"template": "{{&bar}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with &",
+		"template": "{{&bar}}",
 		"expected": "{{&"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with &",
+		"template": "{{&bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with &",
+		"template": "{{&bar}}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with {{{",
+		"template": "{{{bar}}}",
 		"expected": "OPEN_UNESCAPED"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with {{{",
+		"template": "{{{bar}}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with {{{",
+		"template": "{{{bar}}}",
 		"expected": "CLOSE_UNESCAPED"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with {{{",
+		"template": "{{{bar}}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports unescaping with {{{",
+		"template": "{{{bar}}}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": " "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping delimiters",
+		"template": "{{foo}} \\{{bar}} {{baz}}",
 		"expected": "{{bar}} "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": " "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "{{bar}} "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple delimiters",
+		"template": "{{foo}} \\{{bar}} \\{{baz}}",
 		"expected": "{{baz}}"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping a triple stash",
+		"template": "{{foo}} \\{{{bar}}} {{baz}}",
 		"expected": "{{{bar}}} "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": " \\"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping escape character",
+		"template": "{{foo}} \\\\{{bar}} {{baz}}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": " \\"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": " \\"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaping multiple escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\\\{{baz}}",
 		"expected": "baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": " \\"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "{{"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": " "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped mustaches after escaped escape characters",
+		"template": "{{foo}} \\\\{{bar}} \\{{baz}}",
 		"expected": "{{baz}}"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "{{bar}} "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "\\"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "{{"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape characters after escaped mustaches",
+		"template": "{{foo}} \\{{bar}} \\\\{{baz}}",
 		"expected": "baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "OPEN_UNESCAPED"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "CLOSE_UNESCAPED"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": " \\"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "supports escaped escape character on a triple stash",
+		"template": "{{foo}} \\\\{{{bar}}} {{baz}}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple path",
+		"template": "{{foo/bar}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple path",
+		"template": "{{foo/bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple path",
+		"template": "{{foo/bar}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple path",
+		"template": "{{foo/bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple path",
+		"template": "{{foo/bar}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar.baz}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar.baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar.baz}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar.baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar.baz}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar.baz}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"template": "{{foo.bar.baz}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows path literals with []",
+		"template": "{{foo.[bar]}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows path literals with []",
+		"template": "{{foo.[bar]}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows path literals with []",
+		"template": "{{foo.[bar]}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows path literals with []",
+		"template": "{{foo.[bar]}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows path literals with []",
+		"template": "{{foo.[bar]}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "allows multiple path literals on a line with []",
+		"template": "{{foo.[bar]}}{{foo.[baz]}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes {{.}} as OPEN ID CLOSE",
+		"template": "{{.}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes {{.}} as OPEN ID CLOSE",
+		"template": "{{.}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes {{.}} as OPEN ID CLOSE",
+		"template": "{{.}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"template": "{{../foo/bar}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"template": "{{../foo/bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"template": "{{../foo/bar}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"template": "{{../foo/bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"template": "{{../foo/bar}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"template": "{{../foo/bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"template": "{{../foo/bar}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"template": "{{../foo/bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path as \"OPEN (ID SEP)* ID CLOSE\"",
+		"template": "{{../foo/bar}}",
 		"expected": ".."
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with .. as a parent path",
+		"template": "{{../foo.bar}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with .. as a parent path",
+		"template": "{{../foo.bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with .. as a parent path",
+		"template": "{{../foo.bar}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with .. as a parent path",
+		"template": "{{../foo.bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with .. as a parent path",
+		"template": "{{../foo.bar}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with .. as a parent path",
+		"template": "{{../foo.bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with .. as a parent path",
+		"template": "{{../foo.bar}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with .. as a parent path",
+		"template": "{{../foo.bar}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with .. as a parent path",
+		"template": "{{../foo.bar}}",
 		"expected": ".."
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"template": "{{this/foo}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"template": "{{this/foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"template": "{{this/foo}}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"template": "{{this/foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"template": "{{this/foo}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"template": "{{this/foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"template": "{{this/foo}}",
 		"expected": "this"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"template": "{{this/foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a path with this/foo as OPEN ID SEP ID CLOSE",
+		"template": "{{this/foo}}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"template": "{{  foo  }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"template": "{{  foo  }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"template": "{{  foo  }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"template": "{{  foo  }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with spaces as \"OPEN ID CLOSE\"",
+		"template": "{{  foo  }}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"template": "{{  foo  \n   bar }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"template": "{{  foo  \n   bar }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"template": "{{  foo  \n   bar }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"template": "{{  foo  \n   bar }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"template": "{{  foo  \n   bar }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a simple mustache with line breaks as \"OPEN ID ID CLOSE\"",
+		"template": "{{  foo  \n   bar }}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes raw content as \"CONTENT\"",
+		"template": "foo {{ bar }} baz",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes raw content as \"CONTENT\"",
+		"template": "foo {{ bar }} baz",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes raw content as \"CONTENT\"",
+		"template": "foo {{ bar }} baz",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes raw content as \"CONTENT\"",
+		"template": "foo {{ bar }} baz",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes raw content as \"CONTENT\"",
+		"template": "foo {{ bar }} baz",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes raw content as \"CONTENT\"",
+		"template": "foo {{ bar }} baz",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes raw content as \"CONTENT\"",
+		"template": "foo {{ bar }} baz",
 		"expected": "foo "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes raw content as \"CONTENT\"",
+		"template": "foo {{ bar }} baz",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes raw content as \"CONTENT\"",
+		"template": "foo {{ bar }} baz",
 		"expected": " baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{> foo}}",
 		"expected": "OPEN_PARTIAL"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{> foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{> foo}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial with context as \"OPEN_PARTIAL ID ID CLOSE\"",
+		"template": "{{> foo bar }}",
 		"expected": "OPEN_PARTIAL"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial with context as \"OPEN_PARTIAL ID ID CLOSE\"",
+		"template": "{{> foo bar }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial with context as \"OPEN_PARTIAL ID ID CLOSE\"",
+		"template": "{{> foo bar }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial with context as \"OPEN_PARTIAL ID ID CLOSE\"",
+		"template": "{{> foo bar }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial without spaces as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo}}",
 		"expected": "OPEN_PARTIAL"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial without spaces as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial without spaces as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo  }}",
 		"expected": "OPEN_PARTIAL"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo  }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo  }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo/bar.baz  }}",
 		"expected": "OPEN_PARTIAL"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo/bar.baz  }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo/bar.baz  }}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo/bar.baz  }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo/bar.baz  }}",
 		"expected": "SEP"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo/bar.baz  }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"template": "{{>foo/bar.baz  }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a comment as \"COMMENT\"",
+		"template": "foo {{! this is a comment }} bar {{ baz }}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a comment as \"COMMENT\"",
+		"template": "foo {{! this is a comment }} bar {{ baz }}",
 		"expected": "COMMENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a comment as \"COMMENT\"",
+		"template": "foo {{! this is a comment }} bar {{ baz }}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a comment as \"COMMENT\"",
+		"template": "foo {{! this is a comment }} bar {{ baz }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a comment as \"COMMENT\"",
+		"template": "foo {{! this is a comment }} bar {{ baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a comment as \"COMMENT\"",
+		"template": "foo {{! this is a comment }} bar {{ baz }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a comment as \"COMMENT\"",
+		"template": "foo {{! this is a comment }} bar {{ baz }}",
 		"expected": "COMMENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a comment as \"COMMENT\"",
+		"template": "foo {{! this is a comment }} bar {{ baz }}",
 		"expected": " this is a comment "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment as \"COMMENT\"",
+		"template": "foo {{!-- this is a {{comment}} --}} bar {{ baz }}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment as \"COMMENT\"",
+		"template": "foo {{!-- this is a {{comment}} --}} bar {{ baz }}",
 		"expected": "COMMENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment as \"COMMENT\"",
+		"template": "foo {{!-- this is a {{comment}} --}} bar {{ baz }}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment as \"COMMENT\"",
+		"template": "foo {{!-- this is a {{comment}} --}} bar {{ baz }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment as \"COMMENT\"",
+		"template": "foo {{!-- this is a {{comment}} --}} bar {{ baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment as \"COMMENT\"",
+		"template": "foo {{!-- this is a {{comment}} --}} bar {{ baz }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment as \"COMMENT\"",
+		"template": "foo {{!-- this is a {{comment}} --}} bar {{ baz }}",
 		"expected": "COMMENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment as \"COMMENT\"",
+		"template": "foo {{!-- this is a {{comment}} --}} bar {{ baz }}",
 		"expected": " this is a {{comment}} "
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"template": "foo {{!-- this is a\n{{comment}}\n--}} bar {{ baz }}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"template": "foo {{!-- this is a\n{{comment}}\n--}} bar {{ baz }}",
 		"expected": "COMMENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"template": "foo {{!-- this is a\n{{comment}}\n--}} bar {{ baz }}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"template": "foo {{!-- this is a\n{{comment}}\n--}} bar {{ baz }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"template": "foo {{!-- this is a\n{{comment}}\n--}} bar {{ baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"template": "foo {{!-- this is a\n{{comment}}\n--}} bar {{ baz }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"template": "foo {{!-- this is a\n{{comment}}\n--}} bar {{ baz }}",
 		"expected": "COMMENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a block comment with whitespace as \"COMMENT\"",
+		"template": "foo {{!-- this is a\n{{comment}}\n--}} bar {{ baz }}",
 		"expected": " this is a\n{{comment}}\n"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"template": "{{#foo}}content{{/foo}}",
 		"expected": "OPEN_BLOCK"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"template": "{{#foo}}content{{/foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"template": "{{#foo}}content{{/foo}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"template": "{{#foo}}content{{/foo}}",
 		"expected": "CONTENT"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"template": "{{#foo}}content{{/foo}}",
 		"expected": "OPEN_ENDBLOCK"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"template": "{{#foo}}content{{/foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes open and closing blocks as OPEN_BLOCK, ID, CLOSE ..., OPEN_ENDBLOCK ID CLOSE",
+		"template": "{{#foo}}content{{/foo}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"template": "{{^}}",
 		"expected": "OPEN_INVERSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"template": "{{^}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"template": "{{else}}",
 		"expected": "OPEN_INVERSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"template": "{{else}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"template": "{{ else }}",
 		"expected": "OPEN_INVERSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"template": "{{ else }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^foo}}",
 		"expected": "OPEN_INVERSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^foo}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^foo}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^foo}}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^ foo  }}",
 		"expected": "OPEN_INVERSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^ foo  }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^ foo  }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^ foo  }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections with ID and spaces as \"OPEN_INVERSE ID CLOSE\"",
+		"template": "{{^ foo  }}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with params as \"OPEN ID ID ID CLOSE\"",
+		"template": "{{ foo bar baz }}",
 		"expected": "baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar \"baz\" }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar \"baz\" }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar \"baz\" }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar \"baz\" }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar \"baz\" }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar \"baz\" }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar \"baz\" }}",
 		"expected": "baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar 'baz' }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar 'baz' }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar 'baz' }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar 'baz' }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar 'baz' }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar 'baz' }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params using single quotes as \"OPEN ID ID STRING CLOSE\"",
+		"template": "{{ foo bar 'baz' }}",
 		"expected": "baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"template": "{{ foo bar \"baz bat\" }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"template": "{{ foo bar \"baz bat\" }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"template": "{{ foo bar \"baz bat\" }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"template": "{{ foo bar \"baz bat\" }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"template": "{{ foo bar \"baz bat\" }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"template": "{{ foo bar \"baz bat\" }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with spaces inside as \"STRING\"",
+		"template": "{{ foo bar \"baz bat\" }}",
 		"expected": "baz bat"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with escapes quotes as STRING",
+		"template": "{{ foo \"bar\\\"baz\" }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with escapes quotes as STRING",
+		"template": "{{ foo \"bar\\\"baz\" }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with escapes quotes as STRING",
+		"template": "{{ foo \"bar\\\"baz\" }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with escapes quotes as STRING",
+		"template": "{{ foo \"bar\\\"baz\" }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with escapes quotes as STRING",
+		"template": "{{ foo \"bar\\\"baz\" }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params with escapes quotes as STRING",
+		"template": "{{ foo \"bar\\\"baz\" }}",
 		"expected": "bar\"baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"template": "{{ foo 'bar\\'baz' }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"template": "{{ foo 'bar\\'baz' }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"template": "{{ foo 'bar\\'baz' }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"template": "{{ foo 'bar\\'baz' }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"template": "{{ foo 'bar\\'baz' }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes String params using single quotes with escapes quotes as STRING",
+		"template": "{{ foo 'bar\\'baz' }}",
 		"expected": "bar'baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1 }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1 }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1 }}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1 }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1 }}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1 }}",
 		"expected": "1"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1.1 }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1.1 }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1.1 }}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1.1 }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1.1 }}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo 1.1 }}",
 		"expected": "1.1"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1 }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1 }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1 }}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1 }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1 }}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1 }}",
 		"expected": "-1"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1.1 }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1.1 }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1.1 }}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1.1 }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1.1 }}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"template": "{{ foo -1.1 }}",
 		"expected": "-1.1"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo true }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo true }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo true }}",
 		"expected": "BOOLEAN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo true }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo true }}",
 		"expected": "BOOLEAN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo true }}",
 		"expected": "true"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo false }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo false }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo false }}",
 		"expected": "BOOLEAN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo false }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo false }}",
 		"expected": "BOOLEAN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"template": "{{ foo false }}",
 		"expected": "false"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar=baz }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar=baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar=baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar=baz }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar=baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar=baz }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=bat }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=bat }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=bat }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=bat }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=bat }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=bat }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=bat }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=1 }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=1 }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=1 }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=1 }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=1 }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=1 }}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=1 }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=true }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=true }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=true }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=true }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=true }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=true }}",
 		"expected": "BOOLEAN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=true }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=false }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=false }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=false }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=false }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=false }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=false }}",
 		"expected": "BOOLEAN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=false }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar\n  baz=bat }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar\n  baz=bat }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar\n  baz=bat }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar\n  baz=bat }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar\n  baz=bat }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar\n  baz=bat }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar\n  baz=bat }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "omg"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ @foo }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ @foo }}",
 		"expected": "DATA"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ @foo }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ @foo }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ @foo }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ @foo }}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo @bar }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo @bar }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo @bar }}",
 		"expected": "DATA"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo @bar }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo @bar }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo @bar }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo @bar }}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo bar=@baz }}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo bar=@baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo bar=@baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo bar=@baz }}",
 		"expected": "EQUALS"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo bar=@baz }}",
 		"expected": "DATA"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo bar=@baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo bar=@baz }}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo bar=@baz }}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"template": "{{ foo bar=@baz }}",
 		"expected": "baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "does not time out in a mustache with a single } followed by EOF",
+		"template": "{{foo}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "does not time out in a mustache with a single } followed by EOF",
+		"template": "{{foo}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "does not time out in a mustache when invalid ID characters are used",
+		"template": "{{foo &",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "does not time out in a mustache when invalid ID characters are used",
+		"template": "{{foo &",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (bar)}}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "foo"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "a-x"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"template": "{{foo (a-x b-y)}}",
 		"expected": "b-y"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "CLOSE"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "bar"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "lol"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "rofl"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions",
+		"template": "{{foo (bar (lol rofl)) (baz)}}",
 		"expected": "baz"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "OPEN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "BOOLEAN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "BOOLEAN"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "NUMBER"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "OPEN_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "ID"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "STRING"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "CLOSE_SEXPR"
 	},
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes nested subexpressions: literals",
+		"template": "{{foo (bar (lol true) false) (baz 1) (blah 'b') (blorg \"c\")}}",
 		"expected": "CLOSE"
 	}
 ]

@@ -126,7 +126,15 @@ global.equal = global.equals = function (actual, expected, message) {
 
   if (context.hasOwnProperty('helpers')) {
     spec.helpers = extractHelpers(context.helpers);
+
+    // Remove helpder from context
     delete context.helpers;
+  }
+
+  // If a template is found in the lexer, use it for the spec. This is true in
+  // the case of the tokenizer.
+  if (Handlebars.Parser.lexer.matched) {
+    spec.template = Handlebars.Parser.lexer.matched;
   }
 
   tests.add(spec);
