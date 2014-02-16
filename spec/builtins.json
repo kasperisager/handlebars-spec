@@ -179,7 +179,8 @@
 				}
 			},
 			"world": "world"
-		}
+		},
+		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!"
 	},
 	{
 		"description": "#each",

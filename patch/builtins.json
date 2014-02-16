@@ -1,5 +1,5 @@
 {
-    "#each-each with an object and @key-00": {
-        "expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!"
-    }
+	"#each-each with an object and @key-00": {
+		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!"
+	}
 }
