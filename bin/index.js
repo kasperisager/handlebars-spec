@@ -154,7 +154,7 @@ global.compileWithPartials = function(string, hashOrArray, partials, expected, m
   if (partials) spec.partials = partials;
   if (helpers)  spec.helpers  = helpers;
   if (expected) spec.expected = expected;
-  if (message)  spec.message  = message;
+  if (message)  spec.message  = '' + message;
 
   tests.add(spec);
 };
@@ -169,7 +169,7 @@ global.shouldThrow = function (callback, error, message) {
     , exception   : true
     };
 
-  if (message) spec.message = message;
+  if (message) spec.message = '' + message;
 
   tests.add(spec);
 };
