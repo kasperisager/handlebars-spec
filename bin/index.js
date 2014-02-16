@@ -13,7 +13,8 @@ program
   .option('-o, --output [file]', 'write JSON output to a file')
   .parse(process.argv);
 
-var tests = {}
+var tests = []
+  , testsTemp = {}
   , context = {};
 
 tests.add = function (spec) {
@@ -24,7 +25,7 @@ tests.add = function (spec) {
   for (var i = 0; i < 20; i++) {
     var name = key + '-' + ('0' + i).slice(-2);
 
-    if (!tests.hasOwnProperty(name)) {
+    if (!testsTemp.hasOwnProperty(name)) {
       if (program.output) {
         var output    = path.resolve(program.output)
           , patchName = path.basename(output)
@@ -39,7 +40,8 @@ tests.add = function (spec) {
         }
       }
 
-      tests[name] = spec;
+      tests.push(spec);
+      testsTemp[name] = true;
       break;
     }
   }
