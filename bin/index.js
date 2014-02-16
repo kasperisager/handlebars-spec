@@ -13,9 +13,9 @@ program
   .option('-o, --output [file]', 'write JSON output to a file')
   .parse(process.argv);
 
-var tests = []
-  , testsTemp = []
-  , context = {};
+var tests   = []  // Array containg the actual specs
+  , indices = []  // Temp array for auto-incrementing test indices
+  , context = {}; // Current test context
 
 tests.add = function (spec) {
   if (!spec || !spec.template) return;
@@ -25,7 +25,7 @@ tests.add = function (spec) {
   for (var i = 0; i < 20; i++) {
     var name = key + '-' + ('0' + i).slice(-2);
 
-    if (testsTemp.indexOf(name) === -1) {
+    if (indices.indexOf(name) === -1) {
       if (program.output) {
         var output    = path.resolve(program.output)
           , patchName = path.basename(output)
@@ -41,7 +41,7 @@ tests.add = function (spec) {
       }
 
       tests.push(spec);
-      testsTemp.push(name);
+      indices.push(name);
       break;
     }
   }
