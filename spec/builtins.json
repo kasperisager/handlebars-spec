@@ -209,7 +209,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!"
+		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!",
+		"message": "The @index variable is used"
 	},
 	{
 		"description": "#each",
@@ -229,7 +230,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "0. goodbye! 0 1 2 After 0 1. Goodbye! 0 1 2 After 1 2. GOODBYE! 0 1 2 After 2 cruel world!"
+		"expected": "0. goodbye! 0 1 2 After 0 1. Goodbye! 0 1 2 After 1 2. GOODBYE! 0 1 2 After 2 cruel world!",
+		"message": "The @index variable is used"
 	},
 	{
 		"description": "#each",
@@ -249,7 +251,8 @@
 			},
 			"world": "world"
 		},
-		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!"
+		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!",
+		"message": "The @index variable is used"
 	},
 	{
 		"description": "#each",
@@ -269,7 +272,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "goodbye! cruel world!"
+		"expected": "goodbye! cruel world!",
+		"message": "The @first variable is used"
 	},
 	{
 		"description": "#each",
@@ -289,7 +293,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "(goodbye! goodbye! goodbye!) (goodbye!) (goodbye!) cruel world!"
+		"expected": "(goodbye! goodbye! goodbye!) (goodbye!) (goodbye!) cruel world!",
+		"message": "The @first variable is used"
 	},
 	{
 		"description": "#each",
@@ -306,7 +311,8 @@
 			},
 			"world": "world"
 		},
-		"expected": "goodbye! cruel world!"
+		"expected": "goodbye! cruel world!",
+		"message": "The @first variable is used"
 	},
 	{
 		"description": "#each",
@@ -326,7 +332,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "GOODBYE! cruel world!"
+		"expected": "GOODBYE! cruel world!",
+		"message": "The @last variable is used"
 	},
 	{
 		"description": "#each",
@@ -346,7 +353,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "(GOODBYE!) (GOODBYE!) (GOODBYE! GOODBYE! GOODBYE!) cruel world!"
+		"expected": "(GOODBYE!) (GOODBYE!) (GOODBYE! GOODBYE! GOODBYE!) cruel world!",
+		"message": "The @last variable is used"
 	},
 	{
 		"description": "#each",
@@ -379,7 +387,8 @@
 			],
 			"exclaim": "!"
 		},
-		"expected": "a!b!c!"
+		"expected": "a!b!c!",
+		"message": "should output data"
 	},
 	{
 		"description": "#each",

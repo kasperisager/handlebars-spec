@@ -7,6 +7,7 @@
 			"noun": "cat",
 			"adjective": "happy"
 		},
+		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.data.adjective + \" \"  + this.noun;\n      }"
@@ -19,7 +20,8 @@
 		"template": "{{@hello}}",
 		"data": {
 			"hello": "hello"
-		}
+		},
+		"message": "@foo retrieves template data"
 	},
 	{
 		"description": "data",
@@ -28,6 +30,7 @@
 		"data": {
 			"foo": true
 		},
+		"message": "Automatic data was triggered",
 		"helpers": {
 			"helperMissing": {
 				"javascript": "function (/* [args, ]options */) {\n    if(arguments.length === 1) {\n      // A missing field in a {{foo}} constuct.\n      return undefined;\n    } else {\n      // Someone is actually trying to call something, blow up.\n      throw new Exception(\"Missing helper: '\" + arguments[arguments.length-1].name + \"'\");\n    }\n  }"
@@ -65,6 +68,7 @@
 		"data": {
 			"world": "world"
 		},
+		"message": "@foo as a parameter retrieves template data",
 		"helpers": {
 			"hello": {
 				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }"
@@ -78,6 +82,7 @@
 		"data": {
 			"world": "world"
 		},
+		"message": "@foo as a parameter retrieves template data",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return \"Hello \" + options.hash.noun;\n      }"
@@ -93,6 +98,7 @@
 				"bar": "world"
 			}
 		},
+		"message": "@foo as a parameter retrieves template data",
 		"helpers": {
 			"hello": {
 				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }"
@@ -108,6 +114,7 @@
 				"bar": "world"
 			}
 		},
+		"message": "@foo as a parameter retrieves template data",
 		"helpers": {
 			"hello": {
 				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }"
@@ -129,6 +136,7 @@
 				"baz": "hello world"
 			}
 		},
+		"message": "data variables are inherited downstream",
 		"helpers": {
 			"let": {
 				"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          frame[prop] = options.hash[prop];\n        }\n        return options.fn(this, {data: frame});\n      }"
@@ -143,6 +151,7 @@
 			"noun": "cat",
 			"adjective": "happy"
 		},
+		"message": "Data output by helper inside partial",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.data.adjective + \" \"  + this.noun;\n      }"
@@ -158,6 +167,7 @@
 			"world": "world",
 			"adjective": "happy"
 		},
+		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (noun, options) {\n        return options.data.adjective + \" \"  + noun + (this.exclaim ? \"!\" : \"\");\n      }"
@@ -172,6 +182,7 @@
 			"exclaim": true,
 			"adjective": "happy"
 		},
+		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.fn(this);\n      }"
@@ -190,6 +201,7 @@
 			"zomg": "world",
 			"adjective": "happy"
 		},
+		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"});\n      }"
@@ -209,6 +221,7 @@
 			"adjective": "happy",
 			"accessData": "#win"
 		},
+		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.data.accessData + \" \" + options.fn({exclaim: \"?\"});\n      }"
@@ -227,6 +240,7 @@
 			"zomg": "planet",
 			"adjective": "happy"
 		},
+		"message": "Overriden data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\", zomg: \"world\"}, { data: {adjective: \"sad\"} });\n      }"
@@ -245,6 +259,7 @@
 			"zomg": "world",
 			"adjective": "happy"
 		},
+		"message": "Overriden data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }"

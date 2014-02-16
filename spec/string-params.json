@@ -5,6 +5,7 @@
 		"template": "{{wycats is.a slave.driver}}",
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver",
+		"message": "String parameters output",
 		"helpers": {
 			"wycats": {
 				"javascript": "function (passiveVoice, noun) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun;\n      }"
@@ -17,6 +18,7 @@
 		"template": "{{#wycats is.a slave.driver}}help :({{/wycats}}",
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver: help :(",
+		"message": "String parameters output",
 		"helpers": {
 			"wycats": {
 				"javascript": "function (passiveVoice, noun, options) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }"
@@ -32,6 +34,7 @@
 			"need": "need-a"
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke",
+		"message": "Proper context variable output",
 		"helpers": {
 			"tomdale": {
 				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun;\n      }"
@@ -91,6 +94,7 @@
 			"need": "need-a"
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke wot",
+		"message": "Proper context variable output",
 		"helpers": {
 			"tomdale": {
 				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun + \" \" +\n                options.fn(this);\n      }"

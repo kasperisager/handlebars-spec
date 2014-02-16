@@ -47,7 +47,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!"
+		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!",
+		"message": "The @index variable is used"
 	},
 	{
 		"description": "blocks",

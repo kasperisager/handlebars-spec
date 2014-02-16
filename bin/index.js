@@ -124,6 +124,8 @@ global.equal = global.equals = function (actual, expected, message) {
   delete context.template;
   delete context.data;
 
+  if (message) spec.message = message;
+
   if (context.hasOwnProperty('helpers')) {
     spec.helpers = extractHelpers(context.helpers);
 

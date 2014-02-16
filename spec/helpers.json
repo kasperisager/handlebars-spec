@@ -109,6 +109,7 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE! cruel world!",
+		"message": "Block helper executed",
 		"helpers": {
 			"goodbyes": {
 				"javascript": "function (options) { return options.fn({text: \"GOODBYE\"}); }"
@@ -123,6 +124,7 @@
 			"name": "Yehuda"
 		},
 		"expected": "<form><p>Yehuda</p></form>",
+		"message": "Block helper executed with current context",
 		"helpers": {
 			"form": {
 				"javascript": "function (options) { return \"<form>\" + options.fn(this) + \"</form>\"; }"
@@ -168,6 +170,7 @@
 			}
 		},
 		"expected": "<form><p>Yehuda</p></form>",
+		"message": "Context variable resolved",
 		"helpers": {
 			"form": {
 				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }"
@@ -187,6 +190,7 @@
 			}
 		},
 		"expected": "<form><p>Harold</p></form>",
+		"message": "Complex path variable resolved",
 		"helpers": {
 			"form": {
 				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }"
@@ -203,6 +207,7 @@
 			}
 		},
 		"expected": "<form><p>Yehuda</p><a href='Yehuda'>Hello</a></form>",
+		"message": "Both blocks executed",
 		"helpers": {
 			"link": {
 				"javascript": "function (options) { return \"<a href='\" + this.name + \"'>\" + options.fn(this) + \"</a>\"; }"
@@ -477,6 +482,7 @@
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" times=12}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL WORLD 12 TIMES",
+		"message": "Helper output hash",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.hash.world + \" \" + options.hash.times + \" TIMES\";\n        }"
@@ -489,6 +495,7 @@
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=true}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL WORLD",
+		"message": "Helper output hash",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.hash.world;\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }"
@@ -501,6 +508,7 @@
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=false}}",
 		"data": {},
 		"expected": "NOT PRINTING",
+		"message": "Boolean helper parameter honored",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.hash.world;\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }"
@@ -513,6 +521,7 @@
 		"template": "{{#goodbye cruel=\"CRUEL\" times=12}}world{{/goodbye}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL world 12 TIMES",
+		"message": "Hash parameters output",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this) + \" \" + options.hash.times + \" TIMES\";\n        }"
@@ -525,6 +534,7 @@
 		"template": "{{#goodbye cruel='CRUEL' times=12}}world{{/goodbye}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL world 12 TIMES",
+		"message": "Hash parameters output",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this) + \" \" + options.hash.times + \" TIMES\";\n        }"
@@ -537,6 +547,7 @@
 		"template": "{{#goodbye cruel=\"CRUEL\" print=true}}world{{/goodbye}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL world",
+		"message": "Boolean hash parameter honored",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this);\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }"
@@ -549,6 +560,7 @@
 		"template": "{{#goodbye cruel=\"CRUEL\" print=false}}world{{/goodbye}}",
 		"data": {},
 		"expected": "NOT PRINTING",
+		"message": "Boolean hash parameter honored",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this);\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }"
@@ -583,6 +595,7 @@
 		"template": "{{hello}}",
 		"data": {},
 		"expected": "foo",
+		"message": "'foo' should === 'undefined",
 		"helpers": {
 			"hello": {
 				"javascript": "function () { return \"foo\"; }"
@@ -595,6 +608,7 @@
 		"template": "{{typeof hello}}",
 		"data": {},
 		"expected": "undefined",
+		"message": "'undefined' should === 'undefined",
 		"helpers": {
 			"typeof": {
 				"javascript": "function (arg) { return typeof arg; }"
@@ -609,7 +623,8 @@
 		"it": "Builtin helpers available in knownHelpers only mode",
 		"template": "{{#unless foo}}bar{{/unless}}",
 		"data": {},
-		"expected": "bar"
+		"expected": "bar",
+		"message": "'bar' should === 'undefined"
 	},
 	{
 		"description": "knownHelpers",
@@ -618,7 +633,8 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar"
+		"expected": "bar",
+		"message": "'bar' should === 'undefined"
 	},
 	{
 		"description": "knownHelpers",
@@ -627,7 +643,8 @@
 		"data": {
 			"foo": "baz"
 		},
-		"expected": "bar"
+		"expected": "bar",
+		"message": "'bar' should === 'undefined"
 	},
 	{
 		"description": "knownHelpers",
@@ -636,7 +653,8 @@
 		"data": {
 			"foo": false
 		},
-		"expected": "bar"
+		"expected": "bar",
+		"message": "'bar' should === 'undefined"
 	},
 	{
 		"description": "knownHelpers",
@@ -645,7 +663,8 @@
 		"data": {
 			"bar": "bar"
 		},
-		"expected": "bar"
+		"expected": "bar",
+		"message": "'bar' should === 'undefined"
 	},
 	{
 		"description": "knownHelpers",
@@ -782,6 +801,7 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel WORLD",
+		"message": "Helper executed",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }"
@@ -800,6 +820,7 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel WORLD",
+		"message": "Helper executed",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }"
@@ -818,6 +839,7 @@
 			"world": "world"
 		},
 		"expected": "goodbye cruel WORLD cruel GOODBYE",
+		"message": "Helper not executed",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }"
@@ -836,6 +858,7 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel WORLD goodbye",
+		"message": "Helper executed",
 		"helpers": {
 			"goodbye": {
 				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }"
