@@ -26,7 +26,9 @@ tests.add = function (spec) {
 
     if (!tests.hasOwnProperty(name)) {
       if (program.output) {
-        var patchFile = __dirname + '/../patch/' + path.basename(program.output);
+        var output    = path.resolve(program.output)
+          , patchName = path.basename(output)
+          , patchFile = path.dirname(output) + '/../patch/' + patchName;
 
         if (fs.existsSync(path.resolve(patchFile))) {
           var patch = require(patchFile);
