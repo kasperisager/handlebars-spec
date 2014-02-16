@@ -1,4 +1,3 @@
-handlebars-spec
-===============
+# [Handlebars](http://handlebarsjs.com) Spec
 
-Handlebars.js specification in JSON format
+The Handlebars.js specification converted to JSON, ready for cross-platform consumption.
