@@ -12,3 +12,7 @@ $ node bin [input.js] -o [output.json]
 ### Patch files
 
 Patches can be applied to the JSON output by putting a file of the same name as the JSON output in the [`patch`](patch) directory. Specs are identified using the following format: `[description]-[it]-[nn]` (all lowercased).
+
+---
+
+Copyright 2014 © [Kasper Kronborg Isager](https://kasperisager.github.io). Licensed under the terms of the [MIT License](LICENSE.md)
