@@ -389,7 +389,17 @@
 			"exclaim": "!"
 		},
 		"expected": "a!b!c!",
-		"message": "should output data"
+		"message": "should output data",
+		"options": {
+			"data": {
+				"exclaim": "!"
+			}
+		},
+		"helpers": {
+			"detectDataInsideEach": {
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		}
 	},
 	{
 		"description": "#each",
