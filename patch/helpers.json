@@ -194,10 +194,24 @@
 			}
 		}
 	},
-	"string literal parameters-xx-00": {
+	"string literal parameters-negative number literals work-00": {
 		"helpers": {
 			"hello": {
-				"php": ""
+				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
+			}
+		}
+	},
+	"multiple parameters-simple multi-params work-00": {
+		"helpers": {
+			"goodbye": {
+				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
+			}
+		}
+	},
+	"multiple parameters-block multi-params work-00": {
+		"helpers": {
+			"goodbye": {
+				"php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](['greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'], $scope);\n}"
 			}
 		}
 	}

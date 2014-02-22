@@ -482,7 +482,8 @@
 		"data": {},
 		"helpers": {
 			"hello": {
-				"javascript": "function (times) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      return \"Hello \" + times + \" times\";\n    }"
+				"javascript": "function (times) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      return \"Hello \" + times + \" times\";\n    }",
+				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
 		"expected": "Message: Hello -12 times"
@@ -497,7 +498,8 @@
 		},
 		"helpers": {
 			"goodbye": {
-				"javascript": "function (cruel, world) { return \"Goodbye \" + cruel + \" \" + world; }"
+				"javascript": "function (cruel, world) { return \"Goodbye \" + cruel + \" \" + world; }",
+				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
 			}
 		},
 		"expected": "Message: Goodbye cruel world"
@@ -512,7 +514,8 @@
 		},
 		"helpers": {
 			"goodbye": {
-				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: \"Goodbye\", adj: cruel, noun: world});\n      }"
+				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: \"Goodbye\", adj: cruel, noun: world});\n      }",
+				"php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](['greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'], $scope);\n}"
 			}
 		},
 		"expected": "Message: Goodbye cruel world"
