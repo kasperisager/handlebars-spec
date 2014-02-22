@@ -1,17 +1,17 @@
 {
-    "helpers-helper with complex lookup$-00": {
-        "helpers": {
-            "link": {
-                "php": "function($prefix, $context) { return \"<a href='{$prefix}/{$context['url']}'>{$context['text']}</a>\"; }"
-            }
-        }
-    },
-    "helpers-helper for raw block gets raw content-00": {
-        "helpers": {
-            "raw": {
-                "php": "function($options) { return $options['fn'](); }"
-            }
-        }
+	"helpers-helper with complex lookup$-00": {
+		"helpers": {
+			"link": {
+				"php": "function($prefix, $context) { return \"<a href='{$prefix}/{$context['url']}'>{$context['text']}</a>\"; }"
+			}
+		}
+	},
+	"helpers-helper for raw block gets raw content-00": {
+		"helpers": {
+			"raw": {
+				"php": "function($options) { return $options['fn'](); }"
+			}
+		}
 
-    }
+	}
 }
