@@ -14,7 +14,8 @@
 		},
 		"helpers": {
 			"link": {
-				"javascript": "function (prefix) {\n      return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + this.text + \"</a>\";\n    }"
+				"javascript": "function (prefix) {\n      return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + this.text + \"</a>\";\n    }",
+				"php": "function($prefix, $context) { return \"<a href='{$prefix}/{$context['url']}'>{$context['text']}</a>\"; }"
 			}
 		},
 		"expected": "<a href='/root/goodbye'>Goodbye</a>"
@@ -28,7 +29,8 @@
 		},
 		"helpers": {
 			"raw": {
-				"javascript": "function (options) {\n        return options.fn();\n    }"
+				"javascript": "function (options) {\n        return options.fn();\n    }",
+				"php": "function($options) { return $options['fn'](); }"
 			}
 		},
 		"expected": " {{test}} "
