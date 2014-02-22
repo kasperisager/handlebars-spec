@@ -100,7 +100,8 @@
 		},
 		"helpers": {
 			"link": {
-				"javascript": "function (prefix, options) {\n        return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + options.fn(this) + \"</a>\";\n    }"
+				"javascript": "function (prefix, options) {\n        return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + options.fn(this) + \"</a>\";\n    }",
+				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
 			}
 		},
 		"expected": "<a href='/root/goodbye'>Goodbye</a>"
@@ -116,7 +117,8 @@
 		"message": "Block helper executed",
 		"helpers": {
 			"goodbyes": {
-				"javascript": "function (options) { return options.fn({text: \"GOODBYE\"}); }"
+				"javascript": "function (options) { return options.fn({text: \"GOODBYE\"}); }",
+				"php": "function($scope, $options) { $options['fn'](['text' => 'GOODBYE'], $scope); }"
 			}
 		}
 	},

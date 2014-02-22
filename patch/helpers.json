@@ -26,5 +26,19 @@
 				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
 			}
 		}
+	},
+	"helpers-helper with complex lookup and nested template in vm+compiler-00": {
+		"helpers": {
+			"link": {
+				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
+			}
+		}
+	},
+	"helpers-block helper-00": {
+		"helpers": {
+			"goodbyes": {
+				"php": "function($scope, $options) { $options['fn'](['text' => 'GOODBYE'], $scope); }"
+			}
+		}
 	}
 }
