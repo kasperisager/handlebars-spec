@@ -214,5 +214,54 @@
 				"php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](['greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'], $scope);\n}"
 			}
 		}
+	},
+	"hash-helpers can take an optional hash-00": {
+		"helpers": {
+			"goodbye": {
+				"php": "function($options) {\n    $r = 'GOODBYE ';\n    $r .= $options['hash']['cruel'].' ';\n    $r .= $options['hash']['world'].' ';\n    $r .= $options['hash']['times'].' TIMES';\n\n    return $r;\n}"
+			}
+		}
+	},
+	"hash-helpers can take an optional hash with booleans-00": {
+		"helpers": {
+			"goodbye": {
+				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} {$options['hash']['world']}\";\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+			}
+		}
+	},
+	"hash-helpers can take an optional hash with booleans-01": {
+		"helpers": {
+			"goodbye": {
+				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} {$options['hash']['world']}\";\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+			}
+		}
+	},
+	"hash-block helpers can take an optional hash-00": {
+		"helpers": {
+			"goodbye": {
+				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
+			}
+		}
+	},
+	"hash-block helpers can take an optional hash with single quoted stings-00": {
+		"helpers": {
+			"goodbye": {
+				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
+			}
+		}
+	},
+	"hash-block helpers can take an optional hash with booleans-00": {
+		"helpers": {
+			"goodbye": {
+				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+			}
+		}
+	},
+	"hash-block helpers can take an optional hash with booleans-01": {
+		"helpers": {
+			"goodbye": {
+				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+			}
+		}
 	}
 }
