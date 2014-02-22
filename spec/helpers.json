@@ -133,7 +133,8 @@
 		"message": "Block helper executed with current context",
 		"helpers": {
 			"form": {
-				"javascript": "function (options) { return \"<form>\" + options.fn(this) + \"</form>\"; }"
+				"javascript": "function (options) { return \"<form>\" + options.fn(this) + \"</form>\"; }",
+				"php": "function($context, $scope, $options) { echo '<form>'; $options['fn']($context, $scope); echo '</form>'; }"
 			}
 		}
 	},
@@ -155,7 +156,8 @@
 		},
 		"helpers": {
 			"link": {
-				"javascript": "function (options) {\n      return '<a href=\"/people/' + this.id + '\">' + options.fn(this) + '</a>';\n    }"
+				"javascript": "function (options) {\n      return '<a href=\"/people/' + this.id + '\">' + options.fn(this) + '</a>';\n    }",
+				"php": "function($context, $scope, $options) {\n    echo '<a href=\"/people/'.$context['id'].'\">';\n    $options['fn']($context, $scope);\n    echo '</a>';\n}"
 			}
 		},
 		"expected": "<ul><li><a href=\"/people/1\">Alan</a></li><li><a href=\"/people/2\">Yehuda</a></li></ul>"
@@ -179,7 +181,8 @@
 		"message": "Context variable resolved",
 		"helpers": {
 			"form": {
-				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }"
+				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }",
+				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '</form>';\n}"
 			}
 		}
 	},
@@ -199,7 +202,8 @@
 		"message": "Complex path variable resolved",
 		"helpers": {
 			"form": {
-				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }"
+				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }",
+				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '</form>';\n}"
 			}
 		}
 	},
@@ -216,10 +220,12 @@
 		"message": "Both blocks executed",
 		"helpers": {
 			"link": {
-				"javascript": "function (options) { return \"<a href='\" + this.name + \"'>\" + options.fn(this) + \"</a>\"; }"
+				"javascript": "function (options) { return \"<a href='\" + this.name + \"'>\" + options.fn(this) + \"</a>\"; }",
+				"php": "function($context, $scope, $options) {\n    echo \"<a href='\".$context['name'].\"'>\";\n    $options['fn']($context, $scope);\n    echo '</a>';\n}"
 			},
 			"form": {
-				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }"
+				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }",
+				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '</form>';\n}"
 			}
 		}
 	},
@@ -239,7 +245,8 @@
 		},
 		"helpers": {
 			"list": {
-				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }"
+				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }",
+				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '</p>';\n    }\n}"
 			}
 		},
 		"expected": "<ul><li>Alan</li><li>Yehuda</li></ul>"
@@ -253,7 +260,8 @@
 		},
 		"helpers": {
 			"list": {
-				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }"
+				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }",
+				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '</p>';\n    }\n}"
 			}
 		},
 		"expected": "<p><em>Nobody's here</em></p>"
@@ -268,7 +276,8 @@
 		},
 		"helpers": {
 			"list": {
-				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }"
+				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }",
+				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '</p>';\n    }\n}"
 			}
 		},
 		"expected": "<p>Nobody&#x27;s here</p>"
@@ -282,7 +291,8 @@
 		},
 		"helpers": {
 			"world": {
-				"javascript": "function () { return \"world\"; }"
+				"javascript": "function () { return \"world\"; }",
+				"php": "function() { return 'world'; }"
 			}
 		},
 		"expected": "Goodbye cruel world!"
@@ -300,7 +310,8 @@
 		},
 		"helpers": {
 			"world": {
-				"javascript": "function () { return \"world\"; }"
+				"javascript": "function () { return \"world\"; }",
+				"php": "function() { return 'world'; }"
 			}
 		},
 		"expected": "Goodbye cruel world!"
@@ -314,7 +325,8 @@
 		},
 		"helpers": {
 			"lookup": {
-				"javascript": "function () { return 'helpers'; }"
+				"javascript": "function () { return 'helpers'; }",
+				"php": "function() { return 'helpers'; }"
 			}
 		},
 		"expected": "helpers"
@@ -328,7 +340,8 @@
 		},
 		"helpers": {
 			"lookup": {
-				"javascript": "function () { return 'helpers'; }"
+				"javascript": "function () { return 'helpers'; }",
+				"php": "function() { return 'helpers'; }"
 			}
 		},
 		"expected": "helpers"
@@ -346,7 +359,8 @@
 		},
 		"helpers": {
 			"helper": {
-				"javascript": "function () { return 'helper'; }"
+				"javascript": "function () { return 'helper'; }",
+				"php": "function() { return 'helper'; }"
 			}
 		},
 		"expected": "helper"
@@ -360,7 +374,11 @@
 		},
 		"helpers": {
 			"world": {
-				"javascript": "function () { return \"world!\"; }"
+				"javascript": "function () { return \"world!\"; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"test_helper": {
+				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"expected": "found it! Goodbye cruel world!!"
@@ -372,7 +390,15 @@
 		"data": {
 			"cruel": "cruel"
 		},
-		"expected": "found it! Goodbye cruel world!!"
+		"expected": "found it! Goodbye cruel world!!",
+		"helpers": {
+			"test_helper": {
+				"php": "function() { return 'found it!'; }"
+			},
+			"world": {
+				"php": "function() { return 'world!'; }"
+			}
+		}
 	},
 	{
 		"description": "helpers hash",
@@ -381,7 +407,8 @@
 		"data": {},
 		"helpers": {
 			"hello": {
-				"javascript": "function (times, times2) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      if(typeof times2 !== 'number') { times2 = \"NaN\"; }\n      return \"Hello \" + times + \" \" + times2 + \" times\";\n    }"
+				"javascript": "function (times, times2) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      if(typeof times2 !== 'number') { times2 = \"NaN\"; }\n      return \"Hello \" + times + \" \" + times2 + \" times\";\n    }",
+				"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
 			}
 		},
 		"expected": "Message: Hello -1.2 1.2 times"
@@ -393,7 +420,8 @@
 		"data": {},
 		"helpers": {
 			"hello": {
-				"javascript": "function (times) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      return \"Hello \" + times + \" times\";\n    }"
+				"javascript": "function (times) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      return \"Hello \" + times + \" times\";\n    }",
+				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
 		"expected": "Message: Hello -12 times"
@@ -405,7 +433,8 @@
 		"data": {},
 		"helpers": {
 			"hello": {
-				"javascript": "function (param, times, bool1, bool2) {\n        if(typeof times !== 'number') { times = \"NaN\"; }\n        if(typeof bool1 !== 'boolean') { bool1 = \"NaB\"; }\n        if(typeof bool2 !== 'boolean') { bool2 = \"NaB\"; }\n        return \"Hello \" + param + \" \" + times + \" times: \" + bool1 + \" \" + bool2;\n      }"
+				"javascript": "function (param, times, bool1, bool2) {\n        if(typeof times !== 'number') { times = \"NaN\"; }\n        if(typeof bool1 !== 'boolean') { bool1 = \"NaB\"; }\n        if(typeof bool2 !== 'boolean') { bool2 = \"NaB\"; }\n        return \"Hello \" + param + \" \" + times + \" times: \" + bool1 + \" \" + bool2;\n      }",
+				"php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = \\Snidely\\Helpers::jstr($bool1);\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = \\Snidely\\Helpers::jstr($bool2);\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
 			}
 		},
 		"expected": "Message: Hello world 12 times: true false"
@@ -414,7 +443,12 @@
 		"description": "String literal parameters",
 		"it": "using a quote in the middle of a parameter raises an error",
 		"template": "Message: {{hello wo\"rld\"}}",
-		"exception": true
+		"exception": true,
+		"helpers": {
+			"hello": {
+				"php": "function() { return ''; }"
+			}
+		}
 	},
 	{
 		"description": "String literal parameters",
@@ -423,7 +457,8 @@
 		"data": {},
 		"helpers": {
 			"hello": {
-				"javascript": "function (param) { return \"Hello \" + param; }"
+				"javascript": "function (param) { return \"Hello \" + param; }",
+				"php": "function($param) { return 'Hello '.$param; }"
 			}
 		},
 		"expected": "Message: Hello \"world\""
