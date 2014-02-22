@@ -12,6 +12,19 @@
 				"php": "function($options) { return $options['fn'](); }"
 			}
 		}
-
+	},
+	"helpers-helper block with complex lookup expression-00": {
+		"helpers": {
+			"goodbyes": {
+				"php": "function($context, $scope, $options) {\n $byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
+			}
+		}
+	},
+	"helpers-helper with complex lookup and nested template-00": {
+		"helpers": {
+			"link": {
+				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
+			}
+		}
 	}
 }
