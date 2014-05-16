@@ -10,8 +10,8 @@
   "author": "Kasper Isager <kasperisager@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "commander": "2.1.x",
-    "extend": "1.2.1",
-    "handlebars": "2.0.0-alpha.1"
+    "commander": "^2.2.x",
+    "extend": "^1.2.x",
+    "handlebars": "^2.0.x"
   }
 }
