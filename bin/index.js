@@ -205,8 +205,12 @@ var input = path.resolve(program.args[0]);
 fs.exists(input, function (exists) {
   if (exists) {
     require(input);
-
-    var output = JSON.stringify(tests, null, '\t');
+    
+    try {
+      var output = JSON.stringify(tests, null, '\t');
+    } catch(e) {
+      return console.log('Failed converting to JSON: ' + input + ' (' + e + ')');
+    }
 
     if (!program.output) {
       return console.log(output);
