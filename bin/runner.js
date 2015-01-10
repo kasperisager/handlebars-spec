@@ -5,8 +5,10 @@ var program = require('commander')
   , path = require('path')
   , util = require('util')
   , extend = require('extend')
-  , Handlebars = require('handlebars');
+  , Handlebars = require('handlebars')
+  , objmerge = require('object-merge');
 
+global.Handlebars = Handlebars;
 
 // borrowed from spec/env/node.js
 global.handlebarsEnv = Handlebars;
@@ -51,11 +53,33 @@ function getHelpersFromTest(test) {
     return helpers;
 }
 
+function getLambdasFromTest(test) {
+    function l(data) {
+        var fns;
+        for( var x in data ) {
+            if( typeof data[x] !== 'object' ) {
+                continue;
+            }
+            if( '!code' in data[x] ) {
+              if( typeof fns === 'undefined' ) {
+                  fns = {};
+              }
+              fns[x] = safeEval(data[x].javascript);
+            } else {
+              l(data[x]);
+            }
+        }
+        return fns;
+    }
+    return l(test.lambdas);
+}
+
 function runTest(test, suite) {
     switch( suite ) {
         case 'tokenizer':
             break;
         case 'basic':
+        //case 'blocks':
             runTestGeneric(test, suite);
             break;
         default:
@@ -69,13 +93,29 @@ function runTestGeneric(test, suite) {
     console.log('------------------------------------------------------------');
     var prefix = '(' + suite + ' - ' + test.it + ' - ' + test.description + '): ';
     try {
+        var data = JSON.parse(JSON.stringify(test.data));
+        // Get and merge lambdas
+        var lambdas = getLambdasFromTest(test);
+        if( lambdas ) {
+            data = objmerge(data, lambdas);
+        }
+        
         var helpers = test.helpers ? getHelpersFromTest(test) : [];
         shouldCompileTo(test.template, 
                 [test.data, helpers, test.partials], test.expected, 'grr');
-        console.log(prefix + 'OK');
+        if( !test.exception ) {
+            console.log(prefix + 'OK');
+        } else {
+            console.log(prefix + 'Error: should have thrown, did not');
+        }
     } catch( e ) {
-        console.log(prefix + e);
-        console.log('Test Data: ', test);
-        console.log('Helpers: ', helpers);
+        if( test.exception ) {
+            console.log(prefix + 'OK');
+        } else {
+            console.log(prefix + e);
+            console.log('Test Data: ', test);
+            console.log('Merged Data: ', data);
+            console.log('Helpers: ', helpers);
+        }
     }
 }

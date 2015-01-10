@@ -12,6 +12,7 @@
   "dependencies": {
     "commander": "^2.2.x",
     "extend": "^1.2.x",
-    "handlebars": "^2.0.x"
+    "handlebars": "^2.0.x",
+    "object-merge": "2.5.1"
   }
 }

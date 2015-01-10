@@ -71,6 +71,30 @@ var extractHelpers = function (data) {
   return isEmptyObject(helpers) ? false : helpers;
 };
 
+var extractLambdas = function(data) {
+    var fns;
+    for( var x in data ) {
+        if( typeof data[x] === 'function' ) {
+            if( typeof fns === 'undefined' ) {
+                fns = {};
+            }
+            fns[x] = {
+                '!code': true,
+                javascript: data[x].toString()
+            };
+        } else if( typeof data[x] === 'object' ) {
+            var childfns = extractLambdas(data[x]);
+            if( childfns ) {
+                if( typeof fns === 'undefined' ) {
+                    fns = {};
+                }
+                fns[x] = childfns;
+            }
+        }
+    }
+    return fns;
+};
+
 global.Handlebars    = Handlebars;
 global.handlebarsEnv = Handlebars.create();
 
@@ -174,8 +198,13 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
 
   if (partials) spec.partials = partials;
   if (helpers)  spec.helpers  = helpers;
-  if (expected) spec.expected = expected;
+  /*if (expected)*/ spec.expected = expected;
   if (message)  spec.message  = '' + message;
+  
+  var lambdas = extractLambdas(data);
+  if( lambdas ) {
+      spec.lambdas = lambdas;
+  }
 
   tests.add(spec);
 };
