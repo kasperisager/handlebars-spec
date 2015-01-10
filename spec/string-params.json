@@ -5,6 +5,20 @@
 		"template": "{{wycats is.a slave.driver}}",
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
 		"message": "String parameters output",
 		"helpers": {
 			"wycats": {
@@ -18,6 +32,20 @@
 		"template": "{{#wycats is.a slave.driver}}help :({{/wycats}}",
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver: help :(",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
 		"message": "String parameters output",
 		"helpers": {
 			"wycats": {
@@ -34,6 +62,20 @@
 			"need": "need-a"
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
 		"message": "Proper context variable output",
 		"helpers": {
 			"tomdale": {
@@ -49,7 +91,22 @@
 		"it": "information about the types is passed along",
 		"template": "{{tomdale \"need\" dad.joke true false}}",
 		"data": {},
-		"expected": "Helper called",
+		"expected": "STRING",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"message": "the string type is passed",
 		"helpers": {
 			"tomdale": {
 				"javascript": "function (desire, noun, trueBool, falseBool, options) {\n        equal(options.types[0], 'STRING', \"the string type is passed\");\n        equal(options.types[1], 'ID', \"the expression type is passed\");\n        equal(options.types[2], 'BOOLEAN', \"the expression type is passed\");\n        equal(desire, \"need\", \"the string form is passed for strings\");\n        equal(noun, \"dad.joke\", \"the string form is passed for expressions\");\n        equal(trueBool, true, \"raw booleans are passed through\");\n        equal(falseBool, false, \"raw booleans are passed through\");\n        return \"Helper called\";\n      }"
@@ -58,10 +115,72 @@
 	},
 	{
 		"description": "string params mode",
+		"it": "information about the types is passed along",
+		"template": "{{tomdale \"need\" dad.joke true false}}",
+		"expected": "ID",
+		"message": "the expression type is passed"
+	},
+	{
+		"description": "string params mode",
+		"it": "information about the types is passed along",
+		"template": "{{tomdale \"need\" dad.joke true false}}",
+		"expected": "BOOLEAN",
+		"message": "the expression type is passed"
+	},
+	{
+		"description": "string params mode",
+		"it": "information about the types is passed along",
+		"template": "{{tomdale \"need\" dad.joke true false}}",
+		"expected": "need",
+		"message": "the string form is passed for strings"
+	},
+	{
+		"description": "string params mode",
+		"it": "information about the types is passed along",
+		"template": "{{tomdale \"need\" dad.joke true false}}",
+		"expected": "dad.joke",
+		"message": "the string form is passed for expressions"
+	},
+	{
+		"description": "string params mode",
+		"it": "information about the types is passed along",
+		"template": "{{tomdale \"need\" dad.joke true false}}",
+		"expected": true,
+		"message": "raw booleans are passed through"
+	},
+	{
+		"description": "string params mode",
+		"it": "information about the types is passed along",
+		"template": "{{tomdale \"need\" dad.joke true false}}",
+		"expected": false,
+		"message": "raw booleans are passed through"
+	},
+	{
+		"description": "string params mode",
+		"it": "information about the types is passed along",
+		"template": "{{tomdale \"need\" dad.joke true false}}",
+		"expected": "Helper called"
+	},
+	{
+		"description": "string params mode",
 		"it": "hash parameters get type information",
 		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
 		"data": {},
-		"expected": "Helper called",
+		"expected": "he.says",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
 		"helpers": {
 			"tomdale": {
 				"javascript": "function (exclamation, options) {\n        equal(exclamation, \"he.says\");\n        equal(options.types[0], \"ID\");\n\n        equal(options.hashTypes.desire, \"STRING\");\n        equal(options.hashTypes.noun, \"ID\");\n        equal(options.hashTypes.bool, \"BOOLEAN\");\n        equal(options.hash.desire, \"need\");\n        equal(options.hash.noun, \"dad.joke\");\n        equal(options.hash.bool, true);\n        return \"Helper called\";\n      }"
@@ -70,12 +189,74 @@
 	},
 	{
 		"description": "string params mode",
+		"it": "hash parameters get type information",
+		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"expected": "ID"
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get type information",
+		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"expected": "STRING"
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get type information",
+		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"expected": "ID"
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get type information",
+		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"expected": "BOOLEAN"
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get type information",
+		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"expected": "need"
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get type information",
+		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"expected": "dad.joke"
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get type information",
+		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"expected": true
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get type information",
+		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"expected": "Helper called"
+	},
+	{
+		"description": "string params mode",
 		"it": "hash parameters get context information",
 		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
 		"data": {
 			"dale": {}
 		},
-		"expected": "Helper called",
+		"expected": "he.says",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
 		"helpers": {
 			"tomdale": {
 				"javascript": "function (exclamation, options) {\n        equal(exclamation, \"he.says\");\n        equal(options.types[0], \"ID\");\n\n        equal(options.contexts.length, 1);\n        equal(options.hashContexts.noun, context);\n        equal(options.hash.desire, \"need\");\n        equal(options.hash.noun, \"dad.joke\");\n        equal(options.hash.bool, true);\n        return \"Helper called\";\n      }"
@@ -87,6 +268,50 @@
 	},
 	{
 		"description": "string params mode",
+		"it": "hash parameters get context information",
+		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
+		"expected": "ID"
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get context information",
+		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
+		"expected": 1
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get context information",
+		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
+		"expected": {
+			"dale": {}
+		}
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get context information",
+		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
+		"expected": "need"
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get context information",
+		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
+		"expected": "dad.joke"
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get context information",
+		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
+		"expected": true
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get context information",
+		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
+		"expected": "Helper called"
+	},
+	{
+		"description": "string params mode",
 		"it": "when inside a block in String mode, .. passes the appropriate context in the options hash to a block helper",
 		"template": "{{#with dale}}{{#tomdale ../need dad.joke}}wot{{/tomdale}}{{/with}}",
 		"data": {
@@ -94,6 +319,20 @@
 			"need": "need-a"
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke wot",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
 		"message": "Proper context variable output",
 		"helpers": {
 			"tomdale": {
@@ -110,6 +349,20 @@
 		"template": "{{#with content}}{{#view}}{{firstName}} {{lastName}}{{/view}}{{/with}}",
 		"data": {},
 		"expected": "WITH",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
 		"helpers": {
 			"with": {
 				"javascript": "function (options) {\n        return \"WITH\";\n      }"
@@ -124,11 +377,37 @@
 		"it": "should handle DATA",
 		"template": "{{foo @bar}}",
 		"data": {},
-		"expected": "Foo!",
+		"expected": "bar",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
 		"helpers": {
 			"foo": {
 				"javascript": "function (bar, options) {\n        equal(bar, 'bar');\n        equal(options.types[0], 'DATA');\n        return 'Foo!';\n      }"
 			}
 		}
+	},
+	{
+		"description": "string params mode",
+		"it": "should handle DATA",
+		"template": "{{foo @bar}}",
+		"expected": "DATA"
+	},
+	{
+		"description": "string params mode",
+		"it": "should handle DATA",
+		"template": "{{foo @bar}}",
+		"expected": "Foo!"
 	}
 ]

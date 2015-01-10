@@ -106,7 +106,10 @@ global.CompilerContext = {
   compile: function (template, options) {
     // Push template unto context
     context.template = template;
-
+    context.compileOptions = options;
+    
+    var compiledTemplate = Handlebars.compile(template, options);
+    
     return function (data, options) {
       if (options && options.hasOwnProperty('data')) {
         data = extend(true, data, options.data);
@@ -119,11 +122,14 @@ global.CompilerContext = {
         // Push helpers unto context
         context.helpers = options.helpers;
       }
+      return compiledTemplate(data, options);
     };
   },
   compileWithPartial: function(template, options) {
     // Push template unto context
     context.template = template;
+    context.compileOptions = options;
+    return Handlebars.compile(template, options);
   }
 };
 
@@ -147,10 +153,15 @@ global.equal = global.equals = function (actual, expected, message) {
     , data        : context.data
     , expected    : expected
     };
+  if( context.compileOptions ) {
+    spec.compileOptions = context.compileOptions;
+  }
 
   // Remove template and data from context
   delete context.template;
   delete context.data;
+  delete context.knownHelpersOnly;
+  delete context.compileOptions;
 
   if (message) spec.message = message;
 

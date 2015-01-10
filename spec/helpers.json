@@ -166,7 +166,8 @@
 		"description": "helpers",
 		"it": "block helper for undefined value",
 		"template": "{{#empty}}shouldn't render{{/empty}}",
-		"data": {}
+		"data": {},
+		"expected": ""
 	},
 	{
 		"description": "helpers",
@@ -646,7 +647,21 @@
 		"template": "{{hello}}",
 		"data": {},
 		"expected": "foo",
-		"message": "'foo' should === 'undefined",
+		"compileOptions": {
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true,
+				"hello": true
+			},
+			"data": true
+		},
+		"message": "'foo' should === 'foo",
 		"helpers": {
 			"hello": {
 				"javascript": "function () { return \"foo\"; }"
@@ -659,6 +674,21 @@
 		"template": "{{typeof hello}}",
 		"data": {},
 		"expected": "undefined",
+		"compileOptions": {
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true,
+				"typeof": true
+			},
+			"knownHelpersOnly": true,
+			"data": true
+		},
 		"message": "'undefined' should === 'undefined",
 		"helpers": {
 			"typeof": {
@@ -675,7 +705,21 @@
 		"template": "{{#unless foo}}bar{{/unless}}",
 		"data": {},
 		"expected": "bar",
-		"message": "'bar' should === 'undefined"
+		"compileOptions": {
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"message": "'bar' should === 'bar"
 	},
 	{
 		"description": "knownHelpers",
@@ -685,7 +729,21 @@
 			"foo": "bar"
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'undefined"
+		"compileOptions": {
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"message": "'bar' should === 'bar"
 	},
 	{
 		"description": "knownHelpers",
@@ -695,7 +753,21 @@
 			"foo": "baz"
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'undefined"
+		"compileOptions": {
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"message": "'bar' should === 'bar"
 	},
 	{
 		"description": "knownHelpers",
@@ -705,7 +777,21 @@
 			"foo": false
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'undefined"
+		"compileOptions": {
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"message": "'bar' should === 'bar"
 	},
 	{
 		"description": "knownHelpers",
@@ -715,7 +801,21 @@
 			"bar": "bar"
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'undefined"
+		"compileOptions": {
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"message": "'bar' should === 'bar"
 	},
 	{
 		"description": "knownHelpers",
@@ -728,13 +828,30 @@
 		"it": "lambdas are resolved by blockHelperMissing, not handlebars proper",
 		"template": "{{#truthy}}yep{{/truthy}}",
 		"data": {},
-		"expected": "yep"
+		"expected": "yep",
+		"lambdas": {
+			"truthy": {
+				"!code": true,
+				"javascript": "function () { return true; }"
+			}
+		}
 	},
 	{
 		"description": "blockHelperMissing",
 		"it": "lambdas resolved by blockHelperMissing are bound to the context",
 		"template": "{{#truthy}}yep{{/truthy}}",
-		"data": {}
+		"data": {},
+		"expected": "",
+		"lambdas": {
+			"truthy": {
+				"!code": true,
+				"javascript": "function () { return this.truthiness(); }"
+			},
+			"truthiness": {
+				"!code": true,
+				"javascript": "function () { return false; }"
+			}
+		}
 	},
 	{
 		"description": "name field",
@@ -817,6 +934,21 @@
 		"template": "{{helper}}",
 		"data": {},
 		"expected": "ran: helper",
+		"compileOptions": {
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true,
+				"helper": true
+			},
+			"knownHelpersOnly": true,
+			"data": true
+		},
 		"helpers": {
 			"blockHelperMissing": {
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"

@@ -8,6 +8,14 @@
 				"string": "<em>Sean O&#x27;Malley</em>"
 			}
 		},
-		"expected": "<em>Sean O&#x27;Malley</em>"
+		"expected": "<em>Sean O&#x27;Malley</em>",
+		"lambdas": {
+			"name": {
+				"toString": {
+					"!code": true,
+					"javascript": "function () {\n  return \"\" + this.string;\n}"
+				}
+			}
+		}
 	}
 ]

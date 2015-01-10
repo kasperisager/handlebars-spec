@@ -82,7 +82,17 @@
 				}
 			]
 		},
-		"expected": "<strong>This is a slightly more complicated blah.</strong>.\n\nCheck this out:\n\n<ul>\n\n<li class=one>@fat</li>\n\n<li class=two>@dhg</li>\n\n<li class=three>@sayrer</li>\n</ul>.\n\n"
+		"expected": "<strong>This is a slightly more complicated blah.</strong>.\n\nCheck this out:\n\n<ul>\n\n<li class=one>@fat</li>\n\n<li class=two>@dhg</li>\n\n<li class=three>@sayrer</li>\n</ul>.\n\n",
+		"lambdas": {
+			"thing": {
+				"!code": true,
+				"javascript": "function () {\n        return \"blah\";\n      }"
+			},
+			"hasThings": {
+				"!code": true,
+				"javascript": "function () {\n        return true;\n      }"
+			}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -195,5 +205,11 @@
 			"in_ca": true
 		},
 		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes."
+	},
+	{
+		"description": "Regressions",
+		"it": "can pass through an already-compiled AST via compile/precompile",
+		"template": "{{#.}}{{name}}{{/.}}{{#.}}{{name}}{{/.}}{{#.}}{{name}}{{/.}}",
+		"expected": "Hello"
 	}
 ]

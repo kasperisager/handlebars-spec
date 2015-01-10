@@ -225,14 +225,26 @@
 		"it": "functions returning safestrings shouldn't be escaped",
 		"template": "{{awesome}}",
 		"data": {},
-		"expected": "&\"\\<>"
+		"expected": "&\"\\<>",
+		"lambdas": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function () { return new Handlebars.SafeString(\"&\\\"\\\\<>\"); }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
 		"it": "functions",
 		"template": "{{awesome}}",
 		"data": {},
-		"expected": "Awesome"
+		"expected": "Awesome",
+		"lambdas": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function () { return \"Awesome\"; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -241,7 +253,13 @@
 		"data": {
 			"more": "More awesome"
 		},
-		"expected": "More awesome"
+		"expected": "More awesome",
+		"lambdas": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function () { return this.more; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -250,7 +268,13 @@
 		"data": {
 			"frank": "Frank"
 		},
-		"expected": "Frank"
+		"expected": "Frank",
+		"lambdas": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (context) { return context; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -260,7 +284,15 @@
 			"bar": {},
 			"frank": "Frank"
 		},
-		"expected": "Frank"
+		"expected": "Frank",
+		"lambdas": {
+			"bar": {
+				"awesome": {
+					"!code": true,
+					"javascript": "function (context) { return context; }"
+				}
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -269,14 +301,26 @@
 		"data": {
 			"frank": "Frank"
 		},
-		"expected": "Frank"
+		"expected": "Frank",
+		"lambdas": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (context) { return context; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
 		"it": "block functions with context argument",
 		"template": "{{#awesome 1}}inner {{.}}{{/awesome}}",
 		"data": {},
-		"expected": "inner 1"
+		"expected": "inner 1",
+		"lambdas": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (context, options) { return options.fn(context); }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -285,14 +329,26 @@
 		"data": {
 			"value": true
 		},
-		"expected": "inner 1"
+		"expected": "inner 1",
+		"lambdas": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (context, options) { return options.fn(context); }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
 		"it": "block functions without context argument",
 		"template": "{{#awesome}}inner{{/awesome}}",
 		"data": {},
-		"expected": "inner"
+		"expected": "inner",
+		"lambdas": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (options) { return options.fn(this); }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -301,7 +357,15 @@
 		"data": {
 			"foo": {}
 		},
-		"expected": "inner"
+		"expected": "inner",
+		"lambdas": {
+			"foo": {
+				"awesome": {
+					"!code": true,
+					"javascript": "function (options) { return this; }"
+				}
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -310,7 +374,13 @@
 		"data": {
 			"value": true
 		},
-		"expected": "inner"
+		"expected": "inner",
+		"lambdas": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (options) { return this; }"
+			}
+		}
 	},
 	{
 		"description": "basic context",
@@ -411,7 +481,8 @@
 			"person": {
 				"name": null
 			}
-		}
+		},
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -419,7 +490,8 @@
 		"template": "{{person/name}}",
 		"data": {
 			"person": {}
-		}
+		},
+		"expected": ""
 	},
 	{
 		"description": "basic context",

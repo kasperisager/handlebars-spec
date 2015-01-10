@@ -87,7 +87,13 @@
 		"data": {
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!"
+		"expected": "GOODBYE cruel world!",
+		"lambdas": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return true;}"
+			}
+		}
 	},
 	{
 		"description": "#if",
@@ -96,7 +102,13 @@
 		"data": {
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!"
+		"expected": "GOODBYE cruel world!",
+		"lambdas": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return this.world;}"
+			}
+		}
 	},
 	{
 		"description": "#if",
@@ -105,7 +117,13 @@
 		"data": {
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"lambdas": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return false;}"
+			}
+		}
 	},
 	{
 		"description": "#if",
@@ -114,7 +132,13 @@
 		"data": {
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"lambdas": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return this.foo;}"
+			}
+		}
 	},
 	{
 		"description": "#with",
@@ -133,7 +157,13 @@
 		"it": "with with function argument",
 		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
 		"data": {},
-		"expected": "Alan Johnson"
+		"expected": "Alan Johnson",
+		"lambdas": {
+			"person": {
+				"!code": true,
+				"javascript": "function () { return {first: \"Alan\", last: \"Johnson\"};}"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -364,7 +394,13 @@
 		"data": {
 			"world": "world"
 		},
-		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"lambdas": {
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function () { return [{text: \"goodbye\"}, {text: \"Goodbye\"}, {text: \"GOODBYE\"}];}"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -397,6 +433,7 @@
 		},
 		"helpers": {
 			"detectDataInsideEach": {
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
 				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
 		}
@@ -424,7 +461,20 @@
 		"template": "{{log blah}}",
 		"data": {
 			"blah": "whee"
-		}
+		},
+		"expected": ""
+	},
+	{
+		"description": "#each",
+		"it": "#log",
+		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
+		"message": "should call log with 1"
+	},
+	{
+		"description": "#each",
+		"it": "#log",
+		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
+		"message": "should call log with 'whee'"
 	},
 	{
 		"description": "#lookup",

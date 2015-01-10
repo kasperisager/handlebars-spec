@@ -100,7 +100,22 @@
 			"foo": {},
 			"yeah": {}
 		},
-		"expected": "fooyeah",
+		"expected": 1,
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"message": "string params for inner helper processed correctly",
 		"helpers": {
 			"snog": {
 				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, \"string params for outer helper processed correctly\");\n        equals(options.types[0], 'sexpr', \"string params for outer helper processed correctly\");\n        equals(options.types[1], 'ID', \"string params for outer helper processed correctly\");\n        return a + b;\n      }"
@@ -112,10 +127,64 @@
 	},
 	{
 		"description": "subexpressions",
+		"it": "in string params mode,",
+		"template": "{{snog (blorg foo x=y) yeah a=b}}",
+		"expected": "ID",
+		"message": "string params for inner helper processed correctly"
+	},
+	{
+		"description": "subexpressions",
+		"it": "in string params mode,",
+		"template": "{{snog (blorg foo x=y) yeah a=b}}",
+		"expected": "foo"
+	},
+	{
+		"description": "subexpressions",
+		"it": "in string params mode,",
+		"template": "{{snog (blorg foo x=y) yeah a=b}}",
+		"expected": 2,
+		"message": "string params for outer helper processed correctly"
+	},
+	{
+		"description": "subexpressions",
+		"it": "in string params mode,",
+		"template": "{{snog (blorg foo x=y) yeah a=b}}",
+		"expected": "sexpr",
+		"message": "string params for outer helper processed correctly"
+	},
+	{
+		"description": "subexpressions",
+		"it": "in string params mode,",
+		"template": "{{snog (blorg foo x=y) yeah a=b}}",
+		"expected": "ID",
+		"message": "string params for outer helper processed correctly"
+	},
+	{
+		"description": "subexpressions",
+		"it": "in string params mode,",
+		"template": "{{snog (blorg foo x=y) yeah a=b}}",
+		"expected": "fooyeah"
+	},
+	{
+		"description": "subexpressions",
 		"it": "as hashes in string params mode",
 		"template": "{{blog fun=(bork)}}",
 		"data": {},
-		"expected": "val is BORK",
+		"expected": "sexpr",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
 		"helpers": {
 			"blog": {
 				"javascript": "function (options) {\n        equals(options.hashTypes.fun, 'sexpr');\n        return \"val is \" + options.hash.fun;\n      }"
@@ -127,6 +196,12 @@
 	},
 	{
 		"description": "subexpressions",
+		"it": "as hashes in string params mode",
+		"template": "{{blog fun=(bork)}}",
+		"expected": "val is BORK"
+	},
+	{
+		"description": "subexpressions",
 		"it": "subexpression functions on the context",
 		"template": "{{foo (bar)}}!",
 		"data": {},
@@ -135,7 +210,13 @@
 				"javascript": "function (val) {\n        return val+val;\n      }"
 			}
 		},
-		"expected": "LOLLOL!"
+		"expected": "LOLLOL!",
+		"lambdas": {
+			"bar": {
+				"!code": true,
+				"javascript": "function () {\n        return \"LOL\";\n      }"
+			}
+		}
 	},
 	{
 		"description": "subexpressions",

@@ -10,6 +10,7 @@
 		},
 		"helpers": {
 			"detectDataInsideEach": {
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
 				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
 		}
