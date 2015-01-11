@@ -82,6 +82,24 @@ var extractHelpers = function (data) {
   return isEmptyObject(helpers) ? false : helpers;
 };
 
+var detectGlobalPartials = function() {
+  this.prevGlobalPartials = {};
+  var globalPartials;
+  for( var x in global.handlebarsEnv.partials ) {
+    if( global.handlebarsEnv.partials[x] !== this.prevGlobalPartials[x] ) {
+      if( !globalPartials ) {
+        globalPartials = {};
+      }
+      this.prevGlobalPartials[x] = globalPartials[x] = global.handlebarsEnv.partials[x];
+    }
+  }
+  if( globalPartials ) {
+    context.globalPartials = globalPartials;
+  } else {
+    delete context.globalPartials;
+  }
+}
+
 var stringifyLambdas = function(data) {
     for( var x in data ) {
       if( data[x] instanceof Array ) {
@@ -145,6 +163,7 @@ global.describe = function (description, next) {
 global.it = function (description, next) {
   // Push test spec unto context
   context.it = description;
+  delete context.globalPartials;
   next();
 };
 
@@ -192,6 +211,7 @@ global.shouldCompileTo = function (string, hashOrArray, expected) {
 };
 
 global.shouldCompileToWithPartials = function (string, hashOrArray, partials, expected, message) {
+  detectGlobalPartials();
   compileWithPartials(string, hashOrArray, partials, expected, message);
 };
 
@@ -218,8 +238,14 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
   /*if (expected)*/ spec.expected = expected;
   if (message)  spec.message  = '' + message;
   
+  if (context.globalPartials) {
+    spec.globalPartials = context.globalPartials;
+    delete context.globalPartials;
+  }
+  
   // Convert lambdas to object/strings
   stringifyLambdas(spec.data);
+  stringifyLambdas(spec.partials);
   
   tests.add(spec);
 };

@@ -129,7 +129,12 @@
 				}
 			]
 		},
-		"partials": {},
+		"partials": {
+			"dude": {
+				"!code": true,
+				"javascript": "function (context) {\n      return context.name + ' (' + context.url + ') ';\n    }"
+			}
+		},
 		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) "
 	},
 	{
@@ -186,7 +191,10 @@
 			"shared/dude": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers Creepers",
-		"message": "Partials can use globals or passed"
+		"message": "Partials can use globals or passed",
+		"globalPartials": {
+			"global_test": "{{another_dude}}"
+		}
 	},
 	{
 		"description": "partials",
@@ -197,7 +205,11 @@
 			"another_dude": "Creepers"
 		},
 		"expected": "Dudes: Jeepers Creepers",
-		"message": "Partials can use globals or passed"
+		"message": "Partials can use globals or passed",
+		"globalPartials": {
+			"global_test": "{{another_dude}}",
+			"shared/dude": "{{name}}"
+		}
 	},
 	{
 		"description": "partials",
@@ -211,7 +223,11 @@
 			"404": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
-		"message": "Partials can use literal paths"
+		"message": "Partials can use literal paths",
+		"globalPartials": {
+			"global_test": "{{another_dude}}",
+			"shared/dude": "{{name}}"
+		}
 	},
 	{
 		"description": "partials",
@@ -225,7 +241,11 @@
 			"404/asdf?.bar": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
-		"message": "Partials can use literal paths"
+		"message": "Partials can use literal paths",
+		"globalPartials": {
+			"global_test": "{{another_dude}}",
+			"shared/dude": "{{name}}"
+		}
 	},
 	{
 		"description": "partials",
@@ -239,7 +259,11 @@
 			"+404/asdf?.bar": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
-		"message": "Partials can use literal paths"
+		"message": "Partials can use literal paths",
+		"globalPartials": {
+			"global_test": "{{another_dude}}",
+			"shared/dude": "{{name}}"
+		}
 	},
 	{
 		"description": "partials",
@@ -253,7 +277,11 @@
 			"+404/asdf?.bar": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
-		"message": "Partials can use literal paths"
+		"message": "Partials can use literal paths",
+		"globalPartials": {
+			"global_test": "{{another_dude}}",
+			"shared/dude": "{{name}}"
+		}
 	},
 	{
 		"description": "partials",
@@ -274,6 +302,10 @@
 		"partials": {
 			"dude": ""
 		},
-		"expected": "Dudes: "
+		"expected": "Dudes: ",
+		"globalPartials": {
+			"global_test": "{{another_dude}}",
+			"shared/dude": "{{name}}"
+		}
 	}
 ]

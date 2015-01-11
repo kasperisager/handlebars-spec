@@ -82,7 +82,7 @@ function runTest(test) {
         case 'builtins': // a little broken
         //case 'data': // very broken
         case 'helpers': // a little broken
-        //case 'partials': // a little broken
+        case 'partials': // a little broken
         //case 'regressions': // mostly working
         //case 'string-params': // very broken
         //case 'subexpressions': // very broken
@@ -113,6 +113,8 @@ function prepareTestGeneric(test, suite) {
     spec.helpers = unstringifyHelpers(test.helpers);
     // Partials
     spec.partials = test.partials;
+    unstringifyLambdas(spec.partials);
+    spec.globalPartials = test.globalPartials || undefined;
     // Options
     spec.options = test.options || undefined;
     spec.compileOptions = test.compileOptions || undefined;
@@ -133,12 +135,22 @@ function checkResult(test, e) {
 
 function runTestGeneric(test) {
     try {
+        // Register global partials
+        if( test.globalPartials ) {
+            for( var x in test.globalPartials ) {
+                global.handlebarsEnv.registerPartial(x, test.globalPartials[x]);
+            }
+        }
+
         // Execute
         if( test.options || test.compileOptions ) {
             var template = global.CompilerContext.compile(test.template, test.compileOptions);
             var opts = test.options === undefined ? {} : JSON.parse(JSON.stringify(test.options));
             if( test.helpers ) {
                 opts.helpers = test.helpers;
+            }
+            if( test.partials ) {
+                opts.partials = test.partials;
             }
             var actual = template(test.data, opts);
             global.equals(actual, test.expected);
@@ -164,10 +176,10 @@ var successes = [];
 var failures = [];
 var skipped = [];
 
-for( var x in specs ) { 
+for( var x in specs ) {
     var suite = specs[x].replace(/\.json$/, '');
     var data = require(dir + '/' + specs[x]);
-    for( var y in data ) { 
+    for( var y in data ) {
         data[y].suite = suite;
         var result = runTest(data[y]);
         if( result === null ) {
