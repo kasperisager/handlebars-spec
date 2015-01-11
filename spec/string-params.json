@@ -397,17 +397,5 @@
 				"javascript": "function (bar, options) {\n        equal(bar, 'bar');\n        equal(options.types[0], 'DATA');\n        return 'Foo!';\n      }"
 			}
 		}
-	},
-	{
-		"description": "string params mode",
-		"it": "should handle DATA",
-		"template": "{{foo @bar}}",
-		"expected": "DATA"
-	},
-	{
-		"description": "string params mode",
-		"it": "should handle DATA",
-		"template": "{{foo @bar}}",
-		"expected": "Foo!"
 	}
 ]

@@ -16,9 +16,13 @@ program
 var tests   = []  // Array containg the actual specs
   , indices = []  // Temp array for auto-incrementing test indices
   , context = {}; // Current test context
-var skipNames = [
+var skipKeys = [
   '#log-#log',
   'multiple global helper registration-multiple global helper registration'
+];
+var skipNames = [
+  'string params mode-should handle data-01',
+  'string params mode-should handle data-02',
 ];
 
 tests.add = function (spec) {
@@ -28,33 +32,42 @@ tests.add = function (spec) {
   
   // Skip some
   // @todo patch these in manually?
-  if( skipNames.indexOf(key) !== -1 ) {
+  if( skipKeys.indexOf(key) !== -1 ) {
     return;
   }
 
   for (var i = 0; i < 20; i++) {
     var name = key + '-' + ('0' + i).slice(-2);
     
-
-    if (indices.indexOf(name) === -1) {
-      if (program.output) {
-        var output    = path.resolve(program.output)
-          , patchName = path.basename(output)
-          , patchFile = path.dirname(output) + '/../patch/' + patchName;
-
-        if (fs.existsSync(path.resolve(patchFile))) {
-          var patch = require(patchFile);
-
-          if (patch.hasOwnProperty(name)) {
-            spec = extend(true, spec, patch[name]);
-          }
-        }
-      }
-
-      tests.push(spec);
+    // Make sure not duplicate ID
+    if (indices.indexOf(name) !== -1) {
+      continue;
+    }
+    
+    // Skip some
+    // @todo patch these in manually?
+    if( skipNames.indexOf(name) !== -1 ) {
       indices.push(name);
       break;
     }
+    
+    if (program.output) {
+      var output    = path.resolve(program.output)
+        , patchName = path.basename(output)
+        , patchFile = path.dirname(output) + '/../patch/' + patchName;
+
+      if (fs.existsSync(path.resolve(patchFile))) {
+        var patch = require(patchFile);
+
+        if (patch.hasOwnProperty(name)) {
+          spec = extend(true, spec, patch[name]);
+        }
+      }
+    }
+
+    tests.push(spec);
+    indices.push(name);
+    break;
   }
 };
 
