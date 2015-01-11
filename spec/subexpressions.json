@@ -101,6 +101,7 @@
 			"yeah": {}
 		},
 		"expected": 1,
+		"message": "string params for inner helper processed correctly",
 		"compileOptions": {
 			"stringParams": true,
 			"data": true,
@@ -115,7 +116,6 @@
 				"lookup": true
 			}
 		},
-		"message": "string params for inner helper processed correctly",
 		"helpers": {
 			"snog": {
 				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, \"string params for outer helper processed correctly\");\n        equals(options.types[0], 'sexpr', \"string params for outer helper processed correctly\");\n        equals(options.types[1], 'ID', \"string params for outer helper processed correctly\");\n        return a + b;\n      }"

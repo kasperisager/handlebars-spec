@@ -5,6 +5,7 @@
 		"template": "{{wycats is.a slave.driver}}",
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver",
+		"message": "String parameters output",
 		"compileOptions": {
 			"stringParams": true,
 			"data": true,
@@ -19,7 +20,6 @@
 				"lookup": true
 			}
 		},
-		"message": "String parameters output",
 		"helpers": {
 			"wycats": {
 				"javascript": "function (passiveVoice, noun) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun;\n      }"
@@ -32,6 +32,7 @@
 		"template": "{{#wycats is.a slave.driver}}help :({{/wycats}}",
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver: help :(",
+		"message": "String parameters output",
 		"compileOptions": {
 			"stringParams": true,
 			"data": true,
@@ -46,7 +47,6 @@
 				"lookup": true
 			}
 		},
-		"message": "String parameters output",
 		"helpers": {
 			"wycats": {
 				"javascript": "function (passiveVoice, noun, options) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }"
@@ -62,6 +62,7 @@
 			"need": "need-a"
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke",
+		"message": "Proper context variable output",
 		"compileOptions": {
 			"stringParams": true,
 			"data": true,
@@ -76,7 +77,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Proper context variable output",
 		"helpers": {
 			"tomdale": {
 				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun;\n      }"
@@ -92,6 +92,7 @@
 		"template": "{{tomdale \"need\" dad.joke true false}}",
 		"data": {},
 		"expected": "STRING",
+		"message": "the string type is passed",
 		"compileOptions": {
 			"stringParams": true,
 			"data": true,
@@ -106,7 +107,6 @@
 				"lookup": true
 			}
 		},
-		"message": "the string type is passed",
 		"helpers": {
 			"tomdale": {
 				"javascript": "function (desire, noun, trueBool, falseBool, options) {\n        equal(options.types[0], 'STRING', \"the string type is passed\");\n        equal(options.types[1], 'ID', \"the expression type is passed\");\n        equal(options.types[2], 'BOOLEAN', \"the expression type is passed\");\n        equal(desire, \"need\", \"the string form is passed for strings\");\n        equal(noun, \"dad.joke\", \"the string form is passed for expressions\");\n        equal(trueBool, true, \"raw booleans are passed through\");\n        equal(falseBool, false, \"raw booleans are passed through\");\n        return \"Helper called\";\n      }"
@@ -319,6 +319,7 @@
 			"need": "need-a"
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke wot",
+		"message": "Proper context variable output",
 		"compileOptions": {
 			"stringParams": true,
 			"data": true,
@@ -333,7 +334,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Proper context variable output",
 		"helpers": {
 			"tomdale": {
 				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun + \" \" +\n                options.fn(this);\n      }"

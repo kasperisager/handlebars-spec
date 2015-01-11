@@ -169,6 +169,7 @@
 			}
 		},
 		"expected": "@is.a",
+		"options": {},
 		"compileOptions": {
 			"trackIds": true,
 			"data": true,

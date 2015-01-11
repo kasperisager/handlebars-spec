@@ -203,11 +203,5 @@
 			"in_ca": true
 		},
 		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes."
-	},
-	{
-		"description": "Regressions",
-		"it": "can pass through an already-compiled AST via compile/precompile",
-		"template": "{{#.}}{{name}}{{/.}}{{#.}}{{name}}{{/.}}{{#.}}{{name}}{{/.}}",
-		"expected": "Hello"
 	}
 ]

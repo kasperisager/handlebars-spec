@@ -8,6 +8,8 @@
 			"adjective": "happy"
 		},
 		"expected": "happy cat",
+		"message": "Data output by helper",
+		"options": {},
 		"compileOptions": {
 			"data": true,
 			"knownHelpers": {
@@ -21,7 +23,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.data.adjective + \" \"  + this.noun;\n      }"
@@ -36,7 +37,8 @@
 			"hello": "hello"
 		},
 		"expected": "hello",
-		"message": "@foo retrieves template data"
+		"message": "@foo retrieves template data",
+		"options": {}
 	},
 	{
 		"description": "data",
@@ -86,6 +88,7 @@
 		},
 		"expected": "Hello world",
 		"message": "@foo as a parameter retrieves template data",
+		"options": {},
 		"helpers": {
 			"hello": {
 				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }"
@@ -101,6 +104,7 @@
 		},
 		"expected": "Hello world",
 		"message": "@foo as a parameter retrieves template data",
+		"options": {},
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return \"Hello \" + options.hash.noun;\n      }"
@@ -118,6 +122,7 @@
 		},
 		"expected": "Hello world",
 		"message": "@foo as a parameter retrieves template data",
+		"options": {},
 		"helpers": {
 			"hello": {
 				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }"
@@ -135,6 +140,7 @@
 		},
 		"expected": "Hello undefined",
 		"message": "@foo as a parameter retrieves template data",
+		"options": {},
 		"helpers": {
 			"hello": {
 				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }"
@@ -157,6 +163,8 @@
 			}
 		},
 		"expected": "2hello world1",
+		"message": "data variables are inherited downstream",
+		"options": {},
 		"compileOptions": {
 			"data": true,
 			"knownHelpers": {
@@ -170,7 +178,6 @@
 				"lookup": true
 			}
 		},
-		"message": "data variables are inherited downstream",
 		"helpers": {
 			"let": {
 				"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          frame[prop] = options.hash[prop];\n        }\n        return options.fn(this, {data: frame});\n      }"
@@ -189,6 +196,8 @@
 			}
 		},
 		"expected": "happy cat",
+		"message": "Data output by helper inside partial",
+		"options": {},
 		"compileOptions": {
 			"data": true,
 			"knownHelpers": {
@@ -202,7 +211,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Data output by helper inside partial",
 		"helpers": {
 			"helperMissing": {
 				"javascript": "function (/* [args, ]options */) {\n    if(arguments.length === 1) {\n      // A missing field in a {{foo}} constuct.\n      return undefined;\n    } else {\n      // Someone is actually trying to call something, blow up.\n      throw new Exception(\"Missing helper: '\" + arguments[arguments.length-1].name + \"'\");\n    }\n  }"
@@ -243,6 +251,8 @@
 			"adjective": "happy"
 		},
 		"expected": "happy world!",
+		"message": "Data output by helper",
+		"options": {},
 		"compileOptions": {
 			"data": true,
 			"knownHelpers": {
@@ -256,7 +266,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (noun, options) {\n        return options.data.adjective + \" \"  + noun + (this.exclaim ? \"!\" : \"\");\n      }"
@@ -272,6 +281,8 @@
 			"adjective": "happy"
 		},
 		"expected": "happy world!",
+		"message": "Data output by helper",
+		"options": {},
 		"compileOptions": {
 			"data": true,
 			"knownHelpers": {
@@ -285,7 +296,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.fn(this);\n      }"
@@ -305,6 +315,8 @@
 			"adjective": "happy"
 		},
 		"expected": "happy world?",
+		"message": "Data output by helper",
+		"options": {},
 		"compileOptions": {
 			"data": true,
 			"knownHelpers": {
@@ -318,7 +330,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"});\n      }"
@@ -339,6 +350,8 @@
 			"accessData": "#win"
 		},
 		"expected": "#win happy world?",
+		"message": "Data output by helper",
+		"options": {},
 		"compileOptions": {
 			"data": true,
 			"knownHelpers": {
@@ -352,7 +365,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.data.accessData + \" \" + options.fn({exclaim: \"?\"});\n      }"
@@ -372,6 +384,8 @@
 			"adjective": "happy"
 		},
 		"expected": "sad world?",
+		"message": "Overriden data output by helper",
+		"options": {},
 		"compileOptions": {
 			"data": true,
 			"knownHelpers": {
@@ -385,7 +399,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Overriden data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\", zomg: \"world\"}, { data: {adjective: \"sad\"} });\n      }"
@@ -405,6 +418,8 @@
 			"adjective": "happy"
 		},
 		"expected": "sad world?",
+		"message": "Overriden data output by helper",
+		"options": {},
 		"compileOptions": {
 			"data": true,
 			"knownHelpers": {
@@ -418,7 +433,6 @@
 				"lookup": true
 			}
 		},
-		"message": "Overriden data output by helper",
 		"helpers": {
 			"hello": {
 				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }"
@@ -435,7 +449,8 @@
 		"data": {
 			"foo": "hello"
 		},
-		"expected": "hello"
+		"expected": "hello",
+		"options": {}
 	},
 	{
 		"description": "@root",
@@ -455,7 +470,8 @@
 				"foo": "hello"
 			}
 		},
-		"expected": "hello"
+		"expected": "hello",
+		"options": {}
 	},
 	{
 		"description": "nesting",
@@ -466,6 +482,7 @@
 			"depth": 0
 		},
 		"expected": "2 1 0",
+		"options": {},
 		"helpers": {
 			"helper": {
 				"javascript": "function (options) {\n            var frame = Handlebars.createFrame(options.data);\n            frame.depth = options.data.depth + 1;\n            return options.fn(this, {data: frame});\n          }"

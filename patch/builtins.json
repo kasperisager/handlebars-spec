@@ -3,11 +3,6 @@
 		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!"
 	},
 	"#each-data passed to helpers-00": {
-		"options": {
-			"data": {
-				"exclaim": "!"
-			}
-		},
 		"helpers": {
 			"detectDataInsideEach": {
 				"javascript": "function(options) { return options.data && options.data.exclaim; }",

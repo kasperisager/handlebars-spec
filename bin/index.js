@@ -18,7 +18,8 @@ var tests   = []  // Array containg the actual specs
   , context = {}; // Current test context
 var skipKeys = [
   '#log-#log',
-  'multiple global helper registration-multiple global helper registration'
+  'multiple global helper registration-multiple global helper registration',
+  'regressions-can pass through an already-compiled ast via compile/precompile'
 ];
 var skipNames = [
   'string params mode-should handle data-01',
@@ -29,6 +30,7 @@ tests.add = function (spec) {
   if (!spec || !spec.template) return;
 
   var key = (spec.description + '-' + spec.it).toLowerCase();
+  //console.log(key);
   
   // Skip some
   // @todo patch these in manually?
@@ -58,7 +60,7 @@ tests.add = function (spec) {
 
       if (fs.existsSync(path.resolve(patchFile))) {
         var patch = require(patchFile);
-
+        
         if (patch.hasOwnProperty(name)) {
           spec = extend(true, spec, patch[name]);
         }
@@ -144,9 +146,13 @@ global.CompilerContext = {
     var compiledTemplate = Handlebars.compile(template, options);
     
     return function (data, options) {
+      // Note: merging data in the options causes tests to fail, possibly
+      // a separate type of data?
       if (options && options.hasOwnProperty('data')) {
         data = extend(true, data, options.data);
+        context.options = context.options || {};
       }
+      //context.options = options;
 
       // Push template data unto context
       context.data = data;
@@ -188,18 +194,27 @@ global.equal = global.equals = function (actual, expected, message) {
     , data        : context.data
     , expected    : expected
     };
-  if( context.compileOptions ) {
-    spec.compileOptions = context.compileOptions;
-  }
-
+  
   // Remove template and data from context
   delete context.template;
   delete context.data;
   delete context.knownHelpersOnly;
-  delete context.compileOptions;
-
+  
   if (message) spec.message = message;
-
+  
+  // Get options
+  if( context.options ) {
+    spec.options = context.options;
+  }
+  delete context.options;
+  
+  // Get compiler options
+  if( context.compileOptions ) {
+    spec.compileOptions = context.compileOptions;
+  }
+  delete context.compileOptions;
+  
+  // Get helpers
   if (context.hasOwnProperty('helpers')) {
     spec.helpers = extractHelpers(context.helpers);
 
@@ -248,8 +263,20 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
 
   if (partials) spec.partials = partials;
   if (helpers)  spec.helpers  = helpers;
-  /*if (expected)*/ spec.expected = expected;
+  spec.expected = expected + '';
   if (message)  spec.message  = '' + message;
+  
+  // Get options
+  if( context.options ) {
+    spec.options = context.options;
+  }
+  delete context.options;
+  
+  // Get compiler options
+  if( context.compileOptions ) {
+    spec.compileOptions = context.compileOptions;
+  }
+  delete context.compileOptions;
   
   if (context.globalPartials) {
     spec.globalPartials = context.globalPartials;

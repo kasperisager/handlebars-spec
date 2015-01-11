@@ -42,6 +42,10 @@ Handlebars.registerHelper('detectDataInsideEach', function(options) {
 
 // Utils
 
+function clone(v) {
+    return (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
+}
+
 function unstringifyHelpers(helpers) {
     if( !helpers | helpers === null ) {
         return;
@@ -79,11 +83,11 @@ function runTest(test) {
             break;
         case 'basic':
         case 'blocks':
-        case 'builtins': // a little broken
-        //case 'data': // very broken
-        case 'helpers': // a little broken
-        case 'partials': // a little broken
-        //case 'regressions': // mostly working
+        case 'builtins':
+        case 'data': // very broken
+        case 'helpers':
+        case 'partials':
+        case 'regressions':
         //case 'string-params': // very broken
         //case 'subexpressions': // very broken
         //case 'track-ids': // very broken
@@ -107,7 +111,7 @@ function prepareTestGeneric(test, suite) {
     // Exception
     spec.exception = (test.exception ? true : false);
     // Data
-    spec.data = (test.data !== undefined ? JSON.parse(JSON.stringify(test.data)) : undefined);
+    spec.data = clone(test.data);
     unstringifyLambdas(spec.data);
     // Helpers
     spec.helpers = unstringifyHelpers(test.helpers);
@@ -116,8 +120,8 @@ function prepareTestGeneric(test, suite) {
     unstringifyLambdas(spec.partials);
     spec.globalPartials = test.globalPartials || undefined;
     // Options
-    spec.options = test.options || undefined;
-    spec.compileOptions = test.compileOptions || undefined;
+    spec.options = clone(test.options);
+    spec.compileOptions = clone(test.compileOptions);
     return spec;
 }
 
@@ -144,8 +148,9 @@ function runTestGeneric(test) {
 
         // Execute
         if( test.options || test.compileOptions ) {
-            var template = global.CompilerContext.compile(test.template, test.compileOptions);
-            var opts = test.options === undefined ? {} : JSON.parse(JSON.stringify(test.options));
+            var template = global.CompilerContext.compile(test.template, clone(test.compileOptions));
+            var opts = test.options === undefined ? {} : clone(test.options);
+            opts.data = test.data; // le sigh
             if( test.helpers ) {
                 opts.helpers = test.helpers;
             }
