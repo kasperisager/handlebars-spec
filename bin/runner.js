@@ -16,18 +16,18 @@ function safeEval(templateSpec) {
   try {
     return eval('(' + templateSpec + ')');
   } catch (err) {
-    console.error(templateSpec);
+    console.error("SPEC:". templateSpec);
     throw err;
   }
 }
 global.CompilerContext = {
   compile: function(template, options) {
     //return handlebarsEnv.compile(template, options);
-    var templateSpec = handlebarsEnv.precompile(template, options);
-    return handlebarsEnv.template(safeEval(templateSpec));
+    var templateSpec = global.handlebarsEnv.precompile(template, options);
+    return global.handlebarsEnv.template(safeEval(templateSpec));
   },
   compileWithPartial: function(template, options) {
-    return handlebarsEnv.compile(template, options);
+    return global.handlebarsEnv.compile(template, options);
   }
 };
 require('../handlebars.js/spec/env/common.js');
@@ -40,122 +40,152 @@ Handlebars.registerHelper('detectDataInsideEach', function(options) {
 });
 
 
-// Main
-var dir = path.resolve('./spec/');
-var specs = fs.readdirSync(dir);
-var results = [];
+// Utils
 
-for( x in specs ) { 
-    var suite = specs[x].replace(/\.json$/, '');
-    var data = require(dir + '/' + specs[x]);
-    for( var y in data ) { 
-        runTest(data[y], suite);
-    }
-}
-
-function getHelpersFromTest(test) {
-    var helpers = {};
-    for( var x in test.helpers ) {
-        helpers[x] = safeEval(test.helpers[x].javascript);
-    }
-    return helpers;
-}
-
-function getLambdas(data) {
-    if( !data ) {
+function unstringifyHelpers(helpers) {
+    if( !helpers | helpers === null ) {
         return;
     }
-    
-    var fns;
-    for( var x in data ) {
-        if( typeof data[x] !== 'object' ) {
-            continue;
-        }
-        if( '!code' in data[x] ) {
-          if( typeof fns === 'undefined' ) {
-              fns = {};
-          }
-          fns[x] = safeEval(data[x].javascript);
-        } else {
-          var sigh = getLambdas(data[x]);
-          if( sigh ) {
-              if( typeof fns === 'undefined' ) {
-                  fns = {};
-              }
-              fns[x] = sigh;
-          }
-        }
+    var ret = {};
+    for( var x in helpers ) {
+        ret[x] = safeEval(helpers[x].javascript);
     }
-    return fns;
+    return ret;
 }
 
-function runTest(test, suite) {
-    switch( suite ) {
+function unstringifyLambdas(data) {
+    if( !data || data === null ) {
+        return data;
+    }
+    for( var x in data ) {
+        if( data[x] instanceof Array ) {
+            unstringifyLambdas(data[x]);
+        } else if( typeof data[x] === 'object' && data[x] !== null ) {
+            if( '!code' in data[x] ) {
+                data[x] = safeEval(data[x].javascript);
+            } else {
+                unstringifyLambdas(data[x]);
+            }
+        }
+    }
+    return data;
+}
+
+function runTest(test) {
+    var result = null;
+    switch( test.suite ) {
         case 'tokenizer':
             // not yet implemented
             break;
         case 'basic':
         case 'blocks':
-        //case 'builtins': // a little broken
+        case 'builtins': // a little broken
         //case 'data': // very broken
-        //case 'helpers': // a little broken
+        case 'helpers': // a little broken
         //case 'partials': // a little broken
         //case 'regressions': // mostly working
         //case 'string-params': // very broken
         //case 'subexpressions': // very broken
         //case 'track-ids': // very broken
         case 'whitespace-control':
-            runTestGeneric(test, suite);
+            result = runTestGeneric(prepareTestGeneric(test, suite));
             break;
         default:
             break;
     }
+    return result;
 }
 
-function runTestGeneric(test, suite) {
-    console.log('------------------------------------------------------------');
-    var prefix = '(' + suite + ' - ' + test.it + ' - ' + test.description + '): ';
+function prepareTestGeneric(test, suite) {
+    var spec = {};
+    // Output prefix
+    spec.prefix = '(' + suite + ' - ' + test.it + ' - ' + test.description + '): ';
+    // Template
+    spec.template = test.template;
+    // Expected
+    spec.expected = test.expected;
+    // Exception
+    spec.exception = (test.exception ? true : false);
+    // Data
+    spec.data = (test.data !== undefined ? JSON.parse(JSON.stringify(test.data)) : undefined);
+    unstringifyLambdas(spec.data);
+    // Helpers
+    spec.helpers = unstringifyHelpers(test.helpers);
+    // Partials
+    spec.partials = test.partials;
+    // Options
+    spec.options = test.options || undefined;
+    spec.compileOptions = test.compileOptions || undefined;
+    return spec;
+}
+
+function checkResult(test, e) {
+    if( (test.exception === true) === (e !== undefined) ) {
+        console.log(test.prefix + 'OK');
+        return true;
+    } else {
+        console.log(test.prefix + (e || 'Error: should have thrown, did not'));
+        e && console.log(e.stack);
+        console.log('Test Data: ', test);
+        return false;
+    }
+}
+
+function runTestGeneric(test) {
     try {
-        // Clone test data for merge
-        var data = (test.data !== undefined ? JSON.parse(JSON.stringify(test.data)) : undefined);
-        // Get and merge lambdas
-        var lambdas = getLambdas(test.lambdas);
-        if( lambdas ) {
-            data = objmerge(data || {}, lambdas);
-        }
-        // Get helpers
-        var helpers = test.helpers ? getHelpersFromTest(test) : [];
-        // Prepare arguments
-        var hashOrArray;
-        if( test.data || helpers || test.partials ) {
-            hashOrArray = [data, helpers, test.partials]
-        }
         // Execute
         if( test.options || test.compileOptions ) {
-            // @todo separate this into compile opts/render opts
-            var options = test.options || undefined;
-            var compileOptions = test.compileOptions || undefined;
-            var template = global.CompilerContext.compile(test.template, compileOptions);
-            var result = template(data, options);
-            global.equals(result, test.expected);
+            var template = global.CompilerContext.compile(test.template, test.compileOptions);
+            var opts = test.options === undefined ? {} : JSON.parse(JSON.stringify(test.options));
+            if( test.helpers ) {
+                opts.helpers = test.helpers;
+            }
+            var actual = template(test.data, opts);
+            global.equals(actual, test.expected);
         } else {
-            shouldCompileTo(test.template, hashOrArray, test.expected, 'grr');
+            // Prepare arguments
+            var hashOrArray;
+            if( test.data !== undefined || test.helpers || test.partials ) {
+                hashOrArray = [test.data, test.helpers, test.partials]
+            }
+            shouldCompileTo(test.template, hashOrArray, test.expected, 'generated by runner');
         }
-        // Check if should have thrown
-        if( !test.exception ) {
-            console.log(prefix + 'OK');
+        return checkResult(test);
+    } catch(e) {
+        return checkResult(test, e);
+    }
+}
+
+
+// Main
+var dir = path.resolve('./spec/');
+var specs = fs.readdirSync(dir);
+var successes = [];
+var failures = [];
+var skipped = [];
+
+for( var x in specs ) { 
+    var suite = specs[x].replace(/\.json$/, '');
+    var data = require(dir + '/' + specs[x]);
+    for( var y in data ) { 
+        data[y].suite = suite;
+        var result = runTest(data[y]);
+        if( result === null ) {
+            skipped.push(data[y]);
+        } else if( result === true ) {
+            successes.push(data[y]);
         } else {
-            console.log(prefix + 'Error: should have thrown, did not');
-        }
-    } catch( e ) {
-        if( test.exception ) {
-            console.log(prefix + 'OK');
-        } else {
-            console.log(prefix + e);
-            console.log(e.stack);
-            console.log('Test Data: ', test);
-            console.log('Merged Data: ', data);
-            console.log('Helpers: ', helpers);
+            failures.push(data[y]);
         }
     }
 }
+
+
+// Results
+console.log('Summary');
+console.log('Success: ' + successes.length);
+console.log('Failed: ' + failures.length);
+console.log('Skipped: ' + skipped.length);
+
+// Exit
+process.exit(failures.length ? 2 : 0);

@@ -379,30 +379,14 @@
 				"php": "function() { return 'world!'; }"
 			},
 			"test_helper": {
+				"javascript": "function() { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"expected": "found it! Goodbye cruel world!!"
 	},
 	{
-		"description": "helpers hash",
-		"it": "Multiple global helper registration",
-		"template": "{{test_helper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
-		"data": {
-			"cruel": "cruel"
-		},
-		"expected": "found it! Goodbye cruel world!!",
-		"helpers": {
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			},
-			"world": {
-				"php": "function() { return 'world!'; }"
-			}
-		}
-	},
-	{
-		"description": "helpers hash",
+		"description": "decimal number literals work",
 		"it": "decimal number literals work",
 		"template": "Message: {{hello -1.2 1.2}}",
 		"data": {},
@@ -415,7 +399,7 @@
 		"expected": "Message: Hello -1.2 1.2 times"
 	},
 	{
-		"description": "helpers hash",
+		"description": "negative number literals work",
 		"it": "negative number literals work",
 		"template": "Message: {{hello -12}}",
 		"data": {},
@@ -477,7 +461,7 @@
 		"expected": "Message: Hello Alan's world"
 	},
 	{
-		"description": "String literal parameters",
+		"description": "negative number literals work",
 		"it": "negative number literals work",
 		"template": "Message: {{hello -12}}",
 		"data": {},
@@ -798,6 +782,10 @@
 		"it": "Functions are bound to the context in knownHelpers only mode",
 		"template": "{{foo}}",
 		"data": {
+			"foo": {
+				"!code": true,
+				"javascript": "function () { return this.bar; }"
+			},
 			"bar": "bar"
 		},
 		"expected": "bar",
@@ -827,22 +815,19 @@
 		"description": "blockHelperMissing",
 		"it": "lambdas are resolved by blockHelperMissing, not handlebars proper",
 		"template": "{{#truthy}}yep{{/truthy}}",
-		"data": {},
-		"expected": "yep",
-		"lambdas": {
+		"data": {
 			"truthy": {
 				"!code": true,
 				"javascript": "function () { return true; }"
 			}
-		}
+		},
+		"expected": "yep"
 	},
 	{
 		"description": "blockHelperMissing",
 		"it": "lambdas resolved by blockHelperMissing are bound to the context",
 		"template": "{{#truthy}}yep{{/truthy}}",
-		"data": {},
-		"expected": "",
-		"lambdas": {
+		"data": {
 			"truthy": {
 				"!code": true,
 				"javascript": "function () { return this.truthiness(); }"
@@ -851,7 +836,8 @@
 				"!code": true,
 				"javascript": "function () { return false; }"
 			}
-		}
+		},
+		"expected": ""
 	},
 	{
 		"description": "name field",

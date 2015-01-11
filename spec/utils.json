@@ -5,17 +5,13 @@
 		"template": "{{name}}",
 		"data": {
 			"name": {
-				"string": "<em>Sean O&#x27;Malley</em>"
-			}
-		},
-		"expected": "<em>Sean O&#x27;Malley</em>",
-		"lambdas": {
-			"name": {
+				"string": "<em>Sean O&#x27;Malley</em>",
 				"toString": {
 					"!code": true,
 					"javascript": "function () {\n  return \"\" + this.string;\n}"
 				}
 			}
-		}
+		},
+		"expected": "<em>Sean O&#x27;Malley</em>"
 	}
 ]

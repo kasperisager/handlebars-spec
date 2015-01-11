@@ -189,7 +189,7 @@
 		"expected": "baz"
 	},
 	{
-		"description": "blocks",
+		"description": "should strip whitespace around partials",
 		"it": "should strip whitespace around partials",
 		"template": "foo {{~> dude~}} ",
 		"data": {},
@@ -199,7 +199,7 @@
 		"expected": "foobar"
 	},
 	{
-		"description": "blocks",
+		"description": "should strip whitespace around partials",
 		"it": "should strip whitespace around partials",
 		"template": "foo {{> dude~}} ",
 		"data": {},
@@ -209,7 +209,7 @@
 		"expected": "foo bar"
 	},
 	{
-		"description": "blocks",
+		"description": "should strip whitespace around partials",
 		"it": "should strip whitespace around partials",
 		"template": "foo {{> dude}} ",
 		"data": {},
@@ -219,7 +219,7 @@
 		"expected": "foo bar "
 	},
 	{
-		"description": "blocks",
+		"description": "should only strip whitespace once",
 		"it": "should only strip whitespace once",
 		"template": " {{~foo~}} {{foo}} {{foo}} ",
 		"data": {

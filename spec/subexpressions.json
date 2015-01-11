@@ -204,19 +204,18 @@
 		"description": "subexpressions",
 		"it": "subexpression functions on the context",
 		"template": "{{foo (bar)}}!",
-		"data": {},
+		"data": {
+			"bar": {
+				"!code": true,
+				"javascript": "function () {\n        return \"LOL\";\n      }"
+			}
+		},
 		"helpers": {
 			"foo": {
 				"javascript": "function (val) {\n        return val+val;\n      }"
 			}
 		},
-		"expected": "LOLLOL!",
-		"lambdas": {
-			"bar": {
-				"!code": true,
-				"javascript": "function () {\n        return \"LOL\";\n      }"
-			}
-		}
+		"expected": "LOLLOL!"
 	},
 	{
 		"description": "subexpressions",

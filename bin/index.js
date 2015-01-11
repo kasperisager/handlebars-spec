@@ -16,14 +16,25 @@ program
 var tests   = []  // Array containg the actual specs
   , indices = []  // Temp array for auto-incrementing test indices
   , context = {}; // Current test context
+var skipNames = [
+  '#log-#log',
+  'multiple global helper registration-multiple global helper registration'
+];
 
 tests.add = function (spec) {
   if (!spec || !spec.template) return;
 
   var key = (spec.description + '-' + spec.it).toLowerCase();
+  
+  // Skip some
+  // @todo patch these in manually?
+  if( skipNames.indexOf(key) !== -1 ) {
+    return;
+  }
 
   for (var i = 0; i < 20; i++) {
     var name = key + '-' + ('0' + i).slice(-2);
+    
 
     if (indices.indexOf(name) === -1) {
       if (program.output) {
@@ -71,29 +82,20 @@ var extractHelpers = function (data) {
   return isEmptyObject(helpers) ? false : helpers;
 };
 
-var extractLambdas = function(data) {
-    var fns;
+var stringifyLambdas = function(data) {
     for( var x in data ) {
-        if( typeof data[x] === 'function' ) {
-            if( typeof fns === 'undefined' ) {
-                fns = {};
-            }
-            fns[x] = {
-                '!code': true,
-                javascript: data[x].toString()
-            };
-        } else if( typeof data[x] === 'object' ) {
-            var childfns = extractLambdas(data[x]);
-            if( childfns ) {
-                if( typeof fns === 'undefined' ) {
-                    fns = {};
-                }
-                fns[x] = childfns;
-            }
+      if( data[x] instanceof Array ) {
+        stringifyLambdas(data[x]);
+      } else if( typeof data[x] === 'function' || data[x] instanceof Function ) {
+        data[x] = {
+          '!code' : true,
+          'javascript' : data[x].toString()
         }
+      } else if( typeof data[x] === 'object' ) {
+        stringifyLambdas(data[x]);
+      }
     }
-    return fns;
-};
+}
 
 global.Handlebars    = Handlebars;
 global.handlebarsEnv = Handlebars.create();
@@ -137,6 +139,7 @@ global.describe = function (description, next) {
   // Push suite description unto context
   context.description = description;
   next();
+  context.description = undefined;
 };
 
 global.it = function (description, next) {
@@ -147,7 +150,7 @@ global.it = function (description, next) {
 
 global.equal = global.equals = function (actual, expected, message) {
   var spec = {
-      description : context.description
+      description : (context.description || context.it)
     , it          : context.it
     , template    : context.template
     , data        : context.data
@@ -177,7 +180,10 @@ global.equal = global.equals = function (actual, expected, message) {
   if (Handlebars.Parser.lexer.matched) {
     spec.template = Handlebars.Parser.lexer.matched;
   }
-
+  
+  // Convert lambdas to object/strings
+  stringifyLambdas(spec.data);
+  
   tests.add(spec);
 };
 
@@ -190,7 +196,7 @@ global.shouldCompileToWithPartials = function (string, hashOrArray, partials, ex
 };
 
 global.compileWithPartials = function (string, hashOrArray, partials, expected, message) {
-  var helpers = false;
+  var helpers = false, data;
 
   if (util.isArray(hashOrArray)) {
     data     = hashOrArray[0];
@@ -199,9 +205,9 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
   } else {
     data = hashOrArray;
   }
-
+  
   var spec = {
-      description : context.description
+      description : (context.description || context.it)
     , it          : context.it
     , template    : string
     , data        : data
@@ -212,11 +218,9 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
   /*if (expected)*/ spec.expected = expected;
   if (message)  spec.message  = '' + message;
   
-  var lambdas = extractLambdas(data);
-  if( lambdas ) {
-      spec.lambdas = lambdas;
-  }
-
+  // Convert lambdas to object/strings
+  stringifyLambdas(spec.data);
+  
   tests.add(spec);
 };
 
@@ -226,7 +230,7 @@ global.shouldThrow = function (callback, error, message) {
   } catch (err) {}
 
   var spec = {
-      description : context.description
+      description : (context.description || context.it)
     , it          : context.it
     , template    : context.template
     , exception   : true

@@ -85,60 +85,52 @@
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
-			"world": "world"
-		},
-		"expected": "GOODBYE cruel world!",
-		"lambdas": {
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {return true;}"
-			}
-		}
+			},
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "#if",
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
-			"world": "world"
-		},
-		"expected": "GOODBYE cruel world!",
-		"lambdas": {
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {return this.world;}"
-			}
-		}
+			},
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "#if",
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
-			"world": "world"
-		},
-		"expected": "cruel world!",
-		"lambdas": {
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {return false;}"
-			}
-		}
+			},
+			"world": "world"
+		},
+		"expected": "cruel world!"
 	},
 	{
 		"description": "#if",
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
-			"world": "world"
-		},
-		"expected": "cruel world!",
-		"lambdas": {
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {return this.foo;}"
-			}
-		}
+			},
+			"world": "world"
+		},
+		"expected": "cruel world!"
 	},
 	{
 		"description": "#with",
@@ -156,14 +148,13 @@
 		"description": "#with",
 		"it": "with with function argument",
 		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
-		"data": {},
-		"expected": "Alan Johnson",
-		"lambdas": {
+		"data": {
 			"person": {
 				"!code": true,
 				"javascript": "function () { return {first: \"Alan\", last: \"Johnson\"};}"
 			}
-		}
+		},
+		"expected": "Alan Johnson"
 	},
 	{
 		"description": "#each",
@@ -392,15 +383,13 @@
 		"it": "each with function argument",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
 		"data": {
-			"world": "world"
-		},
-		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
-		"lambdas": {
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function () { return [{text: \"goodbye\"}, {text: \"Goodbye\"}, {text: \"GOODBYE\"}];}"
-			}
-		}
+			},
+			"world": "world"
+		},
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
 	},
 	{
 		"description": "#each",
@@ -454,27 +443,6 @@
 			}
 		],
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
-	},
-	{
-		"description": "#each",
-		"it": "#log",
-		"template": "{{log blah}}",
-		"data": {
-			"blah": "whee"
-		},
-		"expected": ""
-	},
-	{
-		"description": "#each",
-		"it": "#log",
-		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
-		"message": "should call log with 1"
-	},
-	{
-		"description": "#each",
-		"it": "#log",
-		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
-		"message": "should call log with 'whee'"
 	},
 	{
 		"description": "#lookup",

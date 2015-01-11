@@ -224,163 +224,143 @@
 		"description": "basic context",
 		"it": "functions returning safestrings shouldn't be escaped",
 		"template": "{{awesome}}",
-		"data": {},
-		"expected": "&\"\\<>",
-		"lambdas": {
+		"data": {
 			"awesome": {
 				"!code": true,
 				"javascript": "function () { return new Handlebars.SafeString(\"&\\\"\\\\<>\"); }"
 			}
-		}
-	},
-	{
-		"description": "basic context",
-		"it": "functions",
-		"template": "{{awesome}}",
-		"data": {},
-		"expected": "Awesome",
-		"lambdas": {
-			"awesome": {
-				"!code": true,
-				"javascript": "function () { return \"Awesome\"; }"
-			}
-		}
+		},
+		"expected": "&\"\\<>"
 	},
 	{
 		"description": "basic context",
 		"it": "functions",
 		"template": "{{awesome}}",
 		"data": {
-			"more": "More awesome"
+			"awesome": {
+				"!code": true,
+				"javascript": "function () { return \"Awesome\"; }"
+			}
 		},
-		"expected": "More awesome",
-		"lambdas": {
+		"expected": "Awesome"
+	},
+	{
+		"description": "basic context",
+		"it": "functions",
+		"template": "{{awesome}}",
+		"data": {
 			"awesome": {
 				"!code": true,
 				"javascript": "function () { return this.more; }"
-			}
-		}
+			},
+			"more": "More awesome"
+		},
+		"expected": "More awesome"
 	},
 	{
 		"description": "basic context",
 		"it": "functions with context argument",
 		"template": "{{awesome frank}}",
 		"data": {
-			"frank": "Frank"
-		},
-		"expected": "Frank",
-		"lambdas": {
 			"awesome": {
 				"!code": true,
 				"javascript": "function (context) { return context; }"
-			}
-		}
+			},
+			"frank": "Frank"
+		},
+		"expected": "Frank"
 	},
 	{
 		"description": "basic context",
 		"it": "pathed functions with context argument",
 		"template": "{{bar.awesome frank}}",
 		"data": {
-			"bar": {},
-			"frank": "Frank"
-		},
-		"expected": "Frank",
-		"lambdas": {
 			"bar": {
 				"awesome": {
 					"!code": true,
 					"javascript": "function (context) { return context; }"
 				}
-			}
-		}
+			},
+			"frank": "Frank"
+		},
+		"expected": "Frank"
 	},
 	{
 		"description": "basic context",
 		"it": "depthed functions with context argument",
 		"template": "{{#with frank}}{{../awesome .}}{{/with}}",
 		"data": {
-			"frank": "Frank"
-		},
-		"expected": "Frank",
-		"lambdas": {
 			"awesome": {
 				"!code": true,
 				"javascript": "function (context) { return context; }"
-			}
-		}
+			},
+			"frank": "Frank"
+		},
+		"expected": "Frank"
 	},
 	{
 		"description": "basic context",
 		"it": "block functions with context argument",
 		"template": "{{#awesome 1}}inner {{.}}{{/awesome}}",
-		"data": {},
-		"expected": "inner 1",
-		"lambdas": {
+		"data": {
 			"awesome": {
 				"!code": true,
 				"javascript": "function (context, options) { return options.fn(context); }"
 			}
-		}
+		},
+		"expected": "inner 1"
 	},
 	{
 		"description": "basic context",
 		"it": "depthed block functions with context argument",
 		"template": "{{#with value}}{{#../awesome 1}}inner {{.}}{{/../awesome}}{{/with}}",
 		"data": {
-			"value": true
-		},
-		"expected": "inner 1",
-		"lambdas": {
+			"value": true,
 			"awesome": {
 				"!code": true,
 				"javascript": "function (context, options) { return options.fn(context); }"
 			}
-		}
+		},
+		"expected": "inner 1"
 	},
 	{
 		"description": "basic context",
 		"it": "block functions without context argument",
 		"template": "{{#awesome}}inner{{/awesome}}",
-		"data": {},
-		"expected": "inner",
-		"lambdas": {
+		"data": {
 			"awesome": {
 				"!code": true,
 				"javascript": "function (options) { return options.fn(this); }"
 			}
-		}
+		},
+		"expected": "inner"
 	},
 	{
 		"description": "basic context",
 		"it": "pathed block functions without context argument",
 		"template": "{{#foo.awesome}}inner{{/foo.awesome}}",
 		"data": {
-			"foo": {}
-		},
-		"expected": "inner",
-		"lambdas": {
 			"foo": {
 				"awesome": {
 					"!code": true,
 					"javascript": "function (options) { return this; }"
 				}
 			}
-		}
+		},
+		"expected": "inner"
 	},
 	{
 		"description": "basic context",
 		"it": "depthed block functions without context argument",
 		"template": "{{#with value}}{{#../awesome}}inner{{/../awesome}}{{/with}}",
 		"data": {
-			"value": true
-		},
-		"expected": "inner",
-		"lambdas": {
+			"value": true,
 			"awesome": {
 				"!code": true,
 				"javascript": "function (options) { return this; }"
 			}
-		}
+		},
+		"expected": "inner"
 	},
 	{
 		"description": "basic context",

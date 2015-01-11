@@ -142,6 +142,7 @@
 	"helpers hash-the helper hash should augment the global hash-00": {
 		"helpers": {
 			"test_helper": {
+				"javascript": "function() { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
 			"world": {
@@ -149,7 +150,7 @@
 			}
 		}
 	},
-	"helpers hash-multiple global helper registration-00": {
+	"multiple global helper registration-multiple global helper registration-00": {
 		"helpers": {
 			"test_helper": {
 				"php": "function() { return 'found it!'; }"
@@ -159,14 +160,14 @@
 			}
 		}
 	},
-	"helpers hash-decimal number literals work-00": {
+	"decimal number literals work-decimal number literals work-00": {
 		"helpers": {
 			"hello": {
 				"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
 			}
 		}
 	},
-	"helpers hash-negative number literals work-00": {
+	"negative number literals work-negative number literals work-00": {
 		"helpers": {
 			"hello": {
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
@@ -194,7 +195,7 @@
 			}
 		}
 	},
-	"string literal parameters-negative number literals work-00": {
+	"negative number literals work-negative number literals work-01": {
 		"helpers": {
 			"hello": {
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
