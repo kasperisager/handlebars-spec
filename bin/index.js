@@ -275,10 +275,15 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
     , template    : string
     , data        : data
     };
-
+  
+  if( context.exception ) {
+    spec.exception = true;
+    delete context.exception;
+  }
+  
   if (partials) spec.partials = partials;
   if (helpers)  spec.helpers  = helpers;
-  spec.expected = expected + '';
+  spec.expected = expected;
   if (message)  spec.message  = '' + message;
   
   // Get options
@@ -306,9 +311,13 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
 };
 
 global.shouldThrow = function (callback, error, message) {
+  context.exception = true;
+  
   try {
     callback();
   } catch (err) {}
+  
+  delete context.exception;
 
   var spec = {
       description : (context.description || context.it)

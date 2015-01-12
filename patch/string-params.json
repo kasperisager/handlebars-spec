@@ -6,7 +6,7 @@
 				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
 			}
 		},
-		"note": "Check original spec, needs other tests"
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
     },
     "string params mode-hash parameters get context information-01": null,
     "string params mode-hash parameters get context information-02": null,
@@ -22,7 +22,7 @@
 				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
 			}
 		},
-		"note": "Check original spec, needs other tests"
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
     },
     "string params mode-hash parameters get type information-01": null,
     "string params mode-hash parameters get type information-02": null,
@@ -34,7 +34,7 @@
     "string params mode-hash parameters get type information-08": null,
     "string params mode-should handle data-00": {
         "expected": "Foo!",
-		"note": "Check original spec, needs other tests"
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
     },
     "string params mode-information about the types is passed along-00": {
         "expected": "Helper called",
@@ -43,7 +43,7 @@
 				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
 			}
 		},
-		"note": "Check original spec, needs other tests"
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
     },
     "string params mode-information about the types is passed along-01": null,
     "string params mode-information about the types is passed along-02": null,

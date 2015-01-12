@@ -68,7 +68,7 @@
 				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
 			}
 		},
-		"note": "Check original spec, needs other tests"
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "string params mode",
@@ -84,7 +84,7 @@
 				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
 			}
 		},
-		"note": "Check original spec, needs other tests"
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "string params mode",
@@ -105,7 +105,7 @@
 				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }"
 			}
 		},
-		"note": "Check original spec, needs other tests"
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "string params mode",
@@ -161,6 +161,6 @@
 				"javascript": "function (bar, options) {\n        equal(bar, 'bar');\n        equal(options.types[0], 'DATA');\n        return 'Foo!';\n      }"
 			}
 		},
-		"note": "Check original spec, needs other tests"
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	}
 ]

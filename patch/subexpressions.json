@@ -1,0 +1,30 @@
+{
+    "subexpressions-as hashes in string params mode-00": {
+        "expected": "val is BORK",
+        "helpers": {
+			"blog": {
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }"
+			}
+        },
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "subexpressions-as hashes in string params mode-01": null,
+    "subexpressions-in string params mode,-00": {
+        "expected": "fooyeah",
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "subexpressions-in string params mode,-01": null,
+    "subexpressions-in string params mode,-02": null,
+    "subexpressions-in string params mode,-03": null,
+    "subexpressions-in string params mode,-04": null,
+    "subexpressions-in string params mode,-05": null,
+    "subexpressions-in string params mode,-06": null,
+    "subexpressions-provides each nested helper invocation its own options hash-00": {
+		"helpers": {
+			"equal": {
+				"javascript": "function (x, y, options) {\n        return x === y;\n      }"
+			}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+    }
+}

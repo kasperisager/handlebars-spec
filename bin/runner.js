@@ -92,8 +92,8 @@ function runTest(test) {
         case 'helpers':
         case 'partials':
         case 'regressions':
-        case 'string-params': // very broken
-        //case 'subexpressions': // very broken
+        case 'string-params':
+        case 'subexpressions': // very broken
         //case 'track-ids': // very broken
         case 'whitespace-control':
             result = runTestGeneric(prepareTestGeneric(test, suite));
