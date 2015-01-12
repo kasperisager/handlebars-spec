@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "0.10"
+before_script:
+  - make
+script:
+  - make check_changes
+  - make test
+
