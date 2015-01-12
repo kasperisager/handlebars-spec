@@ -634,17 +634,8 @@
 		"message": "'foo' should === 'foo",
 		"compileOptions": {
 			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true,
 				"hello": true
-			},
-			"data": true
+			}
 		},
 		"helpers": {
 			"hello": {
@@ -661,18 +652,9 @@
 		"message": "'undefined' should === 'undefined",
 		"compileOptions": {
 			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true,
 				"typeof": true
 			},
-			"knownHelpersOnly": true,
-			"data": true
+			"knownHelpersOnly": true
 		},
 		"helpers": {
 			"typeof": {
@@ -691,18 +673,7 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true,
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"knownHelpersOnly": true
 		}
 	},
 	{
@@ -715,18 +686,7 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true,
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"knownHelpersOnly": true
 		}
 	},
 	{
@@ -739,18 +699,7 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true,
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"knownHelpersOnly": true
 		}
 	},
 	{
@@ -763,18 +712,7 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true,
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"knownHelpersOnly": true
 		}
 	},
 	{
@@ -791,18 +729,7 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true,
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"knownHelpersOnly": true
 		}
 	},
 	{
@@ -823,8 +750,7 @@
 		},
 		"expected": "yep",
 		"compileOptions": {
-			"knownHelpersOnly": true,
-			"data": true
+			"knownHelpersOnly": true
 		}
 	},
 	{
@@ -926,18 +852,9 @@
 		"expected": "ran: helper",
 		"compileOptions": {
 			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true,
 				"helper": true
 			},
-			"knownHelpersOnly": true,
-			"data": true
+			"knownHelpersOnly": true
 		},
 		"helpers": {
 			"blockHelperMissing": {

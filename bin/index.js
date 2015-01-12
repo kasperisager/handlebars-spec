@@ -17,13 +17,8 @@ var tests   = []  // Array containg the actual specs
   , indices = []  // Temp array for auto-incrementing test indices
   , context = {}; // Current test context
 var skipKeys = [
-  '#log-#log',
   'multiple global helper registration-multiple global helper registration',
   'regressions-can pass through an already-compiled ast via compile/precompile'
-];
-var skipNames = [
-  'string params mode-should handle data-01',
-  'string params mode-should handle data-02',
 ];
 
 tests.add = function (spec) {
@@ -46,13 +41,6 @@ tests.add = function (spec) {
       continue;
     }
     
-    // Skip some
-    // @todo patch these in manually?
-    if( skipNames.indexOf(name) !== -1 ) {
-      indices.push(name);
-      break;
-    }
-    
     if (program.output) {
       var output    = path.resolve(program.output)
         , patchName = path.basename(output)
@@ -62,7 +50,14 @@ tests.add = function (spec) {
         var patch = require(patchFile);
         
         if (patch.hasOwnProperty(name)) {
+          if( patch[name] === null ) {
+            // Note: setting to null means to skip the test. These will most
+            // likely be implementation-dependant
+            break;
+          }
           spec = extend(true, spec, patch[name]);
+          // Using nulls in patches to unset things
+          stripNulls(spec);
         }
       }
     }
@@ -72,6 +67,22 @@ tests.add = function (spec) {
     break;
   }
 };
+
+function clone(v) {
+    return (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
+}
+
+function stripNulls(data) {
+  if( typeof data === 'object' ) {
+    for( var x in data ) {
+      if( data[x] === null ) {
+        delete data[x];
+      } else if( typeof data === 'object' ) {
+        stripNulls(data[x]);
+      }
+    }
+  }
+}
 
 var isFunction = function (object) {
   return !!(object && object.constructor && object.call && object.apply);
@@ -95,6 +106,10 @@ var extractHelpers = function (data) {
   });
 
   return isEmptyObject(helpers) ? false : helpers;
+};
+
+var detectGlobalHelpers = function() {
+  
 };
 
 var detectGlobalPartials = function() {
@@ -141,7 +156,7 @@ global.CompilerContext = {
   compile: function (template, options) {
     // Push template unto context
     context.template = template;
-    context.compileOptions = options;
+    context.compileOptions = clone(options);
     
     var compiledTemplate = Handlebars.compile(template, options);
     
@@ -167,7 +182,7 @@ global.CompilerContext = {
   compileWithPartial: function(template, options) {
     // Push template unto context
     context.template = template;
-    context.compileOptions = options;
+    context.compileOptions = clone(options);
     return Handlebars.compile(template, options);
   }
 };

@@ -103,18 +103,7 @@
 		"expected": 1,
 		"message": "string params for inner helper processed correctly",
 		"compileOptions": {
-			"stringParams": true,
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"stringParams": true
 		},
 		"helpers": {
 			"snog": {
@@ -172,18 +161,7 @@
 		"data": {},
 		"expected": "sexpr",
 		"compileOptions": {
-			"stringParams": true,
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"stringParams": true
 		},
 		"helpers": {
 			"blog": {

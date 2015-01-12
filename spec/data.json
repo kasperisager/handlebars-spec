@@ -11,17 +11,7 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"data": true
 		},
 		"helpers": {
 			"hello": {
@@ -50,30 +40,6 @@
 		"expected": "Hello world",
 		"message": "Automatic data was triggered",
 		"helpers": {
-			"helperMissing": {
-				"javascript": "function (/* [args, ]options */) {\n    if(arguments.length === 1) {\n      // A missing field in a {{foo}} constuct.\n      return undefined;\n    } else {\n      // Someone is actually trying to call something, blow up.\n      throw new Exception(\"Missing helper: '\" + arguments[arguments.length-1].name + \"'\");\n    }\n  }"
-			},
-			"blockHelperMissing": {
-				"javascript": "function (context, options) {\n    var inverse = options.inverse || function() {}, fn = options.fn;\n\n    if (isFunction(context)) { context = context.call(this); }\n\n    if(context === true) {\n      return fn(this);\n    } else if(context === false || context == null) {\n      return inverse(this);\n    } else if (isArray(context)) {\n      if(context.length > 0) {\n        if (options.ids) {\n          options.ids = [options.name];\n        }\n\n        return instance.helpers.each(context, options);\n      } else {\n        return inverse(this);\n      }\n    } else {\n      if (options.data && options.ids) {\n        var data = createFrame(options.data);\n        data.contextPath = Utils.appendContextPath(options.data.contextPath, options.name);\n        options = {data: data};\n      }\n\n      return fn(context, options);\n    }\n  }"
-			},
-			"each": {
-				"javascript": "function (context, options) {\n    // Allow for {{#each}}\n    if (!options) {\n      options = context;\n      context = this;\n    }\n\n    var fn = options.fn, inverse = options.inverse;\n    var i = 0, ret = \"\", data;\n\n    var contextPath;\n    if (options.data && options.ids) {\n      contextPath = Utils.appendContextPath(options.data.contextPath, options.ids[0]) + '.';\n    }\n\n    if (isFunction(context)) { context = context.call(this); }\n\n    if (options.data) {\n      data = createFrame(options.data);\n    }\n\n    if(context && typeof context === 'object') {\n      if (isArray(context)) {\n        for(var j = context.length; i<j; i++) {\n          if (data) {\n            data.index = i;\n            data.first = (i === 0);\n            data.last  = (i === (context.length-1));\n\n            if (contextPath) {\n              data.contextPath = contextPath + i;\n            }\n          }\n          ret = ret + fn(context[i], { data: data });\n        }\n      } else {\n        for(var key in context) {\n          if(context.hasOwnProperty(key)) {\n            if(data) {\n              data.key = key;\n              data.index = i;\n              data.first = (i === 0);\n\n              if (contextPath) {\n                data.contextPath = contextPath + key;\n              }\n            }\n            ret = ret + fn(context[key], {data: data});\n            i++;\n          }\n        }\n      }\n    }\n\n    if(i === 0){\n      ret = inverse(this);\n    }\n\n    return ret;\n  }"
-			},
-			"if": {
-				"javascript": "function (conditional, options) {\n    if (isFunction(conditional)) { conditional = conditional.call(this); }\n\n    // Default behavior is to render the positive path if the value is truthy and not empty.\n    // The `includeZero` option may be set to treat the condtional as purely not empty based on the\n    // behavior of isEmpty. Effectively this determines if 0 is handled by the positive path or negative.\n    if ((!options.hash.includeZero && !conditional) || Utils.isEmpty(conditional)) {\n      return options.inverse(this);\n    } else {\n      return options.fn(this);\n    }\n  }"
-			},
-			"unless": {
-				"javascript": "function (conditional, options) {\n    return instance.helpers['if'].call(this, conditional, {fn: options.inverse, inverse: options.fn, hash: options.hash});\n  }"
-			},
-			"with": {
-				"javascript": "function (context, options) {\n    if (isFunction(context)) { context = context.call(this); }\n\n    var fn = options.fn;\n\n    if (!Utils.isEmpty(context)) {\n      if (options.data && options.ids) {\n        var data = createFrame(options.data);\n        data.contextPath = Utils.appendContextPath(options.data.contextPath, options.ids[0]);\n        options = {data:data};\n      }\n\n      return fn(context, options);\n    }\n  }"
-			},
-			"log": {
-				"javascript": "function (context, options) {\n    var level = options.data && options.data.level != null ? parseInt(options.data.level, 10) : 1;\n    instance.log(level, context);\n  }"
-			},
-			"lookup": {
-				"javascript": "function (obj, field, options) {\n    return obj && obj[field];\n  }"
-			},
 			"let": {
 				"javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }"
 			}
@@ -166,17 +132,7 @@
 		"message": "data variables are inherited downstream",
 		"options": {},
 		"compileOptions": {
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"data": true
 		},
 		"helpers": {
 			"let": {
@@ -199,17 +155,7 @@
 		"message": "Data output by helper inside partial",
 		"options": {},
 		"compileOptions": {
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"data": true
 		},
 		"helpers": {
 			"helperMissing": {
@@ -254,17 +200,7 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"data": true
 		},
 		"helpers": {
 			"hello": {
@@ -284,17 +220,7 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"data": true
 		},
 		"helpers": {
 			"hello": {
@@ -318,17 +244,7 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"data": true
 		},
 		"helpers": {
 			"hello": {
@@ -353,17 +269,7 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"data": true
 		},
 		"helpers": {
 			"hello": {
@@ -387,17 +293,7 @@
 		"message": "Overriden data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"data": true
 		},
 		"helpers": {
 			"hello": {
@@ -421,17 +317,7 @@
 		"message": "Overriden data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true,
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+			"data": true
 		},
 		"helpers": {
 			"hello": {

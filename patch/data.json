@@ -1,0 +1,17 @@
+{
+    "data-deep @foo triggers automatic top-level data-00": {
+		"helpers": {
+			"helperMissing": null,
+			"blockHelperMissing": null,
+			"each": null,
+			"if": null,
+			"unless": null,
+			"with": null,
+			"log": null,
+			"lookup": null,
+			"let": {
+				"javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }"
+			}
+		}
+    }
+}

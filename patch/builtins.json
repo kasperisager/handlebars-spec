@@ -9,5 +9,8 @@
 				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
 		}
-	}
+	},
+	"#log-#log-00": null,
+	"#log-#log-01": null,
+	"#log-#log-02": null
 }

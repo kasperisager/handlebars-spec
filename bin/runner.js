@@ -5,8 +5,7 @@ var program = require('commander')
   , path = require('path')
   , util = require('util')
   , extend = require('extend')
-  , Handlebars = require('handlebars')
-  , objmerge = require('object-merge');
+  , Handlebars = require('handlebars');
 
 global.Handlebars = Handlebars;
 
@@ -38,6 +37,11 @@ require('../handlebars.js/spec/env/common.js');
 Handlebars.registerHelper('detectDataInsideEach', function(options) {
     return options.data && options.data.exclaim;
 });
+
+
+function isFunction(f) {
+    return (f instanceof Function);
+}
 
 
 // Utils
@@ -84,11 +88,11 @@ function runTest(test) {
         case 'basic':
         case 'blocks':
         case 'builtins':
-        case 'data': // very broken
+        case 'data':
         case 'helpers':
         case 'partials':
         case 'regressions':
-        //case 'string-params': // very broken
+        case 'string-params': // very broken
         //case 'subexpressions': // very broken
         //case 'track-ids': // very broken
         case 'whitespace-control':

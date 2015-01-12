@@ -1,0 +1,57 @@
+{
+    "string params mode-hash parameters get context information-00": {
+        "expected": "Helper called",
+		"helpers": {
+			"tomdale": {
+				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
+			}
+		},
+		"note": "Check original spec, needs other tests"
+    },
+    "string params mode-hash parameters get context information-01": null,
+    "string params mode-hash parameters get context information-02": null,
+    "string params mode-hash parameters get context information-03": null,
+    "string params mode-hash parameters get context information-04": null,
+    "string params mode-hash parameters get context information-05": null,
+    "string params mode-hash parameters get context information-06": null,
+    "string params mode-hash parameters get context information-07": null,
+    "string params mode-hash parameters get type information-00": {
+        "expected": "Helper called",
+		"helpers": {
+			"tomdale": {
+				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
+			}
+		},
+		"note": "Check original spec, needs other tests"
+    },
+    "string params mode-hash parameters get type information-01": null,
+    "string params mode-hash parameters get type information-02": null,
+    "string params mode-hash parameters get type information-03": null,
+    "string params mode-hash parameters get type information-04": null,
+    "string params mode-hash parameters get type information-05": null,
+    "string params mode-hash parameters get type information-06": null,
+    "string params mode-hash parameters get type information-07": null,
+    "string params mode-hash parameters get type information-08": null,
+    "string params mode-should handle data-00": {
+        "expected": "Foo!",
+		"note": "Check original spec, needs other tests"
+    },
+    "string params mode-information about the types is passed along-00": {
+        "expected": "Helper called",
+		"helpers": {
+			"tomdale": {
+				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
+			}
+		},
+		"note": "Check original spec, needs other tests"
+    },
+    "string params mode-information about the types is passed along-01": null,
+    "string params mode-information about the types is passed along-02": null,
+    "string params mode-information about the types is passed along-03": null,
+    "string params mode-information about the types is passed along-04": null,
+    "string params mode-information about the types is passed along-05": null,
+    "string params mode-information about the types is passed along-06": null,
+    "string params mode-information about the types is passed along-07": null,
+    "string params mode-should handle data-01": null,
+    "string params mode-should handle data-02": null
+}
