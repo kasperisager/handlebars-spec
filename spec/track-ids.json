@@ -4,22 +4,13 @@
 		"it": "should not include anything without the flag",
 		"template": "{{wycats is.a slave.driver}}",
 		"data": {},
+		"expected": "success",
 		"helpers": {
 			"wycats": {
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids, undefined);\n        equal(options.hashIds, undefined);\n\n        return 'success';\n      }"
 			}
-		}
-	},
-	{
-		"description": "track ids",
-		"it": "should not include anything without the flag",
-		"template": "{{wycats is.a slave.driver}}"
-	},
-	{
-		"description": "track ids",
-		"it": "should not include anything without the flag",
-		"template": "{{wycats is.a slave.driver}}",
-		"expected": "success"
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "track ids",
@@ -33,7 +24,7 @@
 				"driver": "bar"
 			}
 		},
-		"expected": "is.a",
+		"expected": "HELP ME MY BOSS is.a:foo slave.driver:bar",
 		"compileOptions": {
 			"trackIds": true
 		},
@@ -41,19 +32,8 @@
 			"wycats": {
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }"
 			}
-		}
-	},
-	{
-		"description": "track ids",
-		"it": "should include argument ids",
-		"template": "{{wycats is.a slave.driver}}",
-		"expected": "slave.driver"
-	},
-	{
-		"description": "track ids",
-		"it": "should include argument ids",
-		"template": "{{wycats is.a slave.driver}}",
-		"expected": "HELP ME MY BOSS is.a:foo slave.driver:bar"
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "track ids",
@@ -67,7 +47,7 @@
 				"driver": "bar"
 			}
 		},
-		"expected": "is.a",
+		"expected": "HELP ME MY BOSS is.a:foo slave.driver:bar",
 		"compileOptions": {
 			"trackIds": true
 		},
@@ -75,19 +55,8 @@
 			"wycats": {
 				"javascript": "function (options) {\n        equal(options.hashIds.bat, 'is.a');\n        equal(options.hashIds.baz, 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;\n      }"
 			}
-		}
-	},
-	{
-		"description": "track ids",
-		"it": "should include hash ids",
-		"template": "{{wycats bat=is.a baz=slave.driver}}",
-		"expected": "slave.driver"
-	},
-	{
-		"description": "track ids",
-		"it": "should include hash ids",
-		"template": "{{wycats bat=is.a baz=slave.driver}}",
-		"expected": "HELP ME MY BOSS is.a:foo slave.driver:bar"
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "track ids",
@@ -101,7 +70,7 @@
 				"driver": "bar"
 			}
 		},
-		"expected": "is.a",
+		"expected": "HELP ME MY BOSS is.a:foo ../slave.driver:undefined",
 		"compileOptions": {
 			"trackIds": true
 		},
@@ -109,19 +78,8 @@
 			"wycats": {
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }"
 			}
-		}
-	},
-	{
-		"description": "track ids",
-		"it": "should note ../ and ./ references",
-		"template": "{{wycats ./is.a ../slave.driver}}",
-		"expected": "../slave.driver"
-	},
-	{
-		"description": "track ids",
-		"it": "should note ../ and ./ references",
-		"template": "{{wycats ./is.a ../slave.driver}}",
-		"expected": "HELP ME MY BOSS is.a:foo ../slave.driver:undefined"
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "track ids",
@@ -135,7 +93,7 @@
 				"driver": "bar"
 			}
 		},
-		"expected": "@is.a",
+		"expected": "HELP ME MY BOSS @is.a:foo @slave.driver:bar",
 		"options": {},
 		"compileOptions": {
 			"trackIds": true
@@ -144,19 +102,8 @@
 			"wycats": {
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], '@is.a');\n        equal(options.ids[1], '@slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }"
 			}
-		}
-	},
-	{
-		"description": "track ids",
-		"it": "should note @data references",
-		"template": "{{wycats @is.a @slave.driver}}",
-		"expected": "@slave.driver"
-	},
-	{
-		"description": "track ids",
-		"it": "should note @data references",
-		"template": "{{wycats @is.a @slave.driver}}",
-		"expected": "HELP ME MY BOSS @is.a:foo @slave.driver:bar"
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "track ids",
@@ -170,7 +117,7 @@
 				"driver": "bar"
 			}
 		},
-		"expected": null,
+		"expected": "HELP ME MY BOSS 1 foo false",
 		"compileOptions": {
 			"trackIds": true
 		},
@@ -178,25 +125,8 @@
 			"wycats": {
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }"
 			}
-		}
-	},
-	{
-		"description": "track ids",
-		"it": "should return null for constants",
-		"template": "{{wycats 1 \"foo\" key=false}}",
-		"expected": null
-	},
-	{
-		"description": "track ids",
-		"it": "should return null for constants",
-		"template": "{{wycats 1 \"foo\" key=false}}",
-		"expected": null
-	},
-	{
-		"description": "track ids",
-		"it": "should return null for constants",
-		"template": "{{wycats 1 \"foo\" key=false}}",
-		"expected": "HELP ME MY BOSS 1 foo false"
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "track ids",
@@ -210,7 +140,7 @@
 				"driver": "bar"
 			}
 		},
-		"expected": true,
+		"expected": "HELP ME MY BOSS 1",
 		"compileOptions": {
 			"trackIds": true
 		},
@@ -221,13 +151,8 @@
 			"wycats": {
 				"javascript": "function (passiveVoice, options) {\n        equal(options.ids[0], true);\n\n        return \"HELP ME MY BOSS \" + passiveVoice;\n      }"
 			}
-		}
-	},
-	{
-		"description": "track ids",
-		"it": "should return true for subexpressions",
-		"template": "{{wycats (sub)}}",
-		"expected": "HELP ME MY BOSS 1"
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "#each",

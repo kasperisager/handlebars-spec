@@ -93,8 +93,8 @@ function runTest(test) {
         case 'partials':
         case 'regressions':
         case 'string-params':
-        case 'subexpressions': // very broken
-        //case 'track-ids': // very broken
+        case 'subexpressions':
+        case 'track-ids':
         case 'whitespace-control':
             result = runTestGeneric(prepareTestGeneric(test, suite));
             break;
