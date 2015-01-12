@@ -10,7 +10,14 @@
 			}
 		}
 	},
-	"#log-#log-00": null,
-	"#log-#log-01": null,
-	"#log-#log-02": null
+	"#log-should call logger at default level-00": null,
+	"#log-should call logger at default level-01": null,
+	"#log-should call logger at default level-02": null,
+	"#log-should call logger at data level-00": null,
+	"#log-should call logger at data level-01": null,
+	"#log-should call logger at data level-02": null,
+	"#log-should not output to console-00": null,
+	"#log-should log at data level-00": null,
+	"#log-should log at data level-01": null,
+	"#log-should handle missing logger-00": null
 }

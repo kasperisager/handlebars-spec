@@ -997,46 +997,34 @@
 	},
 	{
 		"description": "Tokenizer",
-		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"it": "tokenizes inverse sections as \"INVERSE\"",
 		"template": "{{^}}",
 		"expected": [
 			{
-				"name": "OPEN_INVERSE",
-				"text": "{{^"
-			},
-			{
-				"name": "CLOSE",
-				"text": "}}"
+				"name": "INVERSE",
+				"text": "{{^}}"
 			}
 		]
 	},
 	{
 		"description": "Tokenizer",
-		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"it": "tokenizes inverse sections as \"INVERSE\"",
 		"template": "{{else}}",
 		"expected": [
 			{
-				"name": "OPEN_INVERSE",
-				"text": "{{else"
-			},
-			{
-				"name": "CLOSE",
-				"text": "}}"
+				"name": "INVERSE",
+				"text": "{{else}}"
 			}
 		]
 	},
 	{
 		"description": "Tokenizer",
-		"it": "tokenizes inverse sections as \"OPEN_INVERSE CLOSE\"",
+		"it": "tokenizes inverse sections as \"INVERSE\"",
 		"template": "{{ else }}",
 		"expected": [
 			{
-				"name": "OPEN_INVERSE",
-				"text": "{{ else"
-			},
-			{
-				"name": "CLOSE",
-				"text": "}}"
+				"name": "INVERSE",
+				"text": "{{ else }}"
 			}
 		]
 	},

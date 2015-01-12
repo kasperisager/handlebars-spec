@@ -135,6 +135,55 @@
 	},
 	{
 		"description": "basic context",
+		"it": "false",
+		"template": "val1: {{val1}}, val2: {{val2}}",
+		"data": {
+			"val1": false,
+			"val2": false
+		},
+		"expected": "val1: false, val2: false"
+	},
+	{
+		"description": "basic context",
+		"it": "false",
+		"template": "val: {{.}}",
+		"data": false,
+		"expected": "val: false"
+	},
+	{
+		"description": "basic context",
+		"it": "false",
+		"template": "val: {{val1/val2}}",
+		"data": {
+			"val1": {
+				"val2": false
+			}
+		},
+		"expected": "val: false"
+	},
+	{
+		"description": "basic context",
+		"it": "false",
+		"template": "val1: {{{val1}}}, val2: {{{val2}}}",
+		"data": {
+			"val1": false,
+			"val2": false
+		},
+		"expected": "val1: false, val2: false"
+	},
+	{
+		"description": "basic context",
+		"it": "false",
+		"template": "val: {{{val1/val2}}}",
+		"data": {
+			"val1": {
+				"val2": false
+			}
+		},
+		"expected": "val: false"
+	},
+	{
+		"description": "basic context",
 		"it": "newlines",
 		"template": "Alan's\nTest",
 		"data": {},
@@ -524,6 +573,7 @@
 		},
 		"helpers": {
 			"foo": {
+				"!code": true,
 				"javascript": "function (value) {\n        return 'bar ' + value;\n    }",
 				"php": "function($value) { return 'bar '.$value; }"
 			}
@@ -549,6 +599,7 @@
 		},
 		"helpers": {
 			"foo": {
+				"!code": true,
 				"javascript": "function (value) {\n        return 'bar ' + value;\n    }",
 				"php": "function($value) { return 'bar '.$value; }"
 			}

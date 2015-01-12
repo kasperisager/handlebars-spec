@@ -6,9 +6,11 @@
 		"data": {},
 		"helpers": {
 			"foo": {
+				"!code": true,
 				"javascript": "function (val) {\n        return val+val;\n      }"
 			},
 			"bar": {
+				"!code": true,
 				"javascript": "function () {\n        return \"LOL\";\n      }"
 			}
 		},
@@ -23,13 +25,38 @@
 		},
 		"helpers": {
 			"blog": {
+				"!code": true,
 				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
 			},
 			"equal": {
+				"!code": true,
 				"javascript": "function (x, y) {\n        return x === y;\n      }"
 			}
 		},
 		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "mixed paths and helpers",
+		"template": "{{blog baz.bat (equal a b) baz.bar}}",
+		"data": {
+			"bar": "LOL",
+			"baz": {
+				"bat": "foo!",
+				"bar": "bar!"
+			}
+		},
+		"helpers": {
+			"blog": {
+				"!code": true,
+				"javascript": "function (val, that, theOther) {\n        return \"val is \" + val + ', ' + that + ' and ' + theOther;\n      }"
+			},
+			"equal": {
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }"
+			}
+		},
+		"expected": "val is foo!, true and bar!"
 	},
 	{
 		"description": "subexpressions",
@@ -40,13 +67,150 @@
 		},
 		"helpers": {
 			"blog": {
+				"!code": true,
 				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
 			},
 			"equal": {
+				"!code": true,
 				"javascript": "function (x, y) {\n        return x === y;\n      }"
 			}
 		},
 		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash \"abc\" (concat a b)}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }"
+			}
+		},
+		"expected": "abc-ab"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash d (concat a b)}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }"
+			}
+		},
+		"expected": "d-ab"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash c.c (concat a b)}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }"
+			}
+		},
+		"expected": "c-ab"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash (concat a b) c.c}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }"
+			}
+		},
+		"expected": "ab-c"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash (concat a e.e) c.c}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }"
+			}
+		},
+		"expected": "ae-c"
 	},
 	{
 		"description": "subexpressions",
@@ -55,6 +219,7 @@
 		"data": {},
 		"helpers": {
 			"equal": {
+				"!code": true,
 				"javascript": "function (x, y, options) {\n        return x === y;\n      }"
 			}
 		},
@@ -70,9 +235,11 @@
 		},
 		"helpers": {
 			"blog": {
+				"!code": true,
 				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
 			},
 			"equal": {
+				"!code": true,
 				"javascript": "function (x, y) {\n        return x === y;\n      }"
 			}
 		},
@@ -85,13 +252,54 @@
 		"data": {},
 		"helpers": {
 			"blog": {
+				"!code": true,
 				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }"
 			},
 			"equal": {
+				"!code": true,
 				"javascript": "function (x, y) {\n        return x === y;\n      }"
 			}
 		},
 		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "multiple subexpressions in a hash",
+		"template": "{{input aria-label=(t \"Name\") placeholder=(t \"Example User\")}}",
+		"data": {},
+		"helpers": {
+			"input": {
+				"!code": true,
+				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }"
+			},
+			"t": {
+				"!code": true,
+				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }"
+			}
+		},
+		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />"
+	},
+	{
+		"description": "subexpressions",
+		"it": "multiple subexpressions in a hash with context",
+		"template": "{{input aria-label=(t item.field) placeholder=(t item.placeholder)}}",
+		"data": {
+			"item": {
+				"field": "Name",
+				"placeholder": "Example User"
+			}
+		},
+		"helpers": {
+			"input": {
+				"!code": true,
+				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }"
+			},
+			"t": {
+				"!code": true,
+				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }"
+			}
+		},
+		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />"
 	},
 	{
 		"description": "subexpressions",
@@ -108,9 +316,11 @@
 		},
 		"helpers": {
 			"snog": {
+				"!code": true,
 				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, \"string params for outer helper processed correctly\");\n        equals(options.types[0], 'sexpr', \"string params for outer helper processed correctly\");\n        equals(options.types[1], 'ID', \"string params for outer helper processed correctly\");\n        return a + b;\n      }"
 			},
 			"blorg": {
+				"!code": true,
 				"javascript": "function (a, options) {\n        equals(options.types.length, 1, \"string params for inner helper processed correctly\");\n        equals(options.types[0], 'ID', \"string params for inner helper processed correctly\");\n        return a;\n      }"
 			}
 		},
@@ -127,9 +337,11 @@
 		},
 		"helpers": {
 			"blog": {
+				"!code": true,
 				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }"
 			},
 			"bork": {
+				"!code": true,
 				"javascript": "function () {\n        return \"BORK\";\n      }"
 			}
 		},
@@ -147,6 +359,7 @@
 		},
 		"helpers": {
 			"foo": {
+				"!code": true,
 				"javascript": "function (val) {\n        return val+val;\n      }"
 			}
 		},
@@ -162,6 +375,7 @@
 		"exception": true,
 		"helpers": {
 			"foo": {
+				"!code": true,
 				"javascript": "function (val) {\n        return val+val;\n      }"
 			}
 		},

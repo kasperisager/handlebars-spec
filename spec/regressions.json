@@ -90,7 +90,7 @@
 				"javascript": "function () {\n        return true;\n      }"
 			}
 		},
-		"expected": "<strong>This is a slightly more complicated blah.</strong>.\n\nCheck this out:\n\n<ul>\n\n<li class=one>@fat</li>\n\n<li class=two>@dhg</li>\n\n<li class=three>@sayrer</li>\n</ul>.\n\n"
+		"expected": "<strong>This is a slightly more complicated blah.</strong>.\nCheck this out:\n<ul>\n<li class=one>@fat</li>\n<li class=two>@dhg</li>\n<li class=three>@sayrer</li>\n</ul>.\n"
 	},
 	{
 		"description": "Regressions",
@@ -120,9 +120,11 @@
 		"data": {},
 		"helpers": {
 			"blk": {
+				"!code": true,
 				"javascript": "function (block) { return block.fn(''); }"
 			},
 			"inverse": {
+				"!code": true,
 				"javascript": "function (block) { return block.inverse(''); }"
 			}
 		},
@@ -135,9 +137,11 @@
 		"data": {},
 		"helpers": {
 			"blk": {
+				"!code": true,
 				"javascript": "function (block) { return block.fn(''); }"
 			},
 			"inverse": {
+				"!code": true,
 				"javascript": "function (block) { return block.inverse(''); }"
 			}
 		},
@@ -166,7 +170,11 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar"
+		"expected": "bar",
+		"globalPartials": {
+			"55348": true
+		},
+		"globalHelpers": false
 	},
 	{
 		"description": "Regressions",
@@ -203,5 +211,37 @@
 			"in_ca": true
 		},
 		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes."
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-731: zero context rendering",
+		"template": "{{#foo}} This is {{bar}} ~ {{/foo}}",
+		"data": {
+			"foo": 0,
+			"bar": "OK"
+		},
+		"expected": " This is  ~ "
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-820: zero pathed rendering",
+		"template": "{{foo.bar}}",
+		"data": {
+			"foo": 0
+		},
+		"expected": ""
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-837: undefined values for helpers",
+		"template": "{{str bar.baz}}",
+		"data": {},
+		"helpers": {
+			"str": {
+				"!code": true,
+				"javascript": "function (value) { return value + ''; }"
+			}
+		},
+		"expected": "undefined"
 	}
 ]

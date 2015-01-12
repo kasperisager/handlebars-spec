@@ -11,6 +11,7 @@
 		},
 		"helpers": {
 			"wycats": {
+				"!code": true,
 				"javascript": "function (passiveVoice, noun) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun;\n      }"
 			}
 		}
@@ -27,6 +28,7 @@
 		},
 		"helpers": {
 			"wycats": {
+				"!code": true,
 				"javascript": "function (passiveVoice, noun, options) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }"
 			}
 		}
@@ -46,9 +48,11 @@
 		},
 		"helpers": {
 			"tomdale": {
+				"!code": true,
 				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun;\n      }"
 			},
 			"with": {
+				"!code": true,
 				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }"
 			}
 		}
@@ -65,6 +69,7 @@
 		},
 		"helpers": {
 			"tomdale": {
+				"!code": true,
 				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
 			}
 		},
@@ -81,6 +86,7 @@
 		},
 		"helpers": {
 			"tomdale": {
+				"!code": true,
 				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
 			}
 		},
@@ -99,9 +105,11 @@
 		},
 		"helpers": {
 			"tomdale": {
+				"!code": true,
 				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }"
 			},
 			"with": {
+				"!code": true,
 				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }"
 			}
 		},
@@ -122,9 +130,11 @@
 		},
 		"helpers": {
 			"tomdale": {
+				"!code": true,
 				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun + \" \" +\n                options.fn(this);\n      }"
 			},
 			"with": {
+				"!code": true,
 				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }"
 			}
 		}
@@ -140,9 +150,11 @@
 		},
 		"helpers": {
 			"with": {
+				"!code": true,
 				"javascript": "function (options) {\n        return \"WITH\";\n      }"
 			},
 			"view": {
+				"!code": true,
 				"javascript": "function () {\n        return \"VIEW\";\n      }"
 			}
 		}
@@ -158,6 +170,7 @@
 		},
 		"helpers": {
 			"foo": {
+				"!code": true,
 				"javascript": "function (bar, options) {\n        equal(bar, 'bar');\n        equal(options.types[0], 'DATA');\n        return 'Foo!';\n      }"
 			}
 		},

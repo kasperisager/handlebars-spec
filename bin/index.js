@@ -20,6 +20,20 @@ var skipKeys = [
   'multiple global helper registration-multiple global helper registration',
   'regressions-can pass through an already-compiled ast via compile/precompile'
 ];
+var afterFns = [];
+var beforeFns = [];
+
+global.Handlebars    = Handlebars;
+global.handlebarsEnv = Handlebars.create();
+
+
+global.afterEach = function afterEach(fn) {
+  afterFns.push(fn);
+}
+
+global.beforeEach = function beforeEach(fn) {
+  beforeFns.push(fn);
+}
 
 tests.add = function (spec) {
   if (!spec || !spec.template) return;
@@ -101,7 +115,7 @@ var extractHelpers = function (data) {
 
   Object.keys(data).forEach(function (el) {
     if (isFunction(data[el])) {
-      helpers[el] = { javascript: '' + data[el] };
+      helpers[el] = { "!code" : true, javascript: '' + data[el] };
     }
   });
 
@@ -109,19 +123,36 @@ var extractHelpers = function (data) {
 };
 
 var detectGlobalHelpers = function() {
-  
+  var builtins = ['helperMissing', 'blockHelperMissing', 'each', 'if', 
+                  'unless', 'with', 'log', 'lookup'];
+  var globalHelpers;
+  for( var x in global.handlebarsEnv.helpers ) {
+    if( builtins.indexOf(x) !== -1 ) {
+      continue;
+    }
+    if( !globalHelpers ) {
+      globalHelpers = {};
+    }
+    globalHelpers[x] = global.handlebarsEnv.helpers[x];
+  }
+  if( globalHelpers ) {
+    context.globalHelpers = globalHelpers;
+  } else {
+    delete context.globalHelpers;
+  }
 };
 
 var detectGlobalPartials = function() {
-  this.prevGlobalPartials = {};
+  // This should never be null, but it is in one case
+  if( !global.handlebarsEnv ) {
+    return;
+  }
   var globalPartials;
   for( var x in global.handlebarsEnv.partials ) {
-    if( global.handlebarsEnv.partials[x] !== this.prevGlobalPartials[x] ) {
-      if( !globalPartials ) {
-        globalPartials = {};
-      }
-      this.prevGlobalPartials[x] = globalPartials[x] = global.handlebarsEnv.partials[x];
+    if( !globalPartials ) {
+      globalPartials = {};
     }
+    globalPartials[x] = global.handlebarsEnv.partials[x];
   }
   if( globalPartials ) {
     context.globalPartials = globalPartials;
@@ -130,27 +161,46 @@ var detectGlobalPartials = function() {
   }
 }
 
-var stringifyLambdas = function(data) {
-    for( var x in data ) {
-      if( data[x] instanceof Array ) {
-        stringifyLambdas(data[x]);
-      } else if( typeof data[x] === 'function' || data[x] instanceof Function ) {
-        data[x] = {
-          '!code' : true,
-          'javascript' : data[x].toString()
-        }
-      } else if( typeof data[x] === 'object' ) {
-        stringifyLambdas(data[x]);
+function removeCircularReferences(data, prev) {
+  if( typeof data !== 'object' ) {
+    return;
+  }
+  prev = prev || [];
+  prev.push(data);
+  function checkCircularRef(v) {
+    for( var y in prev ) {
+      if( v === prev[y] ) {
+        return true;
       }
     }
+    return false;
+  }
+  for( var x in data ) {
+    if( checkCircularRef(data[x]) ) {
+      delete data[x];
+    } else if( typeof data[x] === 'object' ) {
+      removeCircularReferences(data[x]);
+    }
+  }
 }
 
-global.Handlebars    = Handlebars;
-global.handlebarsEnv = Handlebars.create();
-
-global.beforeEach = function (next) {
-  next();
-};
+var stringifyLambdas = function(data) {
+  if( typeof data !== 'object' ) {
+    return;
+  }
+  for( var x in data ) {
+    if( data[x] instanceof Array ) {
+      stringifyLambdas(data[x]);
+    } else if( typeof data[x] === 'function' || data[x] instanceof Function ) {
+      data[x] = {
+        '!code' : true,
+        'javascript' : data[x].toString()
+      }
+    } else if( typeof data[x] === 'object' ) {
+      stringifyLambdas(data[x]);
+    }
+  }
+}
 
 global.CompilerContext = {
   compile: function (template, options) {
@@ -195,10 +245,18 @@ global.describe = function (description, next) {
 };
 
 global.it = function (description, next) {
+  // Call before fns
+  for( var x in beforeFns ) {
+    beforeFns[x]();
+  }
   // Push test spec unto context
   context.it = description;
   delete context.globalPartials;
   next();
+  // Call after fns
+  for( var x in afterFns ) {
+    afterFns[x]();
+  }
 };
 
 global.equal = global.equals = function (actual, expected, message) {
@@ -209,6 +267,9 @@ global.equal = global.equals = function (actual, expected, message) {
     , data        : context.data
     , expected    : expected
     };
+    
+  // Remove circular references in data
+  removeCircularReferences(data);
   
   // Remove template and data from context
   delete context.template;
@@ -237,6 +298,12 @@ global.equal = global.equals = function (actual, expected, message) {
     delete context.helpers;
   }
 
+  // Get global helpers
+  if (context.globalHelpers) {
+    spec.globalHelpers = extractHelpers(context.globalHelpers);
+    delete context.globalHelpers;
+  }
+  
   // If a template is found in the lexer, use it for the spec. This is true in
   // the case of the tokenizer.
   if (Handlebars.Parser.lexer.matched) {
@@ -272,22 +339,30 @@ global.shouldBeToken = function() {
   
 }
 
-global.shouldCompileTo = function (string, hashOrArray, expected) {
+global.shouldCompileTo = function (string, hashOrArray, expected, compat) {
   shouldCompileToWithPartials(string, hashOrArray, false, expected);
 };
 
 global.shouldCompileToWithPartials = function (string, hashOrArray, partials, expected, message) {
+  detectGlobalHelpers();
   detectGlobalPartials();
   compileWithPartials(string, hashOrArray, partials, expected, message);
 };
 
 global.compileWithPartials = function (string, hashOrArray, partials, expected, message) {
-  var helpers = false, data;
+  var helpers = false, data, compat;
 
   if (util.isArray(hashOrArray)) {
     data     = hashOrArray[0];
     helpers  = extractHelpers(hashOrArray[1]);
     partials = hashOrArray[2];
+    if( hashOrArray[3] ) {
+      compat = true;
+    }
+    /* if (hashOrArray[4] != null) {
+      options.data = !!hashOrArray[4];
+      ary[1].data = hashOrArray[4];
+    } */
   } else {
     data = hashOrArray;
   }
@@ -299,6 +374,10 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
     , data        : data
     };
   
+  // Remove circular references in data
+  removeCircularReferences(data);
+  
+  // Check for exception
   if( context.exception ) {
     spec.exception = true;
     delete context.exception;
@@ -308,6 +387,7 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
   if (helpers)  spec.helpers  = helpers;
   spec.expected = expected;
   if (message)  spec.message  = '' + message;
+  if (compat) spec.compat = true;
   
   // Get options
   if( context.options ) {
@@ -321,14 +401,26 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
   }
   delete context.compileOptions;
   
+  // Get global partials
   if (context.globalPartials) {
     spec.globalPartials = context.globalPartials;
     delete context.globalPartials;
   }
   
+  // Get global helpers
+  if (context.globalHelpers) {
+    spec.globalHelpers = extractHelpers(context.globalHelpers);
+    delete context.globalHelpers;
+  }
+  
   // Convert lambdas to object/strings
-  stringifyLambdas(spec.data);
-  stringifyLambdas(spec.partials);
+  try {
+    stringifyLambdas(spec.data);
+    stringifyLambdas(spec.partials);
+  } catch(e) {
+    console.log(e, data);
+    throw e;
+  }
   
   tests.add(spec);
 };

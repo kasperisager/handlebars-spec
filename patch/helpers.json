@@ -102,6 +102,16 @@
 			}
 		}
 	},
+	"helpers-pathed lambas with parameters-01": {
+		"data": {
+			"hash": {
+				"helper": {
+					"!code": true,
+					"javascript": "function () {\n        return 'winning';\n      }"
+				}
+			}
+		}
+	},
 	"helpers hash-providing a helpers hash-00": {
 		"helpers": {
 			"world": {
@@ -264,5 +274,6 @@
 				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
 			}
 		}
-	}
+	},
+	"registration-unregisters-00": null
 }

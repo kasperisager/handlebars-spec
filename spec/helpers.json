@@ -14,6 +14,7 @@
 		},
 		"helpers": {
 			"link": {
+				"!code": true,
 				"javascript": "function (prefix) {\n      return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + this.text + \"</a>\";\n    }",
 				"php": "function($prefix, $context) { return \"<a href='{$prefix}/{$context['url']}'>{$context['text']}</a>\"; }"
 			}
@@ -29,6 +30,7 @@
 		},
 		"helpers": {
 			"raw": {
+				"!code": true,
 				"javascript": "function (options) {\n        return options.fn();\n    }",
 				"php": "function($options) { return $options['fn'](); }"
 			}
@@ -44,6 +46,7 @@
 		},
 		"helpers": {
 			"raw": {
+				"!code": true,
 				"javascript": "function (a, b, c, options) {\n        return options.fn() + a + b + c;\n    }"
 			}
 		},
@@ -58,6 +61,7 @@
 		},
 		"helpers": {
 			"goodbyes": {
+				"!code": true,
 				"javascript": "function (options) {\n      var out = \"\";\n      var byes = [\"Goodbye\", \"goodbye\", \"GOODBYE\"];\n      for (var i = 0,j = byes.length; i < j; i++) {\n        out += byes[i] + \" \" + options.fn(this) + \"! \";\n      }\n      return out;\n    }",
 				"php": "function($context, $scope, $options) {\n $byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
 			}
@@ -79,6 +83,7 @@
 		},
 		"helpers": {
 			"link": {
+				"!code": true,
 				"javascript": "function (prefix, options) {\n        return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + options.fn(this) + \"</a>\";\n    }",
 				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
 			}
@@ -100,6 +105,7 @@
 		},
 		"helpers": {
 			"link": {
+				"!code": true,
 				"javascript": "function (prefix, options) {\n        return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + options.fn(this) + \"</a>\";\n    }",
 				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
 			}
@@ -117,6 +123,7 @@
 		"message": "Block helper executed",
 		"helpers": {
 			"goodbyes": {
+				"!code": true,
 				"javascript": "function (options) { return options.fn({text: \"GOODBYE\"}); }",
 				"php": "function($scope, $options) { $options['fn'](['text' => 'GOODBYE'], $scope); }"
 			}
@@ -133,6 +140,7 @@
 		"message": "Block helper executed with current context",
 		"helpers": {
 			"form": {
+				"!code": true,
 				"javascript": "function (options) { return \"<form>\" + options.fn(this) + \"</form>\"; }",
 				"php": "function($context, $scope, $options) { echo '<form>'; $options['fn']($context, $scope); echo '</form>'; }"
 			}
@@ -156,6 +164,7 @@
 		},
 		"helpers": {
 			"link": {
+				"!code": true,
 				"javascript": "function (options) {\n      return '<a href=\"/people/' + this.id + '\">' + options.fn(this) + '</a>';\n    }",
 				"php": "function($context, $scope, $options) {\n    echo '<a href=\"/people/'.$context['id'].'\">';\n    $options['fn']($context, $scope);\n    echo '</a>';\n}"
 			}
@@ -182,6 +191,7 @@
 		"message": "Context variable resolved",
 		"helpers": {
 			"form": {
+				"!code": true,
 				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }",
 				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '</form>';\n}"
 			}
@@ -203,6 +213,7 @@
 		"message": "Complex path variable resolved",
 		"helpers": {
 			"form": {
+				"!code": true,
 				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }",
 				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '</form>';\n}"
 			}
@@ -221,10 +232,12 @@
 		"message": "Both blocks executed",
 		"helpers": {
 			"link": {
+				"!code": true,
 				"javascript": "function (options) { return \"<a href='\" + this.name + \"'>\" + options.fn(this) + \"</a>\"; }",
 				"php": "function($context, $scope, $options) {\n    echo \"<a href='\".$context['name'].\"'>\";\n    $options['fn']($context, $scope);\n    echo '</a>';\n}"
 			},
 			"form": {
+				"!code": true,
 				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }",
 				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '</form>';\n}"
 			}
@@ -246,6 +259,7 @@
 		},
 		"helpers": {
 			"list": {
+				"!code": true,
 				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }",
 				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '</p>';\n    }\n}"
 			}
@@ -261,6 +275,7 @@
 		},
 		"helpers": {
 			"list": {
+				"!code": true,
 				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }",
 				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '</p>';\n    }\n}"
 			}
@@ -277,11 +292,60 @@
 		},
 		"helpers": {
 			"list": {
+				"!code": true,
 				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }",
 				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '</p>';\n    }\n}"
 			}
 		},
 		"expected": "<p>Nobody&#x27;s here</p>"
+	},
+	{
+		"description": "helpers",
+		"it": "pathed lambas with parameters",
+		"template": "{{./helper 1}}",
+		"data": {
+			"helper": {
+				"!code": true,
+				"javascript": "function () {\n        return 'winning';\n      }"
+			},
+			"hash": {
+				"helper": {
+					"!code": true,
+					"javascript": "function () {\n        return 'winning';\n      }"
+				}
+			}
+		},
+		"helpers": {
+			"./helper": {
+				"!code": true,
+				"javascript": "function () {\n        return 'fail';\n      }"
+			}
+		},
+		"expected": "winning"
+	},
+	{
+		"description": "helpers",
+		"it": "pathed lambas with parameters",
+		"template": "{{hash/helper 1}}",
+		"data": {
+			"helper": {
+				"!code": true,
+				"javascript": "function () {\n        return 'winning';\n      }"
+			},
+			"hash": {
+				"helper": {
+					"!code": true,
+					"javascript": "function () {\n        return 'winning';\n      }"
+				}
+			}
+		},
+		"helpers": {
+			"./helper": {
+				"!code": true,
+				"javascript": "function () {\n        return 'fail';\n      }"
+			}
+		},
+		"expected": "winning"
 	},
 	{
 		"description": "helpers hash",
@@ -292,6 +356,7 @@
 		},
 		"helpers": {
 			"world": {
+				"!code": true,
 				"javascript": "function () { return \"world\"; }",
 				"php": "function() { return 'world'; }"
 			}
@@ -311,6 +376,7 @@
 		},
 		"helpers": {
 			"world": {
+				"!code": true,
 				"javascript": "function () { return \"world\"; }",
 				"php": "function() { return 'world'; }"
 			}
@@ -326,6 +392,7 @@
 		},
 		"helpers": {
 			"lookup": {
+				"!code": true,
 				"javascript": "function () { return 'helpers'; }",
 				"php": "function() { return 'helpers'; }"
 			}
@@ -341,6 +408,7 @@
 		},
 		"helpers": {
 			"lookup": {
+				"!code": true,
 				"javascript": "function () { return 'helpers'; }",
 				"php": "function() { return 'helpers'; }"
 			}
@@ -360,6 +428,7 @@
 		},
 		"helpers": {
 			"helper": {
+				"!code": true,
 				"javascript": "function () { return 'helper'; }",
 				"php": "function() { return 'helper'; }"
 			}
@@ -375,6 +444,7 @@
 		},
 		"helpers": {
 			"world": {
+				"!code": true,
 				"javascript": "function () { return \"world!\"; }",
 				"php": "function() { return 'world!'; }"
 			},
@@ -383,7 +453,32 @@
 				"php": "function() { return 'found it!'; }"
 			}
 		},
-		"expected": "found it! Goodbye cruel world!!"
+		"expected": "found it! Goodbye cruel world!!",
+		"globalHelpers": {
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
+	},
+	{
+		"description": "registration",
+		"it": "allows multiple globals",
+		"template": "{{test_helper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
+		"data": {
+			"cruel": "cruel"
+		},
+		"expected": "found it! Goodbye cruel world!!",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "decimal number literals work",
@@ -392,11 +487,22 @@
 		"data": {},
 		"helpers": {
 			"hello": {
+				"!code": true,
 				"javascript": "function (times, times2) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      if(typeof times2 !== 'number') { times2 = \"NaN\"; }\n      return \"Hello \" + times + \" \" + times2 + \" times\";\n    }",
 				"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
 			}
 		},
-		"expected": "Message: Hello -1.2 1.2 times"
+		"expected": "Message: Hello -1.2 1.2 times",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "negative number literals work",
@@ -405,11 +511,22 @@
 		"data": {},
 		"helpers": {
 			"hello": {
+				"!code": true,
 				"javascript": "function (times) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      return \"Hello \" + times + \" times\";\n    }",
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
-		"expected": "Message: Hello -12 times"
+		"expected": "Message: Hello -12 times",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "String literal parameters",
@@ -418,11 +535,22 @@
 		"data": {},
 		"helpers": {
 			"hello": {
+				"!code": true,
 				"javascript": "function (param, times, bool1, bool2) {\n        if(typeof times !== 'number') { times = \"NaN\"; }\n        if(typeof bool1 !== 'boolean') { bool1 = \"NaB\"; }\n        if(typeof bool2 !== 'boolean') { bool2 = \"NaB\"; }\n        return \"Hello \" + param + \" \" + times + \" times: \" + bool1 + \" \" + bool2;\n      }",
 				"php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = \\Snidely\\Helpers::jstr($bool1);\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = \\Snidely\\Helpers::jstr($bool2);\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
 			}
 		},
-		"expected": "Message: Hello world 12 times: true false"
+		"expected": "Message: Hello world 12 times: true false",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "String literal parameters",
@@ -442,11 +570,22 @@
 		"data": {},
 		"helpers": {
 			"hello": {
+				"!code": true,
 				"javascript": "function (param) { return \"Hello \" + param; }",
 				"php": "function($param) { return 'Hello '.$param; }"
 			}
 		},
-		"expected": "Message: Hello \"world\""
+		"expected": "Message: Hello \"world\"",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "String literal parameters",
@@ -455,10 +594,21 @@
 		"data": {},
 		"helpers": {
 			"hello": {
+				"!code": true,
 				"javascript": "function (param) { return \"Hello \" + param; }"
 			}
 		},
-		"expected": "Message: Hello Alan's world"
+		"expected": "Message: Hello Alan's world",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "negative number literals work",
@@ -467,11 +617,22 @@
 		"data": {},
 		"helpers": {
 			"hello": {
+				"!code": true,
 				"javascript": "function (times) {\n      if(typeof times !== 'number') { times = \"NaN\"; }\n      return \"Hello \" + times + \" times\";\n    }",
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
-		"expected": "Message: Hello -12 times"
+		"expected": "Message: Hello -12 times",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "multiple parameters",
@@ -483,11 +644,22 @@
 		},
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (cruel, world) { return \"Goodbye \" + cruel + \" \" + world; }",
 				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
 			}
 		},
-		"expected": "Message: Goodbye cruel world"
+		"expected": "Message: Goodbye cruel world",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "multiple parameters",
@@ -499,11 +671,22 @@
 		},
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: \"Goodbye\", adj: cruel, noun: world});\n      }",
 				"php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](['greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'], $scope);\n}"
 			}
 		},
-		"expected": "Message: Goodbye cruel world"
+		"expected": "Message: Goodbye cruel world",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "hash",
@@ -514,6 +697,7 @@
 		"message": "Helper output hash",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.hash.world + \" \" + options.hash.times + \" TIMES\";\n        }",
 				"php": "function($options) {\n    $r = 'GOODBYE ';\n    $r .= $options['hash']['cruel'].' ';\n    $r .= $options['hash']['world'].' ';\n    $r .= $options['hash']['times'].' TIMES';\n\n    return $r;\n}"
 			}
@@ -528,6 +712,7 @@
 		"message": "Helper output hash",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.hash.world;\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }",
 				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} {$options['hash']['world']}\";\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
 			}
@@ -542,6 +727,7 @@
 		"message": "Boolean helper parameter honored",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.hash.world;\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }",
 				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} {$options['hash']['world']}\";\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
 			}
@@ -556,6 +742,7 @@
 		"message": "Hash parameters output",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this) + \" \" + options.hash.times + \" TIMES\";\n        }",
 				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
 			}
@@ -570,6 +757,7 @@
 		"message": "Hash parameters output",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this) + \" \" + options.hash.times + \" TIMES\";\n        }",
 				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
 			}
@@ -584,6 +772,7 @@
 		"message": "Boolean hash parameter honored",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this);\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }",
 				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
 			}
@@ -598,6 +787,7 @@
 		"message": "Boolean hash parameter honored",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this);\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }",
 				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
 			}
@@ -620,10 +810,47 @@
 		},
 		"helpers": {
 			"helperMissing": {
+				"!code": true,
 				"javascript": "function (mesg, options) {\n          if(options.name === \"link_to\") {\n            return new Handlebars.SafeString(\"<a>\" + mesg + \"</a>\");\n          }\n        }"
 			}
 		},
-		"expected": "Hello <a>world</a>"
+		"expected": "Hello <a>world</a>",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
+	},
+	{
+		"description": "helperMissing",
+		"it": "if a value is not found, custom helperMissing is used",
+		"template": "{{hello}} {{link_to}}",
+		"data": {
+			"hello": "Hello",
+			"world": "world"
+		},
+		"helpers": {
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function (options) {\n          if(options.name === \"link_to\") {\n            return new Handlebars.SafeString(\"<a>winning</a>\");\n          }\n        }"
+			}
+		},
+		"expected": "Hello <a>winning</a>",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "knownHelpers",
@@ -639,6 +866,7 @@
 		},
 		"helpers": {
 			"hello": {
+				"!code": true,
 				"javascript": "function () { return \"foo\"; }"
 			}
 		}
@@ -658,9 +886,11 @@
 		},
 		"helpers": {
 			"typeof": {
+				"!code": true,
 				"javascript": "function (arg) { return typeof arg; }"
 			},
 			"hello": {
+				"!code": true,
 				"javascript": "function () { return \"foo\"; }"
 			}
 		}
@@ -751,6 +981,16 @@
 		"expected": "yep",
 		"compileOptions": {
 			"knownHelpersOnly": true
+		},
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
 		}
 	},
 	{
@@ -767,7 +1007,17 @@
 				"javascript": "function () { return false; }"
 			}
 		},
-		"expected": ""
+		"expected": "",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "name field",
@@ -776,13 +1026,29 @@
 		"data": {},
 		"helpers": {
 			"blockHelperMissing": {
+				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
 			},
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function () {\n        return 'helper missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
 			"helper": {
+				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
 			}
 		},
-		"expected": "ran: helper"
+		"expected": "ran: helper",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "name field",
@@ -791,13 +1057,29 @@
 		"data": {},
 		"helpers": {
 			"blockHelperMissing": {
+				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
 			},
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function () {\n        return 'helper missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
 			"helper": {
+				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
 			}
 		},
-		"expected": "ran: helper"
+		"expected": "ran: helper",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "name field",
@@ -806,13 +1088,29 @@
 		"data": {},
 		"helpers": {
 			"blockHelperMissing": {
+				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
 			},
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function () {\n        return 'helper missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
 			"helper": {
+				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
 			}
 		},
-		"expected": "ran: helper"
+		"expected": "ran: helper",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "name field",
@@ -821,13 +1119,29 @@
 		"data": {},
 		"helpers": {
 			"blockHelperMissing": {
+				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
 			},
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function () {\n        return 'helper missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
 			"helper": {
+				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
 			}
 		},
-		"expected": "missing: ./helper"
+		"expected": "missing: ./helper",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "name field",
@@ -836,13 +1150,29 @@
 		"data": {},
 		"helpers": {
 			"blockHelperMissing": {
+				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
 			},
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function () {\n        return 'helper missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
 			"helper": {
+				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
 			}
 		},
-		"expected": "ran: helper"
+		"expected": "ran: helper",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "name field",
@@ -858,9 +1188,15 @@
 		},
 		"helpers": {
 			"blockHelperMissing": {
+				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
 			},
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function () {\n        return 'helper missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
 			"helper": {
+				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
 			}
 		}
@@ -874,13 +1210,62 @@
 		},
 		"helpers": {
 			"blockHelperMissing": {
+				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
 			},
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function () {\n        return 'helper missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
 			"helper": {
+				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
 			}
 		},
-		"expected": "missing: foo.helper"
+		"expected": "missing: foo.helper",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
+	},
+	{
+		"description": "name field",
+		"it": "should include full id if a hash is passed",
+		"template": "{{#foo.helper bar=baz}}{{/foo.helper}}",
+		"data": {
+			"foo": {}
+		},
+		"helpers": {
+			"blockHelperMissing": {
+				"!code": true,
+				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function () {\n        return 'helper missing: ' + arguments[arguments.length-1].name;\n      }"
+			},
+			"helper": {
+				"!code": true,
+				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length-1].name;\n      }"
+			}
+		},
+		"expected": "helper missing: foo.helper",
+		"globalHelpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return \"world!\"; }"
+			},
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }"
+			}
+		}
 	},
 	{
 		"description": "name conflicts",
@@ -894,9 +1279,11 @@
 		"message": "Helper executed",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }"
 			},
 			"cruel": {
+				"!code": true,
 				"javascript": "function (world) {\n          return \"cruel \" + world.toUpperCase();\n        }"
 			}
 		}
@@ -913,9 +1300,11 @@
 		"message": "Helper executed",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }"
 			},
 			"cruel": {
+				"!code": true,
 				"javascript": "function (world) {\n          return \"cruel \" + world.toUpperCase();\n        }"
 			}
 		}
@@ -932,9 +1321,11 @@
 		"message": "Helper not executed",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }"
 			},
 			"cruel": {
+				"!code": true,
 				"javascript": "function (world) {\n          return \"cruel \" + world.toUpperCase();\n        }"
 			}
 		}
@@ -951,9 +1342,11 @@
 		"message": "Helper executed",
 		"helpers": {
 			"goodbye": {
+				"!code": true,
 				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }"
 			},
 			"cruel": {
+				"!code": true,
 				"javascript": "function (world) {\n          return \"cruel \" + world.toUpperCase();\n        }"
 			}
 		}
