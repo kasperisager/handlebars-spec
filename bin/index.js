@@ -249,6 +249,29 @@ global.equal = global.equals = function (actual, expected, message) {
   tests.add(spec);
 };
 
+global.tokenize = function(template) {
+  context.template = template;
+  return originalTokenize(template);
+}
+
+global.shouldMatchTokens = function(result, tokens) {
+  var spec = {
+      description : (context.description || context.it)
+    , it          : context.it
+    , template    : context.template
+    , expected    : result
+    };
+
+  // Remove template from context
+  delete context.template;
+  
+  tests.add(spec);
+}
+
+global.shouldBeToken = function() {
+  
+}
+
 global.shouldCompileTo = function (string, hashOrArray, expected) {
   shouldCompileToWithPartials(string, hashOrArray, false, expected);
 };
@@ -334,32 +357,50 @@ global.shouldThrow = function (callback, error, message) {
   tests.add(spec);
 };
 
+
+
+// Main
+
 var input = path.resolve(program.args[0]);
+var exists = fs.existsSync(input);
 
-fs.exists(input, function (exists) {
-  if (exists) {
-    require(input);
-    
-    try {
-      var output = JSON.stringify(tests, null, '\t');
-    } catch(e) {
-      return console.log('Failed converting to JSON: ' + input + ' (' + e + ')');
-    }
+if( !exists ) {
+  console.error('The input file does not exist');
+  return process.exit(1);
+}
 
-    if (!program.output) {
-      return console.log(output);
-    }
+// Need to patch out some global functions for the tokenizer
+if( input.match(/tokenizer\.js$/) ) {
+  var data = '' + fs.readFileSync(input);
+  data = data.replace(/function shouldMatchTokens/, 'function REMshouldMatchTokens')
+      .replace(/function shouldBeToken/, 'function REMshouldBeToken')
+      .replace(/function tokenize/, 'global.originalTokenize = function')
+  //var oldInput = input;
+  input = input.replace(/\.js$/, '.tmp.js');
+  fs.writeFileSync(input, data);
+  process.on('exit', function() {
+    fs.unlinkSync(input);
+  }) 
+}
 
-    var outputFile = path.resolve(program.output);
+require(input);
 
-    fs.writeFile(outputFile, output, function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('JSON saved to ' + program.output);
-      }
-    });
+try {
+  var output = JSON.stringify(tests, null, '\t');
+} catch(e) {
+  return console.log('Failed converting to JSON: ' + input + ' (' + e + ')');
+}
+
+if (!program.output) {
+  return console.log(output);
+}
+
+var outputFile = path.resolve(program.output);
+
+fs.writeFile(outputFile, output, function (err) {
+  if (err) {
+    console.log(err);
   } else {
-    console.log('The input file does not exist');
+    console.log('JSON saved to ' + program.output);
   }
 });
