@@ -979,9 +979,6 @@
 			}
 		},
 		"expected": "yep",
-		"compileOptions": {
-			"knownHelpersOnly": true
-		},
 		"globalHelpers": {
 			"world": {
 				"!code": true,

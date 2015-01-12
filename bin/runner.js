@@ -8,10 +8,18 @@ var program = require('commander')
   , assert = require('assert')
   , Handlebars = require('handlebars');
 
-global.Handlebars = Handlebars;
 
-// borrowed from spec/env/node.js
-global.handlebarsEnv = Handlebars;
+
+// Utils
+
+function clone(v) {
+    return (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
+}
+
+function isFunction(object) {
+  return !!(object && object.constructor && object.call && object.apply);
+}
+
 function safeEval(templateSpec) {
   try {
     return eval('(' + templateSpec + ')');
@@ -20,22 +28,8 @@ function safeEval(templateSpec) {
     throw err;
   }
 }
-global.CompilerContext = {
-  compile: function(template, options) {
-    //return handlebarsEnv.compile(template, options);
-    var templateSpec = global.handlebarsEnv.precompile(template, options);
-    return global.handlebarsEnv.template(safeEval(templateSpec));
-  },
-  compileWithPartial: function(template, options) {
-    return global.handlebarsEnv.compile(template, options);
-  }
-};
-require('../handlebars.js/spec/env/common.js');
-//require('../handlebars.js/spec/env/node.js');
 
-
-// borrowed from spec/tokenizer.js
-function tokenize(template) {
+function tokenize(template) { // borrowed from spec/tokenizer.js
     var parser = Handlebars.Parser,
         lexer = parser.lexer;
     
@@ -52,24 +46,6 @@ function tokenize(template) {
     }
     
     return out;
-}
-
-
-// Sigh - not sure why this isn't working right (for builtins #each)
-Handlebars.registerHelper('detectDataInsideEach', function(options) {
-    return options.data && options.data.exclaim;
-});
-
-
-function isFunction(f) {
-    return (f instanceof Function);
-}
-
-
-// Utils
-
-function clone(v) {
-    return (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
 }
 
 function unstringifyHelpers(helpers) {
@@ -99,6 +75,22 @@ function unstringifyLambdas(data) {
         }
     }
     return data;
+}
+
+
+
+// Test utils
+
+function checkResult(test, e) {
+    if( (test.exception === true) === (e !== undefined) ) {
+        console.log(test.prefix + 'OK');
+        return true;
+    } else {
+        console.log(test.prefix + (e || 'Error: should have thrown, did not'));
+        e && console.log(e.stack);
+        console.log('Test Data: ', test);
+        return false;
+    }
 }
 
 function makePrefix(test, suite) {
@@ -142,18 +134,6 @@ function prepareTestTokenizer(test, suite) {
     // Expected
     spec.expected = clone(test.expected);
     return spec;
-}
-
-function checkResult(test, e) {
-    if( (test.exception === true) === (e !== undefined) ) {
-        console.log(test.prefix + 'OK');
-        return true;
-    } else {
-        console.log(test.prefix + (e || 'Error: should have thrown, did not'));
-        e && console.log(e.stack);
-        console.log('Test Data: ', test);
-        return false;
-    }
 }
 
 function runTest(test) {
@@ -236,6 +216,30 @@ function runTestTokenizer(test) {
         return checkResult(test, e);
     }
 }
+
+
+
+// Globals
+
+global.Handlebars = Handlebars;
+global.handlebarsEnv = Handlebars;
+
+global.CompilerContext = { // borrowed from spec/env/node.js
+  compile: function(template, options) {
+    var templateSpec = global.handlebarsEnv.precompile(template, options);
+    return global.handlebarsEnv.template(safeEval(templateSpec));
+  },
+  compileWithPartial: function(template, options) {
+    return global.handlebarsEnv.compile(template, options);
+  }
+};
+require('../handlebars.js/spec/env/common.js');
+
+// Sigh - not sure why this isn't working right (for builtins #each)
+Handlebars.registerHelper('detectDataInsideEach', function(options) {
+    return options.data && options.data.exclaim;
+});
+
 
 
 // Main

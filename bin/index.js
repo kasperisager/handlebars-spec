@@ -23,19 +23,11 @@ var skipKeys = [
 var afterFns = [];
 var beforeFns = [];
 
-global.Handlebars    = Handlebars;
-global.handlebarsEnv = Handlebars.create();
 
 
-global.afterEach = function afterEach(fn) {
-  afterFns.push(fn);
-}
+// Utils
 
-global.beforeEach = function beforeEach(fn) {
-  beforeFns.push(fn);
-}
-
-tests.add = function (spec) {
+function addTest(spec) {
   if (!spec || !spec.template) return;
 
   var key = (spec.description + '-' + spec.it).toLowerCase();
@@ -80,49 +72,13 @@ tests.add = function (spec) {
     indices.push(name);
     break;
   }
-};
+}
 
 function clone(v) {
     return (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
 }
 
-function stripNulls(data) {
-  if( typeof data === 'object' ) {
-    for( var x in data ) {
-      if( data[x] === null ) {
-        delete data[x];
-      } else if( typeof data === 'object' ) {
-        stripNulls(data[x]);
-      }
-    }
-  }
-}
-
-var isFunction = function (object) {
-  return !!(object && object.constructor && object.call && object.apply);
-};
-
-var isEmptyObject = function (object) {
-  return !Object.keys(object).length;
-};
-
-var extractHelpers = function (data) {
-  var helpers = {};
-
-  if (!data || typeof data !== 'object') {
-    return false;
-  }
-
-  Object.keys(data).forEach(function (el) {
-    if (isFunction(data[el])) {
-      helpers[el] = { "!code" : true, javascript: '' + data[el] };
-    }
-  });
-
-  return isEmptyObject(helpers) ? false : helpers;
-};
-
-var detectGlobalHelpers = function() {
+function detectGlobalHelpers() {
   var builtins = ['helperMissing', 'blockHelperMissing', 'each', 'if', 
                   'unless', 'with', 'log', 'lookup'];
   var globalHelpers;
@@ -140,9 +96,9 @@ var detectGlobalHelpers = function() {
   } else {
     delete context.globalHelpers;
   }
-};
+}
 
-var detectGlobalPartials = function() {
+function detectGlobalPartials() {
   // This should never be null, but it is in one case
   if( !global.handlebarsEnv ) {
     return;
@@ -159,6 +115,30 @@ var detectGlobalPartials = function() {
   } else {
     delete context.globalPartials;
   }
+}
+
+function extractHelpers(data) {
+  var helpers = {};
+
+  if (!data || typeof data !== 'object') {
+    return false;
+  }
+
+  Object.keys(data).forEach(function (el) {
+    if (isFunction(data[el])) {
+      helpers[el] = { "!code" : true, javascript: '' + data[el] };
+    }
+  });
+
+  return isEmptyObject(helpers) ? false : helpers;
+}
+
+function isFunction(object) {
+  return !!(object && object.constructor && object.call && object.apply);
+}
+
+function isEmptyObject(object) {
+  return !Object.keys(object).length;
 }
 
 function removeCircularReferences(data, prev) {
@@ -184,7 +164,19 @@ function removeCircularReferences(data, prev) {
   }
 }
 
-var stringifyLambdas = function(data) {
+function resetContext() {
+  delete context.template;
+  delete context.data;
+  delete context.options;
+  delete context.compileOptions;
+  delete context.helpers;
+  delete context.globalHelpers;
+  delete context.partials;
+  delete context.globalPartials;
+  delete context.exception;
+}
+
+function stringifyLambdas(data) {
   if( typeof data !== 'object' ) {
     return;
   }
@@ -200,6 +192,33 @@ var stringifyLambdas = function(data) {
       stringifyLambdas(data[x]);
     }
   }
+}
+
+function stripNulls(data) {
+  if( typeof data === 'object' ) {
+    for( var x in data ) {
+      if( data[x] === null ) {
+        delete data[x];
+      } else if( typeof data === 'object' ) {
+        stripNulls(data[x]);
+      }
+    }
+  }
+}
+
+
+
+// Globals
+
+global.Handlebars    = Handlebars;
+global.handlebarsEnv = Handlebars.create();
+
+global.afterEach = function afterEach(fn) {
+  afterFns.push(fn);
+}
+
+global.beforeEach = function beforeEach(fn) {
+  beforeFns.push(fn);
 }
 
 global.CompilerContext = {
@@ -237,29 +256,31 @@ global.CompilerContext = {
   }
 };
 
-global.describe = function (description, next) {
+global.describe = function describe(description, next) {
   // Push suite description unto context
   context.description = description;
   next();
-  context.description = undefined;
+  delete context.description;
 };
 
-global.it = function (description, next) {
+global.it = function it(description, next) {
   // Call before fns
   for( var x in beforeFns ) {
     beforeFns[x]();
   }
   // Push test spec unto context
   context.it = description;
-  delete context.globalPartials;
+  // Test
   next();
+  // Remove test spec from context
+  delete context.it;
   // Call after fns
   for( var x in afterFns ) {
     afterFns[x]();
   }
 };
 
-global.equal = global.equals = function (actual, expected, message) {
+global.equal = global.equals = function equals(actual, expected, message) {
   var spec = {
       description : (context.description || context.it)
     , it          : context.it
@@ -271,37 +292,29 @@ global.equal = global.equals = function (actual, expected, message) {
   // Remove circular references in data
   removeCircularReferences(data);
   
-  // Remove template and data from context
-  delete context.template;
-  delete context.data;
-  delete context.knownHelpersOnly;
-  
-  if (message) spec.message = message;
+  // Get message
+  if (message) {
+    spec.message = message;
+  }
   
   // Get options
   if( context.options ) {
     spec.options = context.options;
   }
-  delete context.options;
   
   // Get compiler options
-  if( context.compileOptions ) {
+  if (context.compileOptions) {
     spec.compileOptions = context.compileOptions;
   }
-  delete context.compileOptions;
   
   // Get helpers
-  if (context.hasOwnProperty('helpers')) {
+  if (context.helpers) {
     spec.helpers = extractHelpers(context.helpers);
-
-    // Remove helpder from context
-    delete context.helpers;
   }
 
   // Get global helpers
   if (context.globalHelpers) {
     spec.globalHelpers = extractHelpers(context.globalHelpers);
-    delete context.globalHelpers;
   }
   
   // If a template is found in the lexer, use it for the spec. This is true in
@@ -313,43 +326,48 @@ global.equal = global.equals = function (actual, expected, message) {
   // Convert lambdas to object/strings
   stringifyLambdas(spec.data);
   
-  tests.add(spec);
+  // Add test
+  addTest(spec);
+  
+  // Reset the context
+  resetContext();
 };
 
-global.tokenize = function(template) {
+global.tokenize = function tokenize(template) {
   context.template = template;
-  return originalTokenize(template);
+  return global.originalTokenize(template);
 }
 
-global.shouldMatchTokens = function(result, tokens) {
+global.shouldMatchTokens = function shouldMatchTokens(result, tokens) {
   var spec = {
       description : (context.description || context.it)
     , it          : context.it
     , template    : context.template
     , expected    : result
     };
-
-  // Remove template from context
-  delete context.template;
   
-  tests.add(spec);
+  // Add the test
+  addTest(spec);
+  
+  // Reset the context
+  resetContext();
 }
 
-global.shouldBeToken = function() {
+global.shouldBeToken = function shouldBeToken() {
   
 }
 
-global.shouldCompileTo = function (string, hashOrArray, expected, compat) {
+global.shouldCompileTo = function shouldCompileTo(string, hashOrArray, expected, compat) {
   shouldCompileToWithPartials(string, hashOrArray, false, expected);
 };
 
-global.shouldCompileToWithPartials = function (string, hashOrArray, partials, expected, message) {
+global.shouldCompileToWithPartials = function shouldCompileToWithPartials(string, hashOrArray, partials, expected, message) {
   detectGlobalHelpers();
   detectGlobalPartials();
   compileWithPartials(string, hashOrArray, partials, expected, message);
 };
 
-global.compileWithPartials = function (string, hashOrArray, partials, expected, message) {
+global.compileWithPartials = function compileWithPartials(string, hashOrArray, partials, expected, message) {
   var helpers = false, data, compat;
 
   if (util.isArray(hashOrArray)) {
@@ -383,11 +401,19 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
     delete context.exception;
   }
   
-  if (partials) spec.partials = partials;
-  if (helpers)  spec.helpers  = helpers;
+  if (partials) {
+    spec.partials = partials;
+  }
+  if (helpers) {
+    spec.helpers  = helpers;
+  }
   spec.expected = expected;
-  if (message)  spec.message  = '' + message;
-  if (compat) spec.compat = true;
+  if (message) {
+    spec.message  = '' + message;
+  }
+  if (compat) {
+    spec.compat = true;
+  }
   
   // Get options
   if( context.options ) {
@@ -422,10 +448,14 @@ global.compileWithPartials = function (string, hashOrArray, partials, expected, 
     throw e;
   }
   
-  tests.add(spec);
+  // Add the test
+  addTest(spec);
+  
+  // Reset the context
+  resetContext();
 };
 
-global.shouldThrow = function (callback, error, message) {
+global.shouldThrow = function shouldThrow(callback, error, message) {
   context.exception = true;
   
   try {
@@ -440,13 +470,17 @@ global.shouldThrow = function (callback, error, message) {
     , template    : context.template
     , exception   : true
     };
-
-  // Remove template from context
-  delete context.template;
-
-  if (message) spec.message = '' + message;
-
-  tests.add(spec);
+  
+  // Add the message
+  if (message) {
+    spec.message = '' + message;
+  }
+  
+  // Add the test
+  addTest(spec);
+  
+  // Reset the context
+  resetContext();
 };
 
 
