@@ -176,11 +176,7 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar",
-		"globalPartials": {
-			"55348": true
-		},
-		"globalHelpers": false
+		"expected": "bar"
 	},
 	{
 		"description": "Regressions",
