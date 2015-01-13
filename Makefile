@@ -7,7 +7,7 @@ all: node_modules
 check_changes:
 	@git status --porcelain | grep 'spec/' && return 1 || return 0
 
-test: test_node test_php
+test: jshint test_node test_php
 
 test_node:
 	@echo ---------- Testing spec against handlebars.js ---------- 
@@ -16,6 +16,9 @@ test_node:
 test_php:
 	@echo ---------- Linting PHP code ---------- 
 	php bin/lint.php $(foreach var,$(SPECS),spec/$(var).json)
+
+jshint: node_modules
+	./node_modules/.bin/jshint  bin/*.js
 
 node_modules:
 	npm install

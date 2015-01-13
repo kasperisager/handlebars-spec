@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
-var program = require('commander')
-  , fs = require('fs')
-  , path = require('path')
-  , util = require('util')
-  , extend = require('extend')
-  , Handlebars = require('handlebars');
+"use strict";
+
+var program = require('commander');
+var fs = require('fs');
+var path = require('path');
+var util = require('util');
+var extend = require('extend');
+var Handlebars = require('handlebars');
 
 program
   .version('0.0.0')
@@ -13,10 +15,19 @@ program
   .option('-o, --output [file]', 'write JSON output to a file')
   .parse(process.argv);
 
-var tests   = []  // Array containg the actual specs
-  , indices = []  // Temp array for auto-incrementing test indices
-  , context = {}; // Current test context
-var afterFns = []; // Functions to execute after a test
+var input = path.resolve(program.args[0]);
+var suite = path.basename(input).replace(/\.js$/, '');
+var exists = fs.existsSync(input);
+
+if( !exists ) {
+  console.error('The input file does not exist');
+  return process.exit(66);
+}
+
+var tests   = [];   // Array containg the actual specs
+var indices = [];   // Temp array for auto-incrementing test indices
+var context = {};   // Current test context
+var afterFns = [];  // Functions to execute after a test
 var beforeFns = []; // Functions to execute before a test
 
 
@@ -65,22 +76,22 @@ function addTest(spec) {
 }
 
 function clone(v) {
-    return (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
+    return v === undefined ? undefined : JSON.parse(JSON.stringify(v));
 }
 
 function detectGlobalHelpers() {
   var builtins = ['helperMissing', 'blockHelperMissing', 'each', 'if', 
                   'unless', 'with', 'log', 'lookup'];
   var globalHelpers;
-  for( var x in global.handlebarsEnv.helpers ) {
+  Object.keys(global.handlebarsEnv.helpers).forEach(function(x) {
     if( builtins.indexOf(x) !== -1 ) {
-      continue;
+      return;
     }
     if( !globalHelpers ) {
       globalHelpers = {};
     }
     globalHelpers[x] = global.handlebarsEnv.helpers[x];
-  }
+  });
   if( globalHelpers ) {
     context.globalHelpers = globalHelpers;
   } else {
@@ -94,12 +105,12 @@ function detectGlobalPartials() {
     return;
   }
   var globalPartials;
-  for( var x in global.handlebarsEnv.partials ) {
+  Object.keys(global.handlebarsEnv.partials).forEach(function(x) {
     if( !globalPartials ) {
       globalPartials = {};
     }
     globalPartials[x] = global.handlebarsEnv.partials[x];
-  }
+  });
   if( globalPartials ) {
     context.globalPartials = globalPartials;
   } else {
@@ -124,12 +135,13 @@ function extractHelpers(data) {
 }
 
 function isFunction(object) {
-  return !!(object && object.constructor && object.call && object.apply);
+  return Boolean(object && object.constructor && object.call && object.apply);
 }
 
 function isEmptyObject(object) {
   return !Object.keys(object).length;
 }
+
 
 function removeCircularReferences(data, prev) {
   if( typeof data !== 'object' ) {
@@ -177,7 +189,7 @@ function stringifyLambdas(data) {
       data[x] = {
         '!code' : true,
         'javascript' : data[x].toString()
-      }
+      };
     } else if( typeof data[x] === 'object' ) {
       stringifyLambdas(data[x]);
     }
@@ -205,14 +217,14 @@ global.handlebarsEnv = Handlebars.create();
 
 global.afterEach = function afterEach(fn) {
   afterFns.push(fn);
-}
+};
 
 global.beforeEach = function beforeEach(fn) {
   beforeFns.push(fn);
-}
+};
 
 global.CompilerContext = {
-  compile: function (template, options) {
+  compile: function CompilerContextCompile(template, options) {
     // Push template unto context
     context.template = template;
     context.compileOptions = clone(options);
@@ -238,7 +250,7 @@ global.CompilerContext = {
       return compiledTemplate(data, options);
     };
   },
-  compileWithPartial: function(template, options) {
+  compileWithPartial: function CompilerContextCompileWithPartial(template, options) {
     // Push template unto context
     context.template = template;
     context.compileOptions = clone(options);
@@ -255,9 +267,9 @@ global.describe = function describe(description, next) {
 
 global.it = function it(description, next) {
   // Call before fns
-  for( var x in beforeFns ) {
-    beforeFns[x]();
-  }
+  beforeFns.forEach(function(fn) {
+    fn();
+  });
   // Push test spec unto context
   context.it = description;
   // Test
@@ -265,22 +277,22 @@ global.it = function it(description, next) {
   // Remove test spec from context
   delete context.it;
   // Call after fns
-  for( var x in afterFns ) {
-    afterFns[x]();
-  }
+  afterFns.forEach(function(fn) {
+    fn();
+  });
 };
 
 global.equal = global.equals = function equals(actual, expected, message) {
   var spec = {
-      description : (context.description || context.it)
-    , it          : context.it
-    , template    : context.template
-    , data        : context.data
-    , expected    : expected
-    };
+    description : context.description || context.it,
+    it          : context.it,
+    template    : context.template,
+    data        : context.data,
+    expected    : expected,
+  };
     
   // Remove circular references in data
-  removeCircularReferences(data);
+  removeCircularReferences(spec.data);
   
   // Get message
   if (message) {
@@ -326,39 +338,41 @@ global.equal = global.equals = function equals(actual, expected, message) {
 global.tokenize = function tokenize(template) {
   context.template = template;
   return global.originalTokenize(template);
-}
+};
 
-global.shouldMatchTokens = function shouldMatchTokens(result, tokens) {
+global.shouldMatchTokens = function shouldMatchTokens(result /*, tokens*/) {
   var spec = {
-      description : (context.description || context.it)
-    , it          : context.it
-    , template    : context.template
-    , expected    : result
-    };
+    description : context.description || context.it,
+    it          : context.it,
+    template    : context.template,
+    expected    : result,
+  };
   
   // Add the test
   addTest(spec);
   
   // Reset the context
   resetContext();
-}
+};
 
 global.shouldBeToken = function shouldBeToken() {
   
-}
+};
 
-global.shouldCompileTo = function shouldCompileTo(string, hashOrArray, expected, compat) {
-  shouldCompileToWithPartials(string, hashOrArray, false, expected);
+global.shouldCompileTo = function shouldCompileTo(string, hashOrArray, expected) {
+  global.shouldCompileToWithPartials(string, hashOrArray, false, expected);
 };
 
 global.shouldCompileToWithPartials = function shouldCompileToWithPartials(string, hashOrArray, partials, expected, message) {
   detectGlobalHelpers();
   detectGlobalPartials();
-  compileWithPartials(string, hashOrArray, partials, expected, message);
+  global.compileWithPartials(string, hashOrArray, partials, expected, message);
 };
 
 global.compileWithPartials = function compileWithPartials(string, hashOrArray, partials, expected, message) {
-  var helpers = false, data, compat;
+  var helpers;
+  var data;
+  var compat;
 
   if (util.isArray(hashOrArray)) {
     data     = hashOrArray[0];
@@ -376,11 +390,11 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   }
   
   var spec = {
-      description : (context.description || context.it)
-    , it          : context.it
-    , template    : string
-    , data        : data
-    };
+    description : context.description || context.it,
+    it          : context.it,
+    template    : string,
+    data        : data,
+  };
   
   // Remove circular references in data
   removeCircularReferences(data);
@@ -388,7 +402,6 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   // Check for exception
   if( context.exception ) {
     spec.exception = true;
-    delete context.exception;
   }
   
   if (partials) {
@@ -409,34 +422,25 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   if( context.options ) {
     spec.options = context.options;
   }
-  delete context.options;
   
   // Get compiler options
   if( context.compileOptions ) {
     spec.compileOptions = context.compileOptions;
   }
-  delete context.compileOptions;
   
   // Get global partials
   if (context.globalPartials) {
     spec.globalPartials = context.globalPartials;
-    delete context.globalPartials;
   }
   
   // Get global helpers
   if (context.globalHelpers) {
     spec.globalHelpers = extractHelpers(context.globalHelpers);
-    delete context.globalHelpers;
   }
   
   // Convert lambdas to object/strings
-  try {
-    stringifyLambdas(spec.data);
-    stringifyLambdas(spec.partials);
-  } catch(e) {
-    console.log(e, data);
-    throw e;
-  }
+  stringifyLambdas(spec.data);
+  stringifyLambdas(spec.partials);
   
   // Add the test
   addTest(spec);
@@ -455,11 +459,11 @@ global.shouldThrow = function shouldThrow(callback, error, message) {
   delete context.exception;
 
   var spec = {
-      description : (context.description || context.it)
-    , it          : context.it
-    , template    : context.template
-    , exception   : true
-    };
+    description : context.description || context.it,
+    it          : context.it,
+    template    : context.template,
+    exception   : true,
+  };
   
   // Add the message
   if (message) {
@@ -477,23 +481,14 @@ global.shouldThrow = function shouldThrow(callback, error, message) {
 
 // Main
 
-var input = path.resolve(program.args[0]);
-var suite = path.basename(input).replace(/\.js$/, '');
-var exists = fs.existsSync(input);
-
-if( !exists ) {
-  console.error('The input file does not exist');
-  return process.exit(66);
-}
-
 // Need to patch out some global functions for the tokenizer
 if( input.match(/tokenizer\.js$/) ) {
-  var data = '' + fs.readFileSync(input);
-  data = data.replace(/function shouldMatchTokens/, 'function REMshouldMatchTokens')
+  var tokenizerData = ('' + fs.readFileSync(input))
+      .replace(/function shouldMatchTokens/, 'function REMshouldMatchTokens')
       .replace(/function shouldBeToken/, 'function REMshouldBeToken')
-      .replace(/function tokenize/, 'global.originalTokenize = function')
+      .replace(/function tokenize/, 'global.originalTokenize = function');
   input = input.replace(/\.js$/, '.tmp.js');
-  fs.writeFileSync(input, data);
+  fs.writeFileSync(input, tokenizerData);
   process.on('exit', function() {
     fs.unlinkSync(input);
   });

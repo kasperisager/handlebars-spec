@@ -13,6 +13,6 @@
     "commander": "^2.2.x",
     "extend": "^1.2.x",
     "handlebars": "2.0.0",
-    "object-merge": "2.5.1"
+    "jshint": "2.5.x"
   }
 }
