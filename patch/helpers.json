@@ -349,16 +349,6 @@
             }
         }
     },
-    "multiple global helper registration-multiple global helper registration-00": {
-        "helpers": {
-            "test_helper": {
-                "php": "function() { return 'found it!'; }"
-            },
-            "world": {
-                "php": "function() { return 'world!'; }"
-            }
-        }
-    },
     "multiple parameters-block multi-params work-00": {
         "helpers": {
             "goodbye": {

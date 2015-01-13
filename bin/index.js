@@ -16,61 +16,51 @@ program
 var tests   = []  // Array containg the actual specs
   , indices = []  // Temp array for auto-incrementing test indices
   , context = {}; // Current test context
-var skipKeys = [
-  'multiple global helper registration-multiple global helper registration',
-  'regressions-can pass through an already-compiled ast via compile/precompile'
-];
-var afterFns = [];
-var beforeFns = [];
+var afterFns = []; // Functions to execute after a test
+var beforeFns = []; // Functions to execute before a test
 
 
 
 // Utils
 
 function addTest(spec) {
-  if (!spec || !spec.template) return;
-
-  var key = (spec.description + '-' + spec.it).toLowerCase();
-  //console.log(key);
-  
-  // Skip some
-  // @todo patch these in manually?
-  if( skipKeys.indexOf(key) !== -1 ) {
+  if (!spec || !spec.template) {
     return;
   }
 
-  for (var i = 0; i < 20; i++) {
-    var name = key + '-' + ('0' + i).slice(-2);
-    
-    // Make sure not duplicate ID
-    if (indices.indexOf(name) !== -1) {
-      continue;
-    }
-    
-    if (program.output) {
-      var output    = path.resolve(program.output)
-        , patchName = path.basename(output)
-        , patchFile = path.dirname(output) + '/../patch/' + patchName;
-
-      if (fs.existsSync(path.resolve(patchFile))) {
-        var patch = require(patchFile);
-        
-        if (patch.hasOwnProperty(name)) {
-          if( patch[name] === null ) {
-            // Note: setting to null means to skip the test. These will most
-            // likely be implementation-dependant
-            break;
-          }
-          spec = extend(true, spec, patch[name]);
-          // Using nulls in patches to unset things
-          stripNulls(spec);
-        }
+  var key = (spec.description + '-' + spec.it).toLowerCase();
+  var name = (function() {
+    for (var i = 0; i < 99; i++) {
+      var name = key + '-' + ('0' + i).slice(-2);
+      if (indices.indexOf(name) === -1) {
+        return name;
       }
     }
+    throw new Error('Failed to acquire test index');
+  })();
+  
+  indices.push(name);
+  
+  var patchFile = path.resolve('./patch/') + '/' + suite + '.json';
+  if (fs.existsSync(path.resolve(patchFile))) {
+    var patch = require(patchFile);
+    
+    if (patch.hasOwnProperty(name)) {
+      if( patch[name] === null ) {
+        // Note: setting to null means to skip the test. These will most
+        // likely be implementation-dependant. Note that it still has to be 
+        // added to the indices array
+        spec = null;
+      } else {
+        spec = extend(true, spec, patch[name]);
+        // Using nulls in patches to unset things
+        stripNulls(spec);
+      }
+    }
+  }
 
+  if( spec !== null ) {
     tests.push(spec);
-    indices.push(name);
-    break;
   }
 }
 
@@ -488,11 +478,12 @@ global.shouldThrow = function shouldThrow(callback, error, message) {
 // Main
 
 var input = path.resolve(program.args[0]);
+var suite = path.basename(input).replace(/\.js$/, '');
 var exists = fs.existsSync(input);
 
 if( !exists ) {
   console.error('The input file does not exist');
-  return process.exit(1);
+  return process.exit(66);
 }
 
 // Need to patch out some global functions for the tokenizer
@@ -501,12 +492,11 @@ if( input.match(/tokenizer\.js$/) ) {
   data = data.replace(/function shouldMatchTokens/, 'function REMshouldMatchTokens')
       .replace(/function shouldBeToken/, 'function REMshouldBeToken')
       .replace(/function tokenize/, 'global.originalTokenize = function')
-  //var oldInput = input;
   input = input.replace(/\.js$/, '.tmp.js');
   fs.writeFileSync(input, data);
   process.on('exit', function() {
     fs.unlinkSync(input);
-  }) 
+  });
 }
 
 require(input);
@@ -514,7 +504,8 @@ require(input);
 try {
   var output = JSON.stringify(tests, null, '\t');
 } catch(e) {
-  return console.log('Failed converting to JSON: ' + input + ' (' + e + ')');
+  console.log('Failed converting to JSON: ' + input + ' (' + e + ')');
+  return process.exit(70);
 }
 
 if (!program.output) {
@@ -523,10 +514,10 @@ if (!program.output) {
 
 var outputFile = path.resolve(program.output);
 
-fs.writeFile(outputFile, output, function (err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('JSON saved to ' + program.output);
-  }
-});
+try {
+  fs.writeFileSync(outputFile, output);
+  console.log('JSON saved to ' + program.output);
+} catch(e) {
+  console.log(e);
+  return process.exit(73);
+}

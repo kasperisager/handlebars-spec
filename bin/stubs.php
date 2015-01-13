@@ -1,5 +1,13 @@
 <?php
 
+if( $argc <= 1 ) {
+    echo "Generates stubs for php code from javascript functions\n";
+    echo "Usage: php bin/stubs.php SPEC_INPUT_FILE [PATCH_OUTPUT_FILE]\n";
+    exit();
+}
+
+
+
 // Utils
 
 function createPatchStub($name, $test, $key, $inputFile) {
@@ -16,7 +24,7 @@ function createPatchStub($name, $test, $key, $inputFile) {
     $ref2 = &$test;
     $path = explode('.', $key);
     $final = array_pop($path);
-    foreach( $path  as $k ) {
+    foreach( $path as $k ) {
         if( !isset($ref[$k]) ) {
             $ref[$k] = array();
         }
@@ -37,31 +45,26 @@ function searchForCode($data, &$codes, $path = array()) {
         return;
     }
     foreach( $data as $k => $v ) {
-        if( is_array($v) ) {
-            $tmp = $path;
-            $tmp[] = is_int($k) ? sprintf('%d', $k) : $k;
-            if( !empty($v['!code']) ) {
-                $key = join('.', $tmp);
-                if( empty($v['php']) ) {
-                    $codes[$key] = $v['javascript'];
-                }
-            } else {
-                searchForCode($v, $codes, $tmp);
+        if( !is_array($v) ) {
+            continue;
+        }
+        
+        $tmp = $path;
+        $tmp[] = is_int($k) ? sprintf('%d', $k) : $k;
+        if( !empty($v['!code']) ) {
+            $key = join('.', $tmp);
+            if( empty($v['php']) ) {
+                $codes[$key] = $v['javascript'];
             }
+        } else {
+            searchForCode($v, $codes, $tmp);
         }
     }
 }
 
 
 
-
 // Main
-
-if( $argc <= 1 ) {
-    echo "Generates stubs for php code from javascript functions\n";
-    echo "Usage: php bin/stubs.php SPEC_INPUT_FILE [PATCH_OUTPUT_FILE]\n";
-    exit();
-}
 
 $inputFile = $argv[1];
 $outputFile = $argc >= 3 ? $argv[2] : null;
@@ -83,7 +86,7 @@ $tests = json_decode(file_get_contents($inputFile), true);
 foreach( $tests as $test ) {
     // Need to get the name of the test in the patch format
     $key = strtolower($test['description'] . '-' . $test['it']);
-    for( $i = 0; $i < 20; $i++ ) {
+    for( $i = 0; $i < 99; $i++ ) {
         $name = $key . '-' . sprintf("%02d", $i);
         if( !in_array($name, $indices) ) {
             break;
