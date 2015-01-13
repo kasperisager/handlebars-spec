@@ -276,7 +276,8 @@
 		"data": {
 			"awesome": {
 				"!code": true,
-				"javascript": "function () { return new Handlebars.SafeString(\"&\\\"\\\\<>\"); }"
+				"javascript": "function () { return new Handlebars.SafeString(\"&\\\"\\\\<>\"); }",
+				"php": "function () { return new SafeString(\"&\\\"\\\\<>\"); }"
 			}
 		},
 		"expected": "&\"\\<>"
@@ -288,7 +289,8 @@
 		"data": {
 			"awesome": {
 				"!code": true,
-				"javascript": "function () { return \"Awesome\"; }"
+				"javascript": "function () { return \"Awesome\"; }",
+				"php": "function () { return \"Awesome\"; }"
 			}
 		},
 		"expected": "Awesome"
@@ -300,7 +302,8 @@
 		"data": {
 			"awesome": {
 				"!code": true,
-				"javascript": "function () { return this.more; }"
+				"javascript": "function () { return this.more; }",
+				"php": "function($context, $scope) { return $scope['more']; }"
 			},
 			"more": "More awesome"
 		},
@@ -313,7 +316,8 @@
 		"data": {
 			"awesome": {
 				"!code": true,
-				"javascript": "function (context) { return context; }"
+				"javascript": "function (context) { return context; }",
+				"php": "function($context) { return $context; }"
 			},
 			"frank": "Frank"
 		},
@@ -327,7 +331,8 @@
 			"bar": {
 				"awesome": {
 					"!code": true,
-					"javascript": "function (context) { return context; }"
+					"javascript": "function (context) { return context; }",
+					"php": "function($context) { return $context; }"
 				}
 			},
 			"frank": "Frank"
@@ -341,7 +346,8 @@
 		"data": {
 			"awesome": {
 				"!code": true,
-				"javascript": "function (context) { return context; }"
+				"javascript": "function (context) { return context; }",
+				"php": "function($context) { return $context; }"
 			},
 			"frank": "Frank"
 		},
@@ -354,7 +360,8 @@
 		"data": {
 			"awesome": {
 				"!code": true,
-				"javascript": "function (context, options) { return options.fn(context); }"
+				"javascript": "function (context, options) { return options.fn(context); }",
+				"php": "function($context, $scope, $options) { return $options['fn']($context); }"
 			}
 		},
 		"expected": "inner 1"
@@ -367,7 +374,8 @@
 			"value": true,
 			"awesome": {
 				"!code": true,
-				"javascript": "function (context, options) { return options.fn(context); }"
+				"javascript": "function (context, options) { return options.fn(context); }",
+				"php": "function($context, $scope, $options) { return $options['fn']($context); }"
 			}
 		},
 		"expected": "inner 1"
@@ -379,7 +387,8 @@
 		"data": {
 			"awesome": {
 				"!code": true,
-				"javascript": "function (options) { return options.fn(this); }"
+				"javascript": "function (options) { return options.fn(this); }",
+				"php": "function($context, $scope, $options) { return $options['fn']($context); }"
 			}
 		},
 		"expected": "inner"
@@ -392,7 +401,8 @@
 			"foo": {
 				"awesome": {
 					"!code": true,
-					"javascript": "function (options) { return this; }"
+					"javascript": "function (options) { return this; }",
+					"php": "function($options, $scope) { return $scope; }"
 				}
 			}
 		},
@@ -406,7 +416,8 @@
 			"value": true,
 			"awesome": {
 				"!code": true,
-				"javascript": "function (options) { return this; }"
+				"javascript": "function (options) { return this; }",
+				"php": "function($options, $scope) { return $scope; }"
 			}
 		},
 		"expected": "inner"
@@ -575,7 +586,7 @@
 			"foo": {
 				"!code": true,
 				"javascript": "function (value) {\n        return 'bar ' + value;\n    }",
-				"php": "function($value) { return 'bar '.$value; }"
+				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
 		"expected": "bar goodbyebar Goodbyebar GOODBYE"
@@ -601,7 +612,7 @@
 			"foo": {
 				"!code": true,
 				"javascript": "function (value) {\n        return 'bar ' + value;\n    }",
-				"php": "function($value) { return 'bar '.$value; }"
+				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
 		"expected": "bar hellobar Hellobar HELLO"
