@@ -152,7 +152,8 @@
 		"partials": {
 			"dude": {
 				"!code": true,
-				"javascript": "function (context) {\n      return context.name + ' (' + context.url + ') ';\n    }"
+				"javascript": "function (context) {\n      return context.name + ' (' + context.url + ') ';\n    }",
+				"php": "function($context) {\n      return $context['name'] . ' (' . $context['url'] . ') ';\n    }"
 			}
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) "

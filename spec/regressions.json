@@ -69,7 +69,8 @@
 		"data": {
 			"thing": {
 				"!code": true,
-				"javascript": "function () {\n        return \"blah\";\n      }"
+				"javascript": "function () {\n        return \"blah\";\n      }",
+				"php": "function() {\n        return \"blah\";\n      }"
 			},
 			"things": [
 				{
@@ -87,7 +88,8 @@
 			],
 			"hasThings": {
 				"!code": true,
-				"javascript": "function () {\n        return true;\n      }"
+				"javascript": "function () {\n        return true;\n      }",
+				"php": "function() {\n        return true;\n      }"
 			}
 		},
 		"expected": "<strong>This is a slightly more complicated blah.</strong>.\nCheck this out:\n<ul>\n<li class=one>@fat</li>\n<li class=two>@dhg</li>\n<li class=three>@sayrer</li>\n</ul>.\n"
@@ -121,11 +123,13 @@
 		"helpers": {
 			"blk": {
 				"!code": true,
-				"javascript": "function (block) { return block.fn(''); }"
+				"javascript": "function (block) { return block.fn(''); }",
+				"php": "function($block) { return $block['fn'](''); }"
 			},
 			"inverse": {
 				"!code": true,
-				"javascript": "function (block) { return block.inverse(''); }"
+				"javascript": "function (block) { return block.inverse(''); }",
+				"php": "function($block) { return $block['inverse'](''); }"
 			}
 		},
 		"expected": "   Expected  "
@@ -138,11 +142,13 @@
 		"helpers": {
 			"blk": {
 				"!code": true,
-				"javascript": "function (block) { return block.fn(''); }"
+				"javascript": "function (block) { return block.fn(''); }",
+				"php": "function($block) { return $block['fn'](''); }"
 			},
 			"inverse": {
 				"!code": true,
-				"javascript": "function (block) { return block.inverse(''); }"
+				"javascript": "function (block) { return block.inverse(''); }",
+				"php": "function($block) { return $block['inverse'](''); }"
 			}
 		},
 		"expected": "  Expected  "
@@ -239,7 +245,8 @@
 		"helpers": {
 			"str": {
 				"!code": true,
-				"javascript": "function (value) { return value + ''; }"
+				"javascript": "function (value) { return value + ''; }",
+				"php": "function($value) { return (string) $value; }"
 			}
 		},
 		"expected": "undefined"

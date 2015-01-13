@@ -8,7 +8,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids, undefined);\n        equal(options.hashIds, undefined);\n\n        return 'success';\n      }"
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids, undefined);\n        equal(options.hashIds, undefined);\n\n        return 'success';\n      }",
+				"php": "function($passiveVoice, $noun, $options) {\n        return 'success';\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -32,7 +33,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }"
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -56,7 +58,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (options) {\n        equal(options.hashIds.bat, 'is.a');\n        equal(options.hashIds.baz, 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;\n      }"
+				"javascript": "function (options) {\n        equal(options.hashIds.bat, 'is.a');\n        equal(options.hashIds.baz, 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;\n      }",
+				"php": "function($options) {\n        return \"HELP ME MY BOSS \" . $options['hashIds']['bat'] . ':' . $options['hash']['bat'] . ' ' . $options['hashIds']['baz'] . ':' . $options['hash']['baz'];\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -80,7 +83,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }"
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -105,7 +109,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], '@is.a');\n        equal(options.ids[1], '@slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }"
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], '@is.a');\n        equal(options.ids[1], '@slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -129,7 +134,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }"
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }",
+				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun . ' ' . $options['hash']['key'];\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -153,11 +159,13 @@
 		"helpers": {
 			"sub": {
 				"!code": true,
-				"javascript": "function () { return 1; }"
+				"javascript": "function () { return 1; }",
+				"php": "function() { return 1; }"
 			},
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, options) {\n        equal(options.ids[0], true);\n\n        return \"HELP ME MY BOSS \" + passiveVoice;\n      }"
+				"javascript": "function (passiveVoice, options) {\n        equal(options.ids[0], true);\n\n        return \"HELP ME MY BOSS \" + passiveVoice;\n      }",
+				"php": "function($passiveVoice, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice;\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -183,7 +191,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
 			}
 		}
 	},
@@ -208,7 +217,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
 			}
 		}
 	},
@@ -233,7 +243,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
 			}
 		}
 	},
@@ -253,7 +264,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
 			}
 		}
 	},
@@ -275,7 +287,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
 			}
 		}
 	},
@@ -297,7 +310,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
 			}
 		}
 	},
@@ -317,7 +331,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
 			}
 		}
 	},
@@ -339,7 +354,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }"
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
 			}
 		}
 	}

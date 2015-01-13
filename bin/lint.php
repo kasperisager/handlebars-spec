@@ -62,18 +62,19 @@ function searchForCode($data, &$codes, $path = array()) {
 
 
 // Main
-
-$inputFiles = array_slice($argv, 1);
+$inputFiles = (array) array_slice($argv, 1);
 $successes = array();
 $failures = array();
 $skipped = array();
+$indices = array();
 
 if( !is_dir('./tmp') ) {
     mkdir('./tmp');
 }
 
 foreach( $inputFiles as $inputFile ) {
-
+    $indices[$inputFile] = array();
+    
     if( !file_exists($inputFile) ) {
         echo "Input file does not exist\n";
         exit(1);
@@ -94,7 +95,6 @@ foreach( $inputFiles as $inputFile ) {
         if( empty($codes) ) {
             continue;
         }
-        
         
         foreach( $codes as $key => $code ) {
             echo $prefix, ' ', '#', ++$index, " [", $key, "] ... ";

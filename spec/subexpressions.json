@@ -7,11 +7,13 @@
 		"helpers": {
 			"foo": {
 				"!code": true,
-				"javascript": "function (val) {\n        return val+val;\n      }"
+				"javascript": "function (val) {\n        return val+val;\n      }",
+				"php": "function($val) {\n        return $val . $val;\n      }"
 			},
 			"bar": {
 				"!code": true,
-				"javascript": "function () {\n        return \"LOL\";\n      }"
+				"javascript": "function () {\n        return \"LOL\";\n      }",
+				"php": "function() {\n        return \"LOL\";\n      }"
 			}
 		},
 		"expected": "LOLLOL!"
@@ -26,11 +28,13 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }",
+				"php": "function($val) {\n        return \"val is \" . $val;\n      }"
 			},
 			"equal": {
 				"!code": true,
-				"javascript": "function (x, y) {\n        return x === y;\n      }"
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "val is true"
@@ -49,11 +53,13 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (val, that, theOther) {\n        return \"val is \" + val + ', ' + that + ' and ' + theOther;\n      }"
+				"javascript": "function (val, that, theOther) {\n        return \"val is \" + val + ', ' + that + ' and ' + theOther;\n      }",
+				"php": "function($val, $that, $theOther) {\n        return \"val is \" . $val . ', ' . $that . ' and ' . $theOther;\n      }"
 			},
 			"equal": {
 				"!code": true,
-				"javascript": "function (x, y) {\n        return x === y;\n      }"
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "val is foo!, true and bar!"
@@ -68,11 +74,13 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }",
+				"php": "function($val) {\n        return \"val is \" . $val;\n      }"
 			},
 			"equal": {
 				"!code": true,
-				"javascript": "function (x, y) {\n        return x === y;\n      }"
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "val is true"
@@ -95,11 +103,13 @@
 		"helpers": {
 			"dash": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
 			},
 			"concat": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
 		"expected": "abc-ab"
@@ -122,11 +132,13 @@
 		"helpers": {
 			"dash": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
 			},
 			"concat": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
 		"expected": "d-ab"
@@ -149,11 +161,13 @@
 		"helpers": {
 			"dash": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
 			},
 			"concat": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
 		"expected": "c-ab"
@@ -176,11 +190,13 @@
 		"helpers": {
 			"dash": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
 			},
 			"concat": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
 		"expected": "ab-c"
@@ -203,11 +219,13 @@
 		"helpers": {
 			"dash": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
 			},
 			"concat": {
 				"!code": true,
-				"javascript": "function (a, b) {\n        return a + b;\n      }"
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
 		"expected": "ae-c"
@@ -220,7 +238,8 @@
 		"helpers": {
 			"equal": {
 				"!code": true,
-				"javascript": "function (x, y, options) {\n        return x === y;\n      }"
+				"javascript": "function (x, y, options) {\n        return x === y;\n      }",
+				"php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "true",
@@ -236,11 +255,13 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }",
+				"php": "function($val) {\n        return \"val is \" . $val;\n      }"
 			},
 			"equal": {
 				"!code": true,
-				"javascript": "function (x, y) {\n        return x === y;\n      }"
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "val is true"
@@ -253,11 +274,13 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }"
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
+				"php": "function($options) {\n        return \"val is \" . $options['hash']['fun'];\n      }"
 			},
 			"equal": {
 				"!code": true,
-				"javascript": "function (x, y) {\n        return x === y;\n      }"
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "val is true"
@@ -270,11 +293,13 @@
 		"helpers": {
 			"input": {
 				"!code": true,
-				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }"
+				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }",
+				"php": "function($options) {\n        $hash        = $options['hash'];\n        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));\n        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));\n        return new SafeString('<input aria-label=\"' . $ariaLabel . '\" placeholder=\"' . $placeholder . '\" />');\n      }"
 			},
 			"t": {
 				"!code": true,
-				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }"
+				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
+				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
 			}
 		},
 		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />"
@@ -292,11 +317,13 @@
 		"helpers": {
 			"input": {
 				"!code": true,
-				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }"
+				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }",
+				"php": "function($options) {\n        $hash        = $options['hash'];\n        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));\n        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));\n        return new SafeString('<input aria-label=\"' . $ariaLabel . '\" placeholder=\"' . $placeholder . '\" />');\n      }"
 			},
 			"t": {
 				"!code": true,
-				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }"
+				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
+				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
 			}
 		},
 		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />"
@@ -317,11 +344,13 @@
 		"helpers": {
 			"snog": {
 				"!code": true,
-				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, \"string params for outer helper processed correctly\");\n        equals(options.types[0], 'sexpr', \"string params for outer helper processed correctly\");\n        equals(options.types[1], 'ID', \"string params for outer helper processed correctly\");\n        return a + b;\n      }"
+				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, \"string params for outer helper processed correctly\");\n        equals(options.types[0], 'sexpr', \"string params for outer helper processed correctly\");\n        equals(options.types[1], 'ID', \"string params for outer helper processed correctly\");\n        return a + b;\n      }",
+				"php": "function($a, $b, $options) {\n        return $a . $b;\n      }"
 			},
 			"blorg": {
 				"!code": true,
-				"javascript": "function (a, options) {\n        equals(options.types.length, 1, \"string params for inner helper processed correctly\");\n        equals(options.types[0], 'ID', \"string params for inner helper processed correctly\");\n        return a;\n      }"
+				"javascript": "function (a, options) {\n        equals(options.types.length, 1, \"string params for inner helper processed correctly\");\n        equals(options.types[0], 'ID', \"string params for inner helper processed correctly\");\n        return a;\n      }",
+				"php": "function($a, $options) {\n        return $a;\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -338,11 +367,13 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }"
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
+				"php": "function($options) {\n        return \"val is \" . $options['hash']['fun'];\n      }"
 			},
 			"bork": {
 				"!code": true,
-				"javascript": "function () {\n        return \"BORK\";\n      }"
+				"javascript": "function () {\n        return \"BORK\";\n      }",
+				"php": "function() {\n        return \"BORK\";\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -354,13 +385,15 @@
 		"data": {
 			"bar": {
 				"!code": true,
-				"javascript": "function () {\n        return \"LOL\";\n      }"
+				"javascript": "function () {\n        return \"LOL\";\n      }",
+				"php": "function() {\n        return \"LOL\";\n      }"
 			}
 		},
 		"helpers": {
 			"foo": {
 				"!code": true,
-				"javascript": "function (val) {\n        return val+val;\n      }"
+				"javascript": "function (val) {\n        return val+val;\n      }",
+				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
 		},
 		"expected": "LOLLOL!"
@@ -376,7 +409,8 @@
 		"helpers": {
 			"foo": {
 				"!code": true,
-				"javascript": "function (val) {\n        return val+val;\n      }"
+				"javascript": "function (val) {\n        return val+val;\n      }",
+				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
 		},
 		"expected": "LOLLOL!"

@@ -87,7 +87,8 @@
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return true;}"
+				"javascript": "function () {return true;}",
+				"php": "function($options, $scope) { return $scope['foo']; }"
 			},
 			"world": "world"
 		},
@@ -100,7 +101,8 @@
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return this.world;}"
+				"javascript": "function () {return this.world;}",
+				"php": "function($options, $scope) { return $scope['world']; }"
 			},
 			"world": "world"
 		},
@@ -113,7 +115,8 @@
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return false;}"
+				"javascript": "function () {return false;}",
+				"php": "function() { return false; }"
 			},
 			"world": "world"
 		},
@@ -126,7 +129,8 @@
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return this.foo;}"
+				"javascript": "function () {return this.foo;}",
+				"php": "function($options, $scope) { return $scope['foo']; }"
 			},
 			"world": "world"
 		},
@@ -151,7 +155,8 @@
 		"data": {
 			"person": {
 				"!code": true,
-				"javascript": "function () { return {first: \"Alan\", last: \"Johnson\"};}"
+				"javascript": "function () { return {first: \"Alan\", last: \"Johnson\"};}",
+				"php": "function() { return array(\"first\" => \"Alan\", \"last\" => \"Johnson\"); }"
 			}
 		},
 		"expected": "Alan Johnson"
@@ -185,7 +190,8 @@
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }"
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
 			}
 		}
 	},
@@ -201,7 +207,8 @@
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }"
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
 			}
 		}
 	},
@@ -227,7 +234,8 @@
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }"
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
 			}
 		}
 	},
@@ -243,7 +251,8 @@
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }"
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
 			}
 		}
 	},
@@ -255,7 +264,8 @@
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }"
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
 			}
 		}
 	},
@@ -274,7 +284,12 @@
 			},
 			"world": "world"
 		},
-		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!"
+		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -288,7 +303,8 @@
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }"
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
 			}
 		}
 	},
@@ -464,7 +480,8 @@
 		"data": {
 			"goodbyes": {
 				"!code": true,
-				"javascript": "function () { return [{text: \"goodbye\"}, {text: \"Goodbye\"}, {text: \"GOODBYE\"}];}"
+				"javascript": "function () { return [{text: \"goodbye\"}, {text: \"Goodbye\"}, {text: \"GOODBYE\"}];}",
+				"php": "function() { return array(array(\"text\" => \"goodbye\"), array(\"text\" => \"Goodbye\"), array(\"text\" => \"GOODBYE\")); }"
 			},
 			"world": "world"
 		},
@@ -472,7 +489,8 @@
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }"
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
 			}
 		}
 	},
@@ -488,7 +506,8 @@
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }"
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
 			}
 		}
 	},
