@@ -1,5 +1,6 @@
 
-SPECS := basic blocks builtins data helpers partials regressions string-params subexpressions tokenizer track-ids whitespace-control
+SPECS := basic blocks builtins data helpers parser partials regressions \
+		 string-params subexpressions tokenizer track-ids whitespace-control
 
 all: node_modules
 	$(foreach var, $(SPECS), node bin handlebars.js/spec/$(var).js -o spec/$(var).json;)

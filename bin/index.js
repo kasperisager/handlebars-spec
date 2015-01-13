@@ -321,7 +321,7 @@ global.equal = global.equals = function equals(actual, expected, message) {
   
   // If a template is found in the lexer, use it for the spec. This is true in
   // the case of the tokenizer.
-  if (Handlebars.Parser.lexer.matched) {
+  if (!spec.template && Handlebars.Parser.lexer.matched) {
     spec.template = Handlebars.Parser.lexer.matched;
   }
   
@@ -468,6 +468,12 @@ global.shouldThrow = function shouldThrow(callback, error, message) {
   // Add the message
   if (message) {
     spec.message = '' + message;
+  }
+  
+  // If a template is found in the lexer, use it for the spec. This is true in
+  // the case of the tokenizer.
+  if (!spec.template && Handlebars.Parser.lexer.matched) {
+    spec.template = Handlebars.Parser.lexer.matched;
   }
   
   // Add the test

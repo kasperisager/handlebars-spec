@@ -494,6 +494,13 @@
 		}
 	},
 	{
+		"description": "registration",
+		"it": "fails with multiple and args",
+		"template": "{{#form yehuda}}<p>{{name}}</p>{{#link}}Hello{{/link}}{{/form}}",
+		"exception": true,
+		"message": "Arg not supported with multiple helpers"
+	},
+	{
 		"description": "decimal number literals work",
 		"it": "decimal number literals work",
 		"template": "Message: {{hello -1.2 1.2}}",
