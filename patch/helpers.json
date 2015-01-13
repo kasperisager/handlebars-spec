@@ -233,14 +233,14 @@
     "helpers-block helper-00": {
         "helpers": {
             "goodbyes": {
-                "php": "function($scope, $options) { $options['fn'](['text' => 'GOODBYE'], $scope); }"
+                "php": "function($scope, $options) { $options['fn'](array('text' => 'GOODBYE'), $scope); }"
             }
         }
     },
     "helpers-helper block with complex lookup expression-00": {
         "helpers": {
             "goodbyes": {
-                "php": "function($context, $scope, $options) {\n $byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
+                "php": "function($context, $scope, $options) {\n $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
             }
         }
     },
@@ -362,7 +362,7 @@
     "multiple parameters-block multi-params work-00": {
         "helpers": {
             "goodbye": {
-                "php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](['greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'], $scope);\n}"
+                "php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'), $scope);\n}"
             }
         },
         "globalHelpers": {

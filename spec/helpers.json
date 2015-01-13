@@ -64,7 +64,7 @@
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) {\n      var out = \"\";\n      var byes = [\"Goodbye\", \"goodbye\", \"GOODBYE\"];\n      for (var i = 0,j = byes.length; i < j; i++) {\n        out += byes[i] + \" \" + options.fn(this) + \"! \";\n      }\n      return out;\n    }",
-				"php": "function($context, $scope, $options) {\n $byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
+				"php": "function($context, $scope, $options) {\n $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
 			}
 		},
 		"expected": "Goodbye Alan! goodbye Alan! GOODBYE Alan! "
@@ -126,7 +126,7 @@
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) { return options.fn({text: \"GOODBYE\"}); }",
-				"php": "function($scope, $options) { $options['fn'](['text' => 'GOODBYE'], $scope); }"
+				"php": "function($scope, $options) { $options['fn'](array('text' => 'GOODBYE'), $scope); }"
 			}
 		}
 	},
@@ -701,7 +701,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: \"Goodbye\", adj: cruel, noun: world});\n      }",
-				"php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](['greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'], $scope);\n}"
+				"php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'), $scope);\n}"
 			}
 		},
 		"expected": "Message: Goodbye cruel world",
